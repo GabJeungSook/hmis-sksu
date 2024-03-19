@@ -285,12 +285,12 @@
     </div>
 
     <main class="lg:pl-72">
-      <div class="xl:pr-96">
+      <div>
         <div class="px-4 py-10 sm:px-6 lg:px-8 lg:py-6">
             <div class="px-4 mt-12 text-4xl font-semibold text-gray-700 poppins-regular">
                 @yield('title')
             </div>
-            <div class="p-4">
+            <div class="p-4 mt-5">
                 {{$slot}}
                 @livewire('notifications')
             </div>

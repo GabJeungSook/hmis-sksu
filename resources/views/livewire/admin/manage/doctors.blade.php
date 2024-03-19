@@ -1,4 +1,4 @@
 @section('title', 'Doctors')
 <div>
-    Be like water.
+    {{$this->table}}
 </div>
