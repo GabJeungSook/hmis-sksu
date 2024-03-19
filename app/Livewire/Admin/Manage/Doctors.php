@@ -6,10 +6,12 @@ use App\Models\User;
 use Livewire\Component;
 use Filament\Tables\Table;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Actions\CreateAction;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Tables\Concerns\InteractsWithTable;
 
@@ -39,7 +41,18 @@ class Doctors extends Component implements HasForms, HasTable
                         ->maxLength(255),
                 ])
             ])->actions([
-
+                EditAction::make('edit')
+                ->button()
+                ->color('success')
+                ->model(User::class)
+                ->form([
+                    TextInput::make('name')
+                        ->required()
+                        ->maxLength(255),
+                ]),
+                DeleteAction::make('delete')
+                ->button()
+                ->requiresConfirmation()
             ])
             ->bulkActions([
                 // ...
