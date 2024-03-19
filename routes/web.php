@@ -1,15 +1,17 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Livewire\Admin\Dashboard;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Admin\Manage\Doctors;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+//admin routes
+Route::get('/dashboard', Dashboard::class)->middleware(['auth', 'verified'])->name('admin.dashboard');
+Route::get('/manage/doctors', Doctors::class)->middleware(['auth', 'verified'])->name('admin.doctors');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
