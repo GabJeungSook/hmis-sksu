@@ -10,8 +10,8 @@ Route::get('/', function () {
 });
 
 //admin routes
-Route::get('/dashboard', Dashboard::class)->middleware(['auth', 'verified'])->name('admin.dashboard');
-Route::get('/manage/doctors', Doctors::class)->middleware(['auth', 'verified'])->name('admin.doctors');
+Route::get('/dashboard', Dashboard::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.dashboard');
+Route::get('/manage/doctors', Doctors::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.doctors');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
