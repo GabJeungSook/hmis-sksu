@@ -1,15 +1,15 @@
 
 <div>
     <div class="w-full bg-gray-100 p-5 rounded-md">
-            <div class="flex justify-between">
+            <div class="flex justify-between relative">
                 <h1 class="poppins-medium text-3xl text-gray-700">Welcome {{auth()->user()->name}},
                     <div class="bg-gray-300 p-4 rounded-md mt-8">
                         <p class="poppins-regular text-2xl text-gray-700">{{Carbon\Carbon::parse(now())->format('F d, Y')}}</p>
                         <p class="poppins-regular text-2xl text-gray-700">{{Carbon\Carbon::parse(now())->format('h:i A')}}</p>
                     </div>
                 </h1>
-                <div>
-                    <svg width="256" height="181" viewBox="0 0 256 181" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <div class="absolute right-3">
+                    <svg width="256" height="195" viewBox="0 0 256 181" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_220_276)">
                         <path opacity="0.1" d="M85.1094 180.898C97.5764 180.898 107.683 179.278 107.683 177.279C107.683 175.281 97.5764 173.66 85.1094 173.66C72.6424 173.66 62.5359 175.281 62.5359 177.279C62.5359 179.278 72.6424 180.898 85.1094 180.898Z" fill="#1363DF"/>
                         <path opacity="0.1" d="M207.816 181C223.373 181 235.984 179.38 235.984 177.381C235.984 175.382 223.373 173.762 207.816 173.762C192.259 173.762 179.647 175.382 179.647 177.381C179.647 179.38 192.259 181 207.816 181Z" fill="#1363DF"/>
