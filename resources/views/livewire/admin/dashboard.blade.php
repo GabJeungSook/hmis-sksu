@@ -3,9 +3,9 @@
     <div class="w-full bg-gray-100 p-5 rounded-md">
             <div class="flex justify-between relative">
                 <h1 class="poppins-medium text-3xl text-gray-700">Welcome {{auth()->user()->name}},
-                    <div class="bg-gray-300 p-4 rounded-md mt-8">
+                    <div wire:poll.1s class="bg-gray-300 p-4 rounded-md mt-8">
                         <p class="poppins-regular text-2xl text-gray-700">{{Carbon\Carbon::parse(now())->format('F d, Y')}}</p>
-                        <p class="poppins-regular text-2xl text-gray-700">{{Carbon\Carbon::parse(now())->format('h:i A')}}</p>
+                        <p class="poppins-regular text-2xl text-gray-700">{{Carbon\Carbon::parse(now())->format('h:i:s A')}}</p>
                     </div>
                 </h1>
                 <div class="absolute right-3">
@@ -264,7 +264,7 @@
                             fill="#ffffff"/>
                         </svg>
                     </div>
-                    <p class="ml-16 truncate text-sm font-medium text-gray-500">Total Payment Requests to Review</p>
+                    <p class="ml-16 truncate text-sm font-medium text-gray-500">Total Numbers of Rooms</p>
                   </dt>
                   <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
                     <p class="text-2xl font-semibold text-gray-900">547</p>

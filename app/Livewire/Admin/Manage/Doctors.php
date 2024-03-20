@@ -8,6 +8,7 @@ use Filament\Tables\Table;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\Select;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Actions\CreateAction;
@@ -23,9 +24,18 @@ class Doctors extends Component implements HasForms, HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(User::query())
+            ->query(User::query()->whereNot('role_id', 1))
             ->columns([
-                TextColumn::make('name'),
+                TextColumn::make('name')
+                ->formatStateUsing(fn ($record, $state) => $record->role_id === 2 ? 'Dr. '.ucwords($state) : ucwords($state)),
+                TextColumn::make('email'),
+                TextColumn::make('role.name')
+                ->badge()
+                ->color(fn (string $state): string => match ($state) {
+                    'doctor' => 'primary',
+                    'pharmacist' => 'warning',
+                })
+                ->formatStateUsing(fn ($state) => strtoupper($state)),
             ])
             ->filters([
                 // ...
@@ -33,12 +43,33 @@ class Doctors extends Component implements HasForms, HasTable
             ->headerActions([
                 CreateAction::make()
                 ->model(User::class)
-                ->label('Add Doctor')
-                ->modalHeading('Add Doctor')
+                ->label('Add User')
+                ->modalHeading('Add User')
                 ->form([
                     TextInput::make('name')
+                        ->doesntStartWith(['admin'])
                         ->required()
                         ->maxLength(255),
+                    TextInput::make('email')
+                        ->email()
+                        ->required()
+                        ->maxLength(255),
+                    TextInput::make('password')
+                        ->password()
+                        ->confirmed()
+                        ->required()
+                        ->maxLength(255),
+                    TextInput::make('password_confirmation')
+                        ->password()
+                        ->required()
+                        ->maxLength(255),
+                    Select::make('role_id')
+                        ->label('Role')
+                        ->required()
+                        ->options([
+                            '2' => 'Doctor',
+                            '3' => 'Pharmacist',
+                        ]),
                 ])
             ])->actions([
                 EditAction::make('edit')
@@ -49,6 +80,17 @@ class Doctors extends Component implements HasForms, HasTable
                     TextInput::make('name')
                         ->required()
                         ->maxLength(255),
+                    TextInput::make('email')
+                        ->email()
+                        ->required()
+                        ->maxLength(255),
+                    Select::make('role_id')
+                        ->label('Role')
+                        ->required()
+                        ->options([
+                            '2' => 'Doctor',
+                            '3' => 'Pharmacist',
+                        ]),
                 ]),
                 DeleteAction::make('delete')
                 ->button()
