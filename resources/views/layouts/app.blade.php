@@ -74,7 +74,7 @@
           </div>
 
           <!-- Sidebar component, swap this element with another sidebar if you like -->
-          <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-2">
+          <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-2 z-50">
             <div class="flex h-16 shrink-0 items-center">
               <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
             </div>
@@ -241,15 +241,12 @@
                         </a>
                       </li>
                       <li>
-                        <a href="#" class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
-                          <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600">T</span>
-                          <span class="truncate">Laboratory Tests</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
-                          <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600">W</span>
-                          <span class="truncate">Laboratory Results</span>
+                        <a wire:navigate href="{{ route('doctor.laboratories') }}" class="{{ request()->routeIs('doctor.laboratories') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
+                            <svg class="h-6 w-6 shrink-0 text-blue-600" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6.5625 13.125H7.05469V13.7812C7.05469 14.1438 7.34836 14.4375 7.71094 14.4375H9.35156C9.71414 14.4375 10.0078 14.1438 10.0078 13.7812V13.125H10.5C11.2247 13.125 11.8125 12.5372 11.8125 11.8125V2.625C11.8125 1.90025 11.2247 1.3125 10.5 1.3125V0.65625C10.5 0.293672 10.2063 0 9.84375 0H7.21875C6.85617 0 6.5625 0.293672 6.5625 0.65625V1.3125C5.83775 1.3125 5.25 1.90025 5.25 2.625V11.8125C5.25 12.5372 5.83775 13.125 6.5625 13.125ZM19.0312 18.375H18.9783C20.2305 16.9801 21 15.143 21 13.125C21 8.78227 17.4677 5.25 13.125 5.25V7.875C16.0199 7.875 18.375 10.2301 18.375 13.125C18.375 16.0199 16.0199 18.375 13.125 18.375H1.96875C0.881426 18.375 0 19.2564 0 20.3438C0 20.7063 0.293672 21 0.65625 21H20.3438C20.7063 21 21 20.7063 21 20.3438C21 19.2564 20.1186 18.375 19.0312 18.375ZM4.26562 17.0625H12.7969C12.9782 17.0625 13.125 16.9157 13.125 16.7344V16.0781C13.125 15.8968 12.9782 15.75 12.7969 15.75H4.26562C4.08434 15.75 3.9375 15.8968 3.9375 16.0781V16.7344C3.9375 16.9157 4.08434 17.0625 4.26562 17.0625Z"
+                                fill="{{ request()->routeIs('doctor.laboratories') ? '#2563EB' : '#5B5B5B'}}"/>
+                                </svg>
+                          <span class="truncate">Laboratories</span>
                         </a>
                       </li>
                     </ul>

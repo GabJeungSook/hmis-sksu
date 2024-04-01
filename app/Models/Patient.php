@@ -20,4 +20,9 @@ class Patient extends Model
         return $this->hasOne(PatientVitals::class);
     }
 
+    public function laboratoryTests()
+    {
+        return $this->hasMany(LaboratoryTest::class);
+    }
+
 }
