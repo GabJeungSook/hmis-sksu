@@ -2,10 +2,13 @@
 
 namespace App\Livewire\Admin\Manage;
 
+use App\Models\Room;
 use App\Models\User;
 use Livewire\Component;
 use Filament\Tables\Table;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Forms\Components\Textarea;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
@@ -23,32 +26,46 @@ class Rooms extends Component implements HasForms, HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(User::query())
+            ->query(Room::query())
             ->columns([
-                TextColumn::make('name'),
+                TextColumn::make('name')
+                ->searchable(),
+                TextColumn::make('description'),
+                TextColumn::make('beds.name')
+                ->listWithLineBreaks()
+                ->bulleted()
             ])
             ->filters([
                 // ...
             ])
             ->headerActions([
                 CreateAction::make()
-                ->model(User::class)
-                ->label('Add Doctor')
-                ->modalHeading('Add Doctor')
+                ->model(Room::class)
+                ->label('Add Room')
+                ->modalHeading('Add Room')
                 ->form([
                     TextInput::make('name')
                         ->required()
                         ->maxLength(255),
+                    Textarea::make('description')
+                        ->nullable()
                 ])
             ])->actions([
+                Action::make('manage_beds')
+                ->button()
+                ->color('primary')
+                ->icon('heroicon-o-plus-circle')
+                ->url(fn (Room $record) => route('admin.manage-beds', $record)),
                 EditAction::make('edit')
                 ->button()
                 ->color('success')
-                ->model(User::class)
+                ->model(Room::class)
                 ->form([
                     TextInput::make('name')
                         ->required()
                         ->maxLength(255),
+                    Textarea::make('description')
+                        ->nullable()
                 ]),
                 DeleteAction::make('delete')
                 ->button()

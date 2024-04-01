@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\Manage\Doctors;
 use App\Livewire\Admin\Manage\Patients;
 use App\Livewire\Admin\Manage\Rooms;
+use App\Livewire\Admin\Manage\ManageBed;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
@@ -16,6 +17,7 @@ Route::get('/dashboard', Dashboard::class)->middleware(['auth', 'verified', 'rol
 Route::get('/manage/doctors', Doctors::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.doctors');
 Route::get('/manage/patients', Patients::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.patients');
 Route::get('/manage/rooms-and-beds', Rooms::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.rooms-and-beds');
+Route::get('/manage/manage-beds/{record}', ManageBed::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.manage-beds');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
