@@ -219,39 +219,37 @@
                     </ul>
                   </li>
                   <li>
-                    <div class="text-xs font-semibold leading-6 text-gray-400">Billing</div>
-                    <ul role="list" class="-mx-2 mt-2 space-y-1">
-                        <li>
-                            <a wire:navigate href="{{ route('admin.doctors') }}" class="{{ request()->routeIs('admin.doctors') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
-                                    <svg class="h-6 w-6 shrink-0 {{ request()->routeIs('admin.doctors') ? 'text-blue-600' : 'text-gray-500' }}" viewBox="0 0 17 20" xmlns="http://www.w3.org/2000/svg" fill="none">
-                                        <path d="M9 8H3V10H9V8ZM11.7812 3.28125L8.72188 0.21875C8.58125 0.078125 8.39062 0 8.19063 0H8V4H12V3.80938C12 3.6125 11.9219 3.42188 11.7812 3.28125ZM7 4.25V0H0.75C0.334375 0 0 0.334375 0 0.75V15.25C0 15.6656 0.334375 16 0.75 16H11.25C11.6656 16 12 15.6656 12 15.25V5H7.75C7.3375 5 7 4.6625 7 4.25ZM2 2.25C2 2.11188 2.11188 2 2.25 2H4.75C4.88812 2 5 2.11188 5 2.25V2.75C5 2.88812 4.88812 3 4.75 3H2.25C2.11188 3 2 2.88812 2 2.75V2.25ZM2 4.25C2 4.11188 2.11188 4 2.25 4H4.75C4.88812 4 5 4.11188 5 4.25V4.75C5 4.88812 4.88812 5 4.75 5H2.25C2.11188 5 2 4.88812 2 4.75V4.25ZM10 13.75C10 13.8881 9.88813 14 9.75 14H7.25C7.11188 14 7 13.8881 7 13.75V13.25C7 13.1119 7.11188 13 7.25 13H9.75C9.88813 13 10 13.1119 10 13.25V13.75ZM10 7.5V10.5C10 10.7762 9.77625 11 9.5 11H2.5C2.22375 11 2 10.7762 2 10.5V7.5C2 7.22375 2.22375 7 2.5 7H9.5C9.77625 7 10 7.22375 10 7.5Z"
-                                        fill="{{ request()->routeIs('admin.doctors') ? '#2563EB' : '#5B5B5B'}}"/>
-                                        </svg>
-                                <span class="truncate">Billing</span>
-                            </a>
-                        </li>
-                    </ul>
-                  </li>
-                  <li>
                     <div class="text-xs font-semibold leading-6 text-gray-400">Doctor Transactions</div>
                     <ul role="list" class="-mx-2 mt-2 space-y-1">
                       <li>
+                        <a wire:navigate href="{{ route('doctor.emergency-room') }}" class="{{ request()->routeIs('doctor.emergency-room') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
+                            <svg class="h-6 w-6 shrink-0 text-blue-600" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.9823 0C17.2718 0 22 4.88347 22 11C22 17.5246 16.744 22 10.9823 22C5.03871 22 0 17.1431 0 11C0 5.10524 4.64395 0 10.9823 0ZM11.0177 1.98266C5.775 1.98266 1.98266 6.325 1.98266 11C1.98266 15.8702 6.02782 19.9952 11.0177 19.9952C15.5952 19.9952 20.0129 16.398 20.0129 11C20.0173 5.95242 16.0121 1.98266 11.0177 1.98266ZM15.7637 11.102C15.5552 11.102 15.3645 11.2262 15.2891 11.4214L15.1117 11.8427L14.6238 7.72661C14.5484 7.11008 13.648 7.13226 13.5992 7.74435L13.4085 10.0242L13.1778 6.97258C13.129 6.33831 12.1976 6.34274 12.1488 6.97258L11.9935 8.96411L11.7319 4.78145C11.6919 4.13831 10.7427 4.14274 10.7028 4.78145L10.4766 8.49395L10.2859 5.55323C10.246 4.91452 9.30121 4.91452 9.25685 5.55323L9.02177 9.11048L8.83992 6.58226C8.79113 5.94798 7.86411 5.94798 7.81089 6.57339L7.46935 10.5565L7.38952 10.0153C7.31411 9.50968 6.63105 9.4121 6.41371 9.86895L5.82823 11.0976H3.88105V12.1266H6.15645C6.35161 12.1266 6.52903 12.0157 6.61774 11.8427L7.09234 15.0851C7.18105 15.6839 8.06371 15.6617 8.11693 15.054L8.28548 13.1202L8.53831 16.5931C8.5871 17.2319 9.52742 17.223 9.56734 16.5887L9.77137 13.4661L9.98427 16.7173C10.0242 17.356 10.9734 17.356 11.0133 16.7129L11.2306 13.1423L11.4302 16.327C11.4702 16.9613 12.4105 16.9702 12.4593 16.3359L12.6633 13.7367L12.8806 16.5931C12.9294 17.2274 13.8565 17.223 13.9052 16.5976L14.2069 12.9161L14.3266 13.9052C14.3887 14.4286 15.1117 14.5306 15.3157 14.0427L16.1141 12.1177H18.354V11.0887L15.7637 11.102ZM12.304 11.3327H11.3327V12.304C11.3327 12.4859 11.1863 12.6367 11 12.6367C10.8181 12.6367 10.6673 12.4903 10.6673 12.304V11.3327H9.69597C9.51411 11.3327 9.36331 11.1863 9.36331 11C9.36331 10.8181 9.51411 10.6673 9.69597 10.6673H10.6673V9.69597C10.6673 9.51411 10.8181 9.36331 11 9.36331C11.1819 9.36331 11.3327 9.50968 11.3327 9.69597V10.6673H12.304C12.4859 10.6673 12.6367 10.8137 12.6367 11C12.6367 11.1819 12.4859 11.3327 12.304 11.3327Z"
+                                fill="{{ request()->routeIs('doctor.emergency-room') ? '#2563EB' : '#5B5B5B'}}"/>
+                                </svg>
+                          <span class="truncate">Emergency Room</span>
+                        </a>
+                      </li>
+                      <li>
                         <!-- Current: "bg-gray-50 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-50" -->
-                        <a href="#" class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
-                          <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600">H</span>
-                          <span class="truncate">Heroicons</span>
+                        <a wire:navigate href="{{ route('doctor.vitals') }}" class="{{ request()->routeIs('doctor.vitals') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
+                            <svg class="h-6 w-6 shrink-0 text-blue-600" viewBox="0 0 23 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 2.2V8.8C0 10.0134 1.03141 11 2.3 11H5.75V0H2.3C1.03141 0 0 0.986563 0 2.2ZM20.7 0H17.25V11H20.7C21.9686 11 23 10.0134 23 8.8V2.2C23 0.986563 21.9686 0 20.7 0ZM6.9 11H16.1V0H6.9V11ZM13.225 3.025C13.703 3.025 14.0875 3.39281 14.0875 3.85C14.0875 4.30719 13.703 4.675 13.225 4.675C12.747 4.675 12.3625 4.30719 12.3625 3.85C12.3625 3.39281 12.747 3.025 13.225 3.025ZM13.225 6.325C13.703 6.325 14.0875 6.69281 14.0875 7.15C14.0875 7.60719 13.703 7.975 13.225 7.975C12.747 7.975 12.3625 7.60719 12.3625 7.15C12.3625 6.69281 12.747 6.325 13.225 6.325ZM9.775 3.025C10.253 3.025 10.6375 3.39281 10.6375 3.85C10.6375 4.30719 10.253 4.675 9.775 4.675C9.29703 4.675 8.9125 4.30719 8.9125 3.85C8.9125 3.39281 9.29703 3.025 9.775 3.025ZM9.775 6.325C10.253 6.325 10.6375 6.69281 10.6375 7.15C10.6375 7.60719 10.253 7.975 9.775 7.975C9.29703 7.975 8.9125 7.60719 8.9125 7.15C8.9125 6.69281 9.29703 6.325 9.775 6.325Z"
+                                fill="{{ request()->routeIs('doctor.vitals') ? '#2563EB' : '#5B5B5B'}}"/>
+                                </svg>
+                          <span class="truncate">Vitals</span>
                         </a>
                       </li>
                       <li>
                         <a href="#" class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                           <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600">T</span>
-                          <span class="truncate">Tailwind Labs</span>
+                          <span class="truncate">Laboratory Tests</span>
                         </a>
                       </li>
                       <li>
                         <a href="#" class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                           <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600">W</span>
-                          <span class="truncate">Workcation</span>
+                          <span class="truncate">Laboratory Results</span>
                         </a>
                       </li>
                     </ul>
@@ -263,21 +261,35 @@
                         <!-- Current: "bg-gray-50 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-50" -->
                         <a href="#" class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                           <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600">H</span>
-                          <span class="truncate">Heroicons</span>
+                          <span class="truncate">Inventory</span>
                         </a>
                       </li>
                       <li>
                         <a href="#" class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                           <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600">T</span>
-                          <span class="truncate">Tailwind Labs</span>
+                          <span class="truncate">Point of Sale</span>
                         </a>
                       </li>
                       <li>
                         <a href="#" class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                           <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600">W</span>
-                          <span class="truncate">Workcation</span>
+                          <span class="truncate">Transactions</span>
                         </a>
                       </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <div class="text-xs font-semibold leading-6 text-gray-400">Cashier Transactions</div>
+                    <ul role="list" class="-mx-2 mt-2 space-y-1">
+                        <li>
+                            <a wire:navigate href="{{ route('admin.doctors') }}" class="{{ request()->routeIs('admin.doctors') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
+                                    <svg class="h-6 w-6 shrink-0 {{ request()->routeIs('admin.doctors') ? 'text-blue-600' : 'text-gray-500' }}" viewBox="0 0 17 20" xmlns="http://www.w3.org/2000/svg" fill="none">
+                                        <path d="M9 8H3V10H9V8ZM11.7812 3.28125L8.72188 0.21875C8.58125 0.078125 8.39062 0 8.19063 0H8V4H12V3.80938C12 3.6125 11.9219 3.42188 11.7812 3.28125ZM7 4.25V0H0.75C0.334375 0 0 0.334375 0 0.75V15.25C0 15.6656 0.334375 16 0.75 16H11.25C11.6656 16 12 15.6656 12 15.25V5H7.75C7.3375 5 7 4.6625 7 4.25ZM2 2.25C2 2.11188 2.11188 2 2.25 2H4.75C4.88812 2 5 2.11188 5 2.25V2.75C5 2.88812 4.88812 3 4.75 3H2.25C2.11188 3 2 2.88812 2 2.75V2.25ZM2 4.25C2 4.11188 2.11188 4 2.25 4H4.75C4.88812 4 5 4.11188 5 4.25V4.75C5 4.88812 4.88812 5 4.75 5H2.25C2.11188 5 2 4.88812 2 4.75V4.25ZM10 13.75C10 13.8881 9.88813 14 9.75 14H7.25C7.11188 14 7 13.8881 7 13.75V13.25C7 13.1119 7.11188 13 7.25 13H9.75C9.88813 13 10 13.1119 10 13.25V13.75ZM10 7.5V10.5C10 10.7762 9.77625 11 9.5 11H2.5C2.22375 11 2 10.7762 2 10.5V7.5C2 7.22375 2.22375 7 2.5 7H9.5C9.77625 7 10 7.22375 10 7.5Z"
+                                        fill="{{ request()->routeIs('admin.doctors') ? '#2563EB' : '#5B5B5B'}}"/>
+                                        </svg>
+                                <span class="truncate">Billing</span>
+                            </a>
+                        </li>
                     </ul>
                   </li>
               </ul>

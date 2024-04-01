@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->nullable()->onDelete('cascade');
             $table->string('name');
+            $table->string('type');
             $table->date('birth_date')->nullable();
             $table->string('contact_number')->nullable();
             $table->text('address')->nullable();
             $table->string('blood_type')->nullable();
-            $table->string('temperature')->nullable();
             $table->string('guardian_name')->nullable();
             $table->text('initial_diagnosis')->nullable();
             $table->timestamps();

@@ -32,7 +32,10 @@ class Patients extends Component implements HasForms, HasTable
             ->query(Patient::query())
             ->columns([
                 TextColumn::make('name')
-                ->searchable(),
+                    ->searchable(),
+                TextColumn::make('type')
+                    ->label('Patient Type')
+                    ->sortable(),
                 TextColumn::make('doctor.name')
                     ->label('Doctor')
                     ->formatStateUsing(fn ($state) => 'Dr. '.$state)
@@ -63,6 +66,14 @@ class Patients extends Component implements HasForms, HasTable
                         ->label('Patient Name')
                         ->required()
                         ->maxLength(255),
+                    Select::make('type')
+                        ->required()
+                        ->label('Patient Type')
+                        ->required()
+                        ->options([
+                            'In-Patient' => 'In-Patient',
+                            'Out-Patient' => 'Out-Patient',
+                        ]),
                     DatePicker::make('birth_date')
                     ->label('Birthday')
                     ->native(false),
@@ -84,10 +95,6 @@ class Patients extends Component implements HasForms, HasTable
                             'O+' => 'O+',
                             'O-' => 'O-',
                         ]),
-                    TextInput::make('temperature')
-                        ->label('Temperature (celcius)')
-                        ->numeric()
-                        ->maxLength(3),
                     TextInput::make('guardian_name')
                         ->label('Guardian Name')
                         ->maxLength(255),
@@ -108,6 +115,14 @@ class Patients extends Component implements HasForms, HasTable
                         ->label('Patient Name')
                         ->required()
                         ->maxLength(255),
+                    Select::make('type')
+                        ->required()
+                        ->label('Patient Type')
+                        ->required()
+                        ->options([
+                            'In-Patient' => 'In-Patient',
+                            'Out-Patient' => 'Out-Patient',
+                        ]),
                     DatePicker::make('birth_date')
                     ->label('Birthday')
                     ->native(false),
@@ -129,10 +144,6 @@ class Patients extends Component implements HasForms, HasTable
                             'O+' => 'O+',
                             'O-' => 'O-',
                         ]),
-                    TextInput::make('temperature')
-                        ->label('Temperature (celcius)')
-                        ->numeric()
-                        ->maxLength(3),
                     TextInput::make('guardian_name')
                         ->label('Guardian Name')
                         ->maxLength(255),

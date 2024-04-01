@@ -30,10 +30,28 @@
                             </svg>
                           <div class="ml-5 flex min-w-0 flex-1 gap-2">
                             <span class="truncate font-medium">{{$bed->name}}</span>
+                            @if ($bed->is_occupied)
+                            <span class="inline-flex items-center gap-x-1.5 rounded-md px-2 py-1 text-xs font-medium text-gray-900 ring-1 ring-inset ring-gray-200">
+                                <svg class="h-1.5 w-1.5 fill-red-500" viewBox="0 0 6 6" aria-hidden="true">
+                                  <circle cx="3" cy="3" r="3" />
+                                </svg>
+                                Occupied
+                              </span>
+                            @else
+                            <span class="inline-flex items-center gap-x-1.5 rounded-md px-2 py-1 text-xs font-medium text-gray-900 ring-1 ring-inset ring-gray-200">
+                                <svg class="h-1.5 w-1.5 fill-green-500" viewBox="0 0 6 6" aria-hidden="true">
+                                  <circle cx="3" cy="3" r="3" />
+                                </svg>
+                                Unoccupied
+                              </span>
+                            @endif
                           </div>
                         </div>
-                        <div class="ml-4 flex-shrink-0">
+                        <div class="ml-4 flex-shrink-0 space-x-4">
                           {{ ($this->updateBedAction)(['id' => $bed->id]) }}
+                          @if(!$bed->is_occupied)
+                          {{ ($this->deleteBedAction)(['id' => $bed->id]) }}
+                          @endif
                         </div>
                       </li>
                     </ul>

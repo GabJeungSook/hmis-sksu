@@ -8,6 +8,7 @@ use Livewire\Component;
 use Filament\Forms\Form;
 use Filament\Actions\Action;
 use Filament\Actions\CreateAction;
+use Filament\Actions\DeleteAction;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Components\TextInput;
@@ -74,6 +75,21 @@ class ManageBed extends Component implements HasForms, HasActions
                 $bed = Bed::find($arguments['id']);
                 $bed->name = $data['name'];
                 $bed->save();
+            });
+    }
+
+
+    public function deleteBedAction(): Action
+    {
+        return Action::make('deleteBed')
+            ->label('Delete')
+            ->link()
+            ->icon('heroicon-o-trash')
+            ->color('danger')
+            ->requiresConfirmation()
+            ->action(function (array $arguments) {
+                $bed = Bed::find($arguments['id']);
+                $bed->delete();
             });
     }
 

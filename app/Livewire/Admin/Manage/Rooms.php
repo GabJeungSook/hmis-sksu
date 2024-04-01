@@ -31,9 +31,10 @@ class Rooms extends Component implements HasForms, HasTable
                 TextColumn::make('name')
                 ->searchable(),
                 TextColumn::make('description'),
-                TextColumn::make('beds.name')
-                ->listWithLineBreaks()
-                ->bulleted()
+                TextColumn::make('beds_count')->label('No. of Beds')->counts('beds'),
+                // TextColumn::make('beds.name')
+                // ->listWithLineBreaks()
+                // ->bulleted()
             ])
             ->filters([
                 // ...
