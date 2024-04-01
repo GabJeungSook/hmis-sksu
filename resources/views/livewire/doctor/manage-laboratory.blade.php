@@ -20,10 +20,9 @@
             <div class="mt-8 flow-root">
                 @if ($record->laboratoryTests->count() > 0)
                 @foreach ($record->laboratoryTests as $test)
-                <div class="bg-gray-50 px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
-                    <dt class="text-sm font-medium leading-6 text-gray-900">Laboratory Test: </dt>
-                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-1 sm:mt-0">{{$test->test}}</dd>
-                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-1 sm:mt-0">{{Carbon\Carbon::parse($test->created_at)->format('F d, Y h:i A')}}</dd>
+                <div class="bg-gray-50 pl-4 py-6 sm:grid sm:grid-cols-4">
+                    <dt class="text-sm font-medium leading-6 text-gray-900">Laboratory Test: &emsp;{{$test->test}}</dt>
+                    <dd class="mt-1 text-sm leading-6 text-gray-700 col-span-1 col-start-4 sm:mt-0 mx-auto">Date Conducted: {{Carbon\Carbon::parse($test->created_at)->format('F d, Y h:i A')}}</dd>
                   </div>
                   @php
                       $result = App\Models\LaboratoryResult::where('laboratory_test_id', $test->id)->first();
@@ -41,7 +40,7 @@
                             {{ ($this->addResultAction)(['id' => $test->id]) }}
                             @else
                             <span class="truncate font-medium">Result: &emsp;{{$result->result}}</span>
-                            <span class="truncate font-medium">Date: &emsp;{{Carbon\Carbon::parse($result->created_at)->format('F d, Y h:i A')}}</span>
+                            <span class="truncate font-medium">Date Conducted: &emsp;{{Carbon\Carbon::parse($result->created_at)->format('F d, Y h:i A')}}</span>
                             @endif
                           </div>
                       </div>

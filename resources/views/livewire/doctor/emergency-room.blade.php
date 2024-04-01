@@ -1,4 +1,4 @@
 @section('title', 'Emergency Room')
 <div>
-    {{-- {{$this->table}} --}}
+    {{$this->table}}
 </div>
