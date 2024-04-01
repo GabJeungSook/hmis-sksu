@@ -27,13 +27,17 @@ class Doctors extends Component implements HasForms, HasTable
             ->query(User::query()->whereNot('role_id', 1))
             ->columns([
                 TextColumn::make('name')
+                ->searchable()
                 ->formatStateUsing(fn ($record, $state) => $record->role_id === 2 ? 'Dr. '.ucwords($state) : ucwords($state)),
-                TextColumn::make('email'),
+                TextColumn::make('email')
+                ->searchable(),
                 TextColumn::make('role.name')
+                ->sortable()
                 ->badge()
                 ->color(fn (string $state): string => match ($state) {
-                    'doctor' => 'primary',
+                    'doctor' => 'success',
                     'pharmacist' => 'warning',
+                    'cashier' => 'primary',
                 })
                 ->formatStateUsing(fn ($state) => strtoupper($state)),
             ])
@@ -69,6 +73,7 @@ class Doctors extends Component implements HasForms, HasTable
                         ->options([
                             '2' => 'Doctor',
                             '3' => 'Pharmacist',
+                            '4' => 'Cashier',
                         ]),
                 ])
             ])->actions([
@@ -90,6 +95,7 @@ class Doctors extends Component implements HasForms, HasTable
                         ->options([
                             '2' => 'Doctor',
                             '3' => 'Pharmacist',
+                            '4' => 'Cashier',
                         ]),
                 ]),
                 DeleteAction::make('delete')

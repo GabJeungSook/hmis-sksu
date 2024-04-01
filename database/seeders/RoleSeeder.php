@@ -23,6 +23,9 @@ class RoleSeeder extends Seeder
             [
                 'name' => 'pharmacist',
             ],
+            [
+                'name' => 'cashier',
+            ],
         ]);
     }
 }
