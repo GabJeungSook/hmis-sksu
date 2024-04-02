@@ -216,6 +216,32 @@
                             <span class="truncate">Rooms and Beds</span>
                         </a>
                       </li>
+                      <li>
+                        <a wire:navigate href="{{ route('admin.inventory.category') }}" class="{{ request()->routeIs('admin.inventory.category') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
+                            <svg class="h-4 w-4 shrink-0 text-blue-600" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_239_371)">
+                                <path d="M14.3438 10.625H13.2812C13.1404 10.625 13.0052 10.681 12.9056 10.7806C12.806 10.8802 12.75 11.0154 12.75 11.1562V14.875H2.125V4.25H6.90625C7.04715 4.25 7.18227 4.19403 7.2819 4.0944C7.38153 3.99477 7.4375 3.85965 7.4375 3.71875V2.65625C7.4375 2.51535 7.38153 2.38023 7.2819 2.2806C7.18227 2.18097 7.04715 2.125 6.90625 2.125H1.59375C1.17106 2.125 0.765685 2.29291 0.466799 2.5918C0.167912 2.89068 0 3.29606 0 3.71875L0 15.4062C0 15.8289 0.167912 16.2343 0.466799 16.5332C0.765685 16.8321 1.17106 17 1.59375 17H13.2812C13.7039 17 14.1093 16.8321 14.4082 16.5332C14.7071 16.2343 14.875 15.8289 14.875 15.4062V11.1562C14.875 11.0154 14.819 10.8802 14.7194 10.7806C14.6198 10.681 14.4846 10.625 14.3438 10.625ZM16.2031 0H11.9531C11.2436 0 10.889 0.860293 11.3887 1.36133L12.575 2.54768L4.48242 10.6373C4.40813 10.7113 4.34919 10.7993 4.30897 10.8961C4.26875 10.993 4.24804 11.0969 4.24804 11.2017C4.24804 11.3066 4.26875 11.4105 4.30897 11.5073C4.34919 11.6042 4.40813 11.6922 4.48242 11.7662L5.23514 12.5176C5.30917 12.5919 5.39714 12.6508 5.494 12.691C5.59086 12.7313 5.69471 12.752 5.79959 12.752C5.90447 12.752 6.00832 12.7313 6.10518 12.691C6.20204 12.6508 6.29001 12.5919 6.36404 12.5176L14.4527 4.42664L15.6387 5.61133C16.1367 6.10938 17 5.76074 17 5.04688V0.796875C17 0.585531 16.916 0.382842 16.7666 0.233399C16.6172 0.0839562 16.4145 0 16.2031 0V0Z"
+                                fill="{{ request()->routeIs('admin.inventory.category') ? '#2563EB' : '#5B5B5B'}}"/>
+                                </g>
+                                <defs>
+                                <clipPath id="clip0_239_371">
+                                <rect width="17" height="17" fill="white"/>
+                                </clipPath>
+                                </defs>
+                                </svg>
+
+                            <span class="truncate">Categories</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a wire:navigate href="{{ route('admin.inventory.medicine') }}" class="{{ request()->routeIs('admin.inventory.medicine') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
+                            <svg class="h-4 w-4 shrink-0 text-blue-600" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2.8125 14H12.1875V3H11.25V1.5C11.25 0.671562 10.6204 0 9.84375 0H5.15625C4.37959 0 3.75 0.671562 3.75 1.5V3H2.8125V14ZM5.625 2H9.375V3H5.625V2ZM15 4.5V12.5C15 13.3284 14.3704 14 13.5938 14H13.125V3H13.5938C14.3704 3 15 3.67156 15 4.5ZM1.875 14H1.40625C0.62959 14 0 13.3284 0 12.5V4.5C0 3.67156 0.62959 3 1.40625 3H1.875V14ZM10.3125 7.5V8.5C10.3125 8.77616 10.1026 9 9.84375 9H8.4375V10.5C8.4375 10.7762 8.22765 11 7.96875 11H7.03125C6.77235 11 6.5625 10.7762 6.5625 10.5V9H5.15625C4.89735 9 4.6875 8.77616 4.6875 8.5V7.5C4.6875 7.22384 4.89735 7 5.15625 7H6.5625V5.5C6.5625 5.22384 6.77235 5 7.03125 5H7.96875C8.22765 5 8.4375 5.22384 8.4375 5.5V7H9.84375C10.1026 7 10.3125 7.22384 10.3125 7.5Z"
+                                fill="{{ request()->routeIs('admin.inventory.medicine') ? '#2563EB' : '#5B5B5B'}}"/>
+                                </svg>
+                            <span class="truncate">Medicines</span>
+                        </a>
+                      </li>
                     </ul>
                   </li>
                   <li>
