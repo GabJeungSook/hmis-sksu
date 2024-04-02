@@ -25,4 +25,9 @@ class Patient extends Model
         return $this->hasMany(LaboratoryTest::class);
     }
 
+    public function bed()
+    {
+        return $this->belongsTo(Bed::class);
+    }
+
 }

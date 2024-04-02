@@ -44,7 +44,8 @@ class Patients extends Component implements HasForms, HasTable
                     ->label('Guardian')
                     ->searchable(),
                 TextColumn::make('initial_diagnosis')
-                    ->label('Initial Diagnosis'),
+                    ->label('Initial Diagnosis')
+                    ->wrap(),
                 TextColumn::make('created_at')
                     ->label('Date Added')
                     ->formatStateUsing(fn ($state) => $state->format('F j, Y h:i A'))

@@ -101,57 +101,7 @@ class EmergencyRoom extends Component implements HasForms, HasTable
                         ->label('Initial Diagnosis')
                 ])
             ])->actions([
-                EditAction::make('edit')
-                ->button()
-                ->color('success')
-                ->model(Patient::class)
-                ->form([
-                    Select::make('user_id')
-                    ->label('Doctor')
-                    ->required()
-                    ->options(User::where('role_id', 2)->get()->pluck('name', 'id')),
-                    TextInput::make('name')
-                        ->label('Patient Name')
-                        ->required()
-                        ->maxLength(255),
-                    Select::make('type')
-                        ->required()
-                        ->label('Patient Type')
-                        ->required()
-                        ->options([
-                            'In-Patient' => 'In-Patient',
-                            'Out-Patient' => 'Out-Patient',
-                        ]),
-                    DatePicker::make('birth_date')
-                    ->label('Birthday')
-                    ->native(false),
-                    TextInput::make('contact_number')
-                        ->label('Contact Number')
-                        ->numeric()
-                        ->maxLength(11),
-                    Textarea::make('address'),
-                    Select::make('blood_type')
-                        ->label('Blood Type')
-                        ->searchable()
-                        ->options([
-                            'A+' => 'A+',
-                            'A-' => 'A-',
-                            'B+' => 'B+',
-                            'B-' => 'B-',
-                            'AB+' => 'AB+',
-                            'AB-' => 'AB-',
-                            'O+' => 'O+',
-                            'O-' => 'O-',
-                        ]),
-                    TextInput::make('guardian_name')
-                        ->label('Guardian Name')
-                        ->maxLength(255),
-                    Textarea::make('initial_diagnosis')
-                        ->label('Initial Diagnosis')
-                ]),
-                DeleteAction::make('delete')
-                ->button()
-                ->requiresConfirmation()
+
             ])
             ->bulkActions([
                 // ...

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->nullable()->onDelete('cascade');
+            $table->foreignId('bed_id')->nullable();
             $table->string('name');
             $table->string('type');
             $table->date('birth_date')->nullable();
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->string('blood_type')->nullable();
             $table->string('guardian_name')->nullable();
             $table->text('initial_diagnosis')->nullable();
+
             $table->timestamps();
         });
     }
