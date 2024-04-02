@@ -3,11 +3,13 @@
 use App\Livewire\Doctor\Vitals;
 use App\Livewire\Admin\Dashboard;
 use App\Livewire\Admin\Manage\Rooms;
+use App\Livewire\Pharmacy\Inventory;
 use App\Livewire\Doctor\Laboratories;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\Manage\Doctors;
 use App\Livewire\Doctor\EmergencyRoom;
 use App\Livewire\Doctor\MedicalRecord;
+use App\Livewire\Pharmacy\ManageStock;
 use App\Livewire\Admin\Manage\Patients;
 use App\Livewire\Admin\Manage\ManageBed;
 use App\Livewire\Doctor\ManageLaboratory;
@@ -36,6 +38,10 @@ Route::get('/doctor/laboratories', Laboratories::class)->middleware(['auth', 've
 Route::get('/doctor/manage-laboratories/{record}', ManageLaboratory::class)->middleware(['auth', 'verified', 'role:admin'])->name('doctor.manage-labs');
 Route::get('/doctor/medical-records', MedicalRecord::class)->middleware(['auth', 'verified', 'role:admin'])->name('doctor.medical-records');
 Route::get('/doctor/view-medical-records/{record}', ViewMedicalRecord::class)->middleware(['auth', 'verified', 'role:admin'])->name('doctor.view-medical-records');
+
+//pharmacy routes
+Route::get('/pharmacy/inventory', Inventory::class)->middleware(['auth', 'verified', 'role:admin'])->name('pharmacy.inventory');
+Route::get('/pharmacy/manage-stock/{record}', ManageStock::class)->middleware(['auth', 'verified', 'role:admin'])->name('pharmacy.manage-stock');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

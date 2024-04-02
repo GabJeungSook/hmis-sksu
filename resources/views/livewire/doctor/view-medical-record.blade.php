@@ -21,7 +21,7 @@
         <nav class="isolate flex divide-x divide-gray-200 rounded-lg shadow" aria-label="Tabs">
             <a href="#" class="text-gray-900 rounded-l-lg group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-center text-sm font-medium hover:bg-gray-50 focus:z-10"
                 @click.prevent="activeTab = 'patient'; localStorage.setItem('activeTab', 'patient')"
-                :class="{ 'text-gray-900': activeTab === 'patient', 'text-gray-500 hover:text-gray-700': activeTab !== 'patient' }"
+                :class="{ 'text-blue-900': activeTab === 'patient', 'text-gray-500 hover:text-gray-700': activeTab !== 'patient' }"
                 aria-current="page">
                 <span>Patient Profile</span>
                 <span aria-hidden="true" class="bg-blue-600 absolute inset-x-0 bottom-0 h-0.5" x-show="activeTab === 'patient'"></span>
@@ -30,14 +30,14 @@
             <!-- Laboratory Tab -->
             <a href="#" class="text-gray-500 hover:text-gray-700 group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-center text-sm font-medium hover:bg-gray-50 focus:z-10"
                 @click.prevent="activeTab = 'laboratory'; localStorage.setItem('activeTab', 'laboratory')"
-                :class="{ 'text-gray-900': activeTab === 'laboratory', 'text-gray-500 hover:text-gray-700': activeTab !== 'laboratory' }">
+                :class="{ 'text-blue-900': activeTab === 'laboratory', 'text-gray-500 hover:text-gray-700': activeTab !== 'laboratory' }">
                 <span>Laboratory</span>
                 <span aria-hidden="true" class="bg-blue-600 absolute inset-x-0 bottom-0 h-0.5" x-show="activeTab === 'laboratory'"></span>
             </a>
             <!-- Vitals Tab -->
             <a href="#" class="text-gray-500 hover:text-gray-700 group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-center text-sm font-medium hover:bg-gray-50 focus:z-10"
                 @click.prevent="activeTab = 'vitals'; localStorage.setItem('activeTab', 'vitals')"
-                :class="{ 'text-gray-900': activeTab === 'vitals', 'text-gray-500 hover:text-gray-700': activeTab !== 'vitals' }">
+                :class="{ 'text-blue-900': activeTab === 'vitals', 'text-gray-500 hover:text-gray-700': activeTab !== 'vitals' }">
                 <span>Vitals</span>
                 <span aria-hidden="true" class="bg-blue-600 absolute inset-x-0 bottom-0 h-0.5" x-show="activeTab === 'vitals'"></span>
             </a>
@@ -45,7 +45,7 @@
             <!-- Room & Bed Tab -->
             <a href="#" class="text-gray-500 hover:text-gray-700 rounded-r-lg group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-center text-sm font-medium hover:bg-gray-50 focus:z-10"
                 @click.prevent="activeTab = 'room_bed'; localStorage.setItem('activeTab', 'room_bed')"
-                :class="{ 'text-gray-900': activeTab === 'room_bed', 'text-gray-500 hover:text-gray-700': activeTab !== 'room_bed' }">
+                :class="{ 'text-blue-900': activeTab === 'room_bed', 'text-gray-500 hover:text-gray-700': activeTab !== 'room_bed' }">
                 <span>Room & Bed</span>
                 <span aria-hidden="true" class="bg-blue-600 absolute inset-x-0 bottom-0 h-0.5" x-show="activeTab === 'room_bed'"></span>
             </a>
