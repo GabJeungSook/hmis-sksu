@@ -32,7 +32,9 @@ class Inventory extends Component implements HasForms, HasTable
             ->query(MedicineModel::query())
             ->columns([
                 TextColumn::make('category.name')
-                ->searchable(),
+                ->searchable()
+                ->badge()
+                ->color('success'),
                 TextColumn::make('name')
                 ->searchable(),
                 TextColumn::make('description'),
