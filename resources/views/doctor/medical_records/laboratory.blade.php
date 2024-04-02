@@ -28,11 +28,17 @@
                       $result = App\Models\LaboratoryResult::where('laboratory_test_id', $test->id)->first();
                       @endphp
                       <div class="truncate font-medium text-gray-900">Test: {{$test->test}}</div>
-                      <div class="truncate text-gray-500">Result: {{$result->result}}</div>
+                      @if ($result)
+                      <div class="truncate text-gray-500">Result: {{$result?->result}}</div>
+                      @else
+                        <div class="truncate text-gray-500">No Result Yet</div>
+                      @endif
                     </td>
                     <td class="hidden py-5 pl-8 pr-0 text-right align-top tabular-nums text-gray-700 sm:table-cell">{{Carbon\Carbon::parse($test->created_at)->format('F d, Y h:i A')}}</td>
-                    <td class="hidden py-5 pl-8 pr-5 text-right align-top tabular-nums text-gray-700 sm:table-cell">{{Carbon\Carbon::parse($result->created_at)->format('F d, Y h:i A')}}</td>
-                  </tr>
+                    @if ($result)
+                    <td class="hidden py-5 pl-8 pr-5 text-right align-top tabular-nums text-gray-700 sm:table-cell">{{Carbon\Carbon::parse($result?->created_at)->format('F d, Y h:i A')}}</td>
+                    @endif
+                    </tr>
                   @endforeach
                   @else
                   <tr class="border-b border-gray-100">

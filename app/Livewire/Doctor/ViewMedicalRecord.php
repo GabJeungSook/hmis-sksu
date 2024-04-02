@@ -47,12 +47,16 @@ class ViewMedicalRecord extends Component implements HasForms, HasActions
               ->options(Room::all()->pluck('name', 'id')),
               Select::make('bed_id')
               ->label('Bed')
-              ->options(fn (Get $get) => Bed::where('room_id', $get('room_id'))->pluck('name', 'id'))
+              ->options(fn (Get $get) => Bed::where('room_id', $get('room_id'))->where('is_occupied', false)->pluck('name', 'id'))
             ])
             ->action(function (array $data) {
                 $patient = Patient::find($this->record->id);
                 $patient->update([
                     'bed_id' => $data['bed_id'],
+                ]);
+
+                $patient->bed->update([
+                    'is_occupied' => true,
                 ]);
 
                 Notification::make()
