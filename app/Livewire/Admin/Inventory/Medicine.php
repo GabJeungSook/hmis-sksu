@@ -35,6 +35,7 @@ class Medicine extends Component implements HasForms, HasTable
                 ->searchable(),
                 TextColumn::make('description'),
                 TextColumn::make('price')
+                ->formatStateusing(fn ($state) => '₱'. number_format($state, 2)),
             ])
             ->filters([
                 // ...

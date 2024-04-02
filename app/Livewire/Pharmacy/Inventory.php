@@ -36,7 +36,8 @@ class Inventory extends Component implements HasForms, HasTable
                 TextColumn::make('name')
                 ->searchable(),
                 TextColumn::make('description'),
-                TextColumn::make('price'),
+                TextColumn::make('price')
+                ->formatStateusing(fn ($state) => '₱'. number_format($state, 2)),
                 TextColumn::make('stock'),
             ])
             ->filters([

@@ -35,7 +35,7 @@
                         @foreach ($record->stocks as $stock)
                         <tr>
                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">{{$record->category->name}}</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{$record->price}}</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">₱ {{number_format($record->price, 2)}}</td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{$stock->quantity}}</td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{Carbon\Carbon::parse($stock->created_at)->format('F d, Y h:i A')}}</td>
 
