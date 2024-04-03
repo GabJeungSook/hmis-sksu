@@ -10,6 +10,7 @@ use App\Livewire\Admin\Manage\Doctors;
 use App\Livewire\Doctor\EmergencyRoom;
 use App\Livewire\Doctor\MedicalRecord;
 use App\Livewire\Pharmacy\ManageStock;
+use App\Livewire\Pharmacy\PointOfSale;
 use App\Livewire\Admin\Manage\Patients;
 use App\Livewire\Admin\Manage\ManageBed;
 use App\Livewire\Doctor\ManageLaboratory;
@@ -42,6 +43,7 @@ Route::get('/doctor/view-medical-records/{record}', ViewMedicalRecord::class)->m
 //pharmacy routes
 Route::get('/pharmacy/inventory', Inventory::class)->middleware(['auth', 'verified', 'role:admin'])->name('pharmacy.inventory');
 Route::get('/pharmacy/manage-stock/{record}', ManageStock::class)->middleware(['auth', 'verified', 'role:admin'])->name('pharmacy.manage-stock');
+Route::get('/pharmacy/point-of-sale', PointOfSale::class)->middleware(['auth', 'verified', 'role:admin'])->name('pharmacy.pos');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
