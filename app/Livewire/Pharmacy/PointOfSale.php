@@ -5,10 +5,14 @@ namespace App\Livewire\Pharmacy;
 use Livewire\Component;
 use App\Models\Medicine;
 use Filament\Forms\Form;
+use App\Models\Transaction;
+use Filament\Support\RawJs;
 use Filament\Actions\Action;
+use Illuminate\Support\Facades\DB;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Actions\Concerns\InteractsWithActions;
@@ -135,17 +139,57 @@ class PointOfSale extends Component implements HasForms, HasActions
     {
         return Action::make('saveTransaction')
         ->label('Payment')
-        ->action(function () {
+        ->form([
+            TextInput::make('payment_amount')
+            ->label('Amount')
+            ->numeric()
+            ->autofocus()
+            ->prefix('₱')
+            ->mask(RawJs::make('$money($input)'))
+            ->stripCharacters(',')
+            ->rules('numeric|min:'.$this->grand_total)
+            ->required(),
+
+        ])
+        ->action(function (array $data) {
             //save transaction
+            DB::beginTransaction();
+            $transaction = Transaction::create([
+                'transaction_number' => $this->transaction_number,
+                'quantity' => array_sum(array_column($this->selectedMedicines, 'quantity')),
+                'sub_total' => $this->sub_total,
+                'tax' => $this->total_tax,
+                'grand_total' => $this->grand_total,
+                'amount_paid' => $data['payment_amount'],
+                'change' => $data['payment_amount'] - $this->grand_total,
+            ]);
+
             //save transaction details
+            foreach ($this->selectedMedicines as $key => $product) {
+                $transaction->transaction_items()->create([
+                    'medicine_id' => $product['id'],
+                    'quantity' => $product['quantity'],
+                    'price' => $product['price'],
+                    'sub_total' => $product['sub_total'],
+                ]);
+            }
+
             //update stock
-            //clear all data
-            $this->selectedMedicines = [];
-            $this->quantity = 0;
-            $this->total_tax = 0;
-            $this->sub_total = 0;
-            $this->grand_total = 0;
-            $this->form->fill();
+            foreach ($this->selectedMedicines as $key => $product) {
+                $product = Medicine::find($product['id']);
+                $updated_quantity = $product->stocks()->where('quantity', '>', 0)->first()->quantity - $product['quantity'];
+                $product->stocks()->where('quantity', '>', 0)->first()->update(['quantity' => $updated_quantity]);
+            }
+            DB::commit();
+
+            Notification::make()
+            ->title('Payment Successful')
+            ->body('Transaction has been saved successfully.')
+            ->success()
+            ->send();
+            //reload page
+            return redirect()->route('pharmacy.pos');
+
         })
         ->extraAttributes([
             'class' => 'w-full',
