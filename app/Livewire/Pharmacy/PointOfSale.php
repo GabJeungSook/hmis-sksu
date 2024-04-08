@@ -19,11 +19,16 @@ class PointOfSale extends Component implements HasForms, HasActions
     use InteractsWithForms;
     public ?array $data = [];
     public $selectedMedicines = [];
+    public $quantity;
     public $total_quantity;
+    public $total_tax;
     public $sub_total;
+    public $grand_total;
+    public $transaction_number;
 
     public function mount(): void
     {
+        $this->transaction_number = 'TRN-'.date('YmdHis');
         $this->form->fill();
     }
 
@@ -53,8 +58,12 @@ class PointOfSale extends Component implements HasForms, HasActions
                     if ($existingProductIndex !== false) {
                         // If product already exists, increment quantity
                         $this->selectedMedicines[$existingProductIndex]['quantity'] += 1;
-                        $this->selectedMedicines[$existingProductIndex]['price'] = $this->selectedMedicines[$existingProductIndex]['quantity'] * $med->price;
-                        $this->sub_total = $this->selectedMedicines[$existingProductIndex]['price'] * $this->selectedMedicines[$existingProductIndex]['quantity'];
+                        $this->quantity += 1;
+                        $this->selectedMedicines[$existingProductIndex]['tax'] += ($med->price * (12 / 100));
+                        $this->selectedMedicines[$existingProductIndex]['sub_total'] += $med->price;
+                        $this->sub_total =  array_sum(array_column($this->selectedMedicines, 'sub_total'));
+                        $this->total_tax = array_sum(array_column($this->selectedMedicines, 'tax'));
+                        $this->grand_total = $this->sub_total - $this->total_tax;
                     } else {
                         // Otherwise, add new product to the array
                         $this->selectedMedicines[] = [
@@ -63,8 +72,13 @@ class PointOfSale extends Component implements HasForms, HasActions
                             'description' => $med->description,
                             'quantity' => 1,
                             'price' => $med->price,
+                            'sub_total' => $med->price,
+                            'tax' => ($med->price * (12 / 100))
                         ];
-                        $this->sub_total = $med->price;
+                        $this->quantity = 1;
+                        $this->sub_total = array_sum(array_column($this->selectedMedicines, 'sub_total'));
+                        $this->total_tax = array_sum(array_column($this->selectedMedicines, 'tax'));
+                        $this->grand_total = $this->sub_total - $this->total_tax;
                     }
                 }
 
@@ -90,6 +104,53 @@ class PointOfSale extends Component implements HasForms, HasActions
             }));
 
         });
+    }
+
+    public function editQuantityAction(): Action
+    {
+        return Action::make('editQuantity')
+        ->icon('heroicon-m-pencil-square')
+        ->iconButton()
+        ->color('primary')
+        ->form([
+            TextInput::make('quantity')
+            ->required()
+            ->numeric()
+            ->minValue(1)
+            ->maxValue(100)
+        ])
+        ->action(function (array $arguments, array $data) {
+                $existingProductIndex = $this->findProductIndex($arguments['id']);
+                $this->selectedMedicines[$existingProductIndex]['quantity'] = $data['quantity'];
+                $this->selectedMedicines[$existingProductIndex]['sub_total'] = $this->selectedMedicines[$existingProductIndex]['price'] * $data['quantity'];
+                $this->selectedMedicines[$existingProductIndex]['tax'] = ($this->selectedMedicines[$existingProductIndex]['price'] * (12 / 100));
+                $this->sub_total =  array_sum(array_column($this->selectedMedicines, 'sub_total'));
+                $this->total_tax = array_sum(array_column($this->selectedMedicines, 'tax'));
+                $this->grand_total = $this->sub_total - $this->total_tax;
+        })
+        ->requiresConfirmation();
+    }
+
+    public function saveTransactionAction(): Action
+    {
+        return Action::make('saveTransaction')
+        ->label('Payment')
+        ->action(function () {
+            //save transaction
+            //save transaction details
+            //update stock
+            //clear all data
+            $this->selectedMedicines = [];
+            $this->quantity = 0;
+            $this->total_tax = 0;
+            $this->sub_total = 0;
+            $this->grand_total = 0;
+            $this->form->fill();
+        })
+        ->extraAttributes([
+            'class' => 'w-full',
+        ])
+        ->requiresConfirmation();
     }
 
     public function findProductIndex($productId)

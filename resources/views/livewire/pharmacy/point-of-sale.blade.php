@@ -2,6 +2,9 @@
 <div>
     <div class="grid grid-cols-2">
         <div class="col-span-1">
+            <div class="text-lg font-medium text-gray-900 mt-1 font-mono">
+                Transaction Number: {{$transaction_number}}
+            </div>
             <div class="mr-4 mt-5">
                 {{$this->form}}
                 <div class="mt-3">
@@ -9,6 +12,7 @@
 
                     <x-filament-actions::modals />
                 </div>
+
             </div>
         </div>
   <!-- Order summary -->
@@ -44,11 +48,20 @@
             </div>
 
             <div class="flex flex-1 items-end justify-between pt-2">
-              <p class="mt-1 text-sm font-medium text-gray-900">₱ {{number_format($item['price'], 2)}}</p>
+              <p class="mt-1 text-sm font-medium text-gray-900">₱ {{number_format($item['price'], 2)}} x {{$item['quantity']}} = ₱ {{number_format($item['sub_total'], 2)}}</p>
 
               <div class="ml-4">
                 <label for="quantity" class="sr-only">Quantity</label>
-                <input type="text" value="{{$item['quantity']}}">
+                <div class="flex space-x-4">
+                    <input type="text" disabled="true" value="{{$item['quantity']}}" class="rounded-md text-center w-16">
+                    <div class="flex justify-center items-center">
+                        {{ ($this->editQuantityAction)(['id' => $item['id']]) }}
+                    </div>
+                </div>
+
+
+
+                <x-filament-actions::modals />
                 {{-- <select id="quantity" name="quantity" class="rounded-md border border-gray-300 text-left text-base font-medium text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -69,18 +82,23 @@
           <dt class="text-sm">Subtotal</dt>
           <dd class="text-sm font-medium text-gray-900">₱ {{number_format($sub_total, 2)}}</dd>
         </div>
+        <div class="flex items-center justify-between">
+            <dt class="text-sm">Tax (12%)</dt>
+            <dd class="text-sm font-medium text-gray-900">₱ {{number_format($total_tax, 2)}}</dd>
+          </div>
         {{-- <div class="flex items-center justify-between">
           <dt class="text-sm">Taxes</dt>
           <dd class="text-sm font-medium text-gray-900">$5.52</dd>
         </div> --}}
         <div class="flex items-center justify-between border-t border-gray-200 pt-6">
-          <dt class="text-base font-medium">Total</dt>
-          <dd class="text-base font-medium text-gray-900">$75.52</dd>
+          <dt class="text-3xl font-medium">Grand Total</dt>
+          <dd class="text-3xl font-medium text-gray-900">₱ {{number_format($grand_total, 2)}}</dd>
         </div>
       </dl>
 
       <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
-        <button type="submit" class="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">Confirm order</button>
+        {{ ($this->saveTransactionAction) }}
+        {{-- <button type="submit" class="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">Proceed Payment</button> --}}
       </div>
     </div>
     @else
