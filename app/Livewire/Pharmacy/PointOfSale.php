@@ -188,7 +188,7 @@ class PointOfSale extends Component implements HasForms, HasActions
             ->success()
             ->send();
             //reload page
-            return redirect()->route('pharmacy.pos');
+            return redirect()->route('pharmacy.receipt', $transaction);
 
         })
         ->extraAttributes([

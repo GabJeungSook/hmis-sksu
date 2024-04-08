@@ -2,6 +2,7 @@
 
 use App\Livewire\Doctor\Vitals;
 use App\Livewire\Admin\Dashboard;
+use App\Livewire\Pharmacy\Receipt;
 use App\Livewire\Admin\Manage\Rooms;
 use App\Livewire\Pharmacy\Inventory;
 use App\Livewire\Doctor\Laboratories;
@@ -11,6 +12,7 @@ use App\Livewire\Doctor\EmergencyRoom;
 use App\Livewire\Doctor\MedicalRecord;
 use App\Livewire\Pharmacy\ManageStock;
 use App\Livewire\Pharmacy\PointOfSale;
+use App\Livewire\Pharmacy\Transaction;
 use App\Livewire\Admin\Manage\Patients;
 use App\Livewire\Admin\Manage\ManageBed;
 use App\Livewire\Doctor\ManageLaboratory;
@@ -44,6 +46,8 @@ Route::get('/doctor/view-medical-records/{record}', ViewMedicalRecord::class)->m
 Route::get('/pharmacy/inventory', Inventory::class)->middleware(['auth', 'verified', 'role:admin'])->name('pharmacy.inventory');
 Route::get('/pharmacy/manage-stock/{record}', ManageStock::class)->middleware(['auth', 'verified', 'role:admin'])->name('pharmacy.manage-stock');
 Route::get('/pharmacy/point-of-sale', PointOfSale::class)->middleware(['auth', 'verified', 'role:admin'])->name('pharmacy.pos');
+Route::get('/pharmacy/receipt/{record}', Receipt::class)->middleware(['auth', 'verified', 'role:admin'])->name('pharmacy.receipt');
+Route::get('/pharmacy/transactions', Transaction::class)->middleware(['auth', 'verified', 'role:admin'])->name('pharmacy.transaction');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

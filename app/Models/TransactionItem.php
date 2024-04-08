@@ -17,6 +17,6 @@ class TransactionItem extends Model
 
     public function medicine()
     {
-        return $this->belongsTo(Meicine::class);
+        return $this->belongsTo(Medicine::class);
     }
 }
