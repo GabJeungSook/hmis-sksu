@@ -3,6 +3,7 @@
 use App\Livewire\Doctor\Vitals;
 use App\Livewire\Admin\Dashboard;
 use App\Livewire\Cashier\Billing;
+use App\Livewire\Cashier\BillOut;
 use App\Livewire\Pharmacy\Receipt;
 use App\Livewire\Admin\Manage\Rooms;
 use App\Livewire\Pharmacy\Inventory;
@@ -27,7 +28,7 @@ Route::get('/', function () {
 });
 
 //admin routes
-Route::get('/dashboard', Dashboard::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.dashboard');
+Route::get('/dashboard', Dashboard::class)->middleware(['auth', 'verified', 'role:admin,doctor,pharmacist,cashier'])->name('admin.dashboard');
 Route::get('/manage/doctors', Doctors::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.doctors');
 Route::get('/manage/patients', Patients::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.patients');
 Route::get('/manage/rooms-and-beds', Rooms::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.rooms-and-beds');
@@ -36,22 +37,23 @@ Route::get('/manage/inventory/category', Category::class)->middleware(['auth', '
 Route::get('/manage/inventory/medicine', Medicine::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.inventory.medicine');
 
 //doctor routes
-Route::get('/doctor/emergency-room', EmergencyRoom::class)->middleware(['auth', 'verified', 'role:admin'])->name('doctor.emergency-room');
-Route::get('/doctor/vitals', Vitals::class)->middleware(['auth', 'verified', 'role:admin'])->name('doctor.vitals');
-Route::get('/doctor/laboratories', Laboratories::class)->middleware(['auth', 'verified', 'role:admin'])->name('doctor.laboratories');
-Route::get('/doctor/manage-laboratories/{record}', ManageLaboratory::class)->middleware(['auth', 'verified', 'role:admin'])->name('doctor.manage-labs');
-Route::get('/doctor/medical-records', MedicalRecord::class)->middleware(['auth', 'verified', 'role:admin'])->name('doctor.medical-records');
-Route::get('/doctor/view-medical-records/{record}', ViewMedicalRecord::class)->middleware(['auth', 'verified', 'role:admin'])->name('doctor.view-medical-records');
+Route::get('/doctor/emergency-room', EmergencyRoom::class)->middleware(['auth', 'verified', 'role:admin,doctor'])->name('doctor.emergency-room');
+Route::get('/doctor/vitals', Vitals::class)->middleware(['auth', 'verified', 'role:admin,doctor'])->name('doctor.vitals');
+Route::get('/doctor/laboratories', Laboratories::class)->middleware(['auth', 'verified', 'role:admin,doctor'])->name('doctor.laboratories');
+Route::get('/doctor/manage-laboratories/{record}', ManageLaboratory::class)->middleware(['auth', 'verified', 'role:admin,doctor'])->name('doctor.manage-labs');
+Route::get('/doctor/medical-records', MedicalRecord::class)->middleware(['auth', 'verified', 'role:admin,doctor'])->name('doctor.medical-records');
+Route::get('/doctor/view-medical-records/{record}', ViewMedicalRecord::class)->middleware(['auth', 'verified', 'role:admin,doctor'])->name('doctor.view-medical-records');
 
 //pharmacy routes
-Route::get('/pharmacy/inventory', Inventory::class)->middleware(['auth', 'verified', 'role:admin'])->name('pharmacy.inventory');
-Route::get('/pharmacy/manage-stock/{record}', ManageStock::class)->middleware(['auth', 'verified', 'role:admin'])->name('pharmacy.manage-stock');
-Route::get('/pharmacy/point-of-sale', PointOfSale::class)->middleware(['auth', 'verified', 'role:admin'])->name('pharmacy.pos');
-Route::get('/pharmacy/receipt/{record}', Receipt::class)->middleware(['auth', 'verified', 'role:admin'])->name('pharmacy.receipt');
-Route::get('/pharmacy/transactions', Transaction::class)->middleware(['auth', 'verified', 'role:admin'])->name('pharmacy.transaction');
+Route::get('/pharmacy/inventory', Inventory::class)->middleware(['auth', 'verified', 'role:admin,pharmacist'])->name('pharmacy.inventory');
+Route::get('/pharmacy/manage-stock/{record}', ManageStock::class)->middleware(['auth', 'verified', 'role:admin,pharmacist'])->name('pharmacy.manage-stock');
+Route::get('/pharmacy/point-of-sale', PointOfSale::class)->middleware(['auth', 'verified', 'role:admin,pharmacist'])->name('pharmacy.pos');
+Route::get('/pharmacy/receipt/{record}', Receipt::class)->middleware(['auth', 'verified', 'role:admin,pharmacist'])->name('pharmacy.receipt');
+Route::get('/pharmacy/transactions', Transaction::class)->middleware(['auth', 'verified', 'role:admin,pharmacist'])->name('pharmacy.transaction');
 
 //cashier routes
-Route::get('/cashier/billing', Billing::class)->middleware(['auth', 'verified', 'role:admin'])->name('cashier.billing');
+Route::get('/cashier/billing', Billing::class)->middleware(['auth', 'verified', 'role:admin,cashier'])->name('cashier.billing');
+Route::get('/cashier/patient-bill/{record}', BillOut::class)->middleware(['auth', 'verified', 'role:admin,cashier'])->name('cashier.bill-out');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

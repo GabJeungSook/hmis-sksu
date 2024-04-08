@@ -33,7 +33,9 @@ class Tests extends Component implements HasForms, HasTable
             ->columns([
                 TextColumn::make('patient.name')
                     ->searchable(),
-                TextColumn::make('test')
+                TextColumn::make('test'),
+                TextColumn::make('amount')
+                ->formatStateusing(fn ($state) => '₱ '. number_format($state, 2)),
                 // TextColumn::make('temperature')
                 //     ->searchable()
                 //     ->label('Temperature (°C)'),

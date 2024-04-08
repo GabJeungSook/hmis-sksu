@@ -4,6 +4,7 @@ namespace App\Livewire\Doctor;
 
 use App\Models\Patient;
 use Livewire\Component;
+use Filament\Support\RawJs;
 use Filament\Actions\Action;
 use App\Models\LaboratoryTest;
 use App\Models\LaboratoryResult;
@@ -48,6 +49,14 @@ class ManageLaboratory extends Component implements HasForms, HasActions
             Textarea::make('test')
                 ->required()
                 ->maxLength(255),
+            TextInput::make('amount')
+                ->label('Amount')
+                ->numeric()
+                ->autofocus()
+                ->prefix('₱')
+                ->mask(RawJs::make('$money($input)'))
+                ->stripCharacters(',')
+                ->required(),
             // ...
         ]);
     }

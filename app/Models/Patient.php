@@ -30,4 +30,9 @@ class Patient extends Model
         return $this->belongsTo(Bed::class);
     }
 
+    public function patientBill()
+    {
+        return $this->hasOne(PatientBill::class);
+    }
+
 }

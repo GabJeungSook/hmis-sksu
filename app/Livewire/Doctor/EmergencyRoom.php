@@ -28,7 +28,7 @@ class EmergencyRoom extends Component implements HasForms, HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(Patient::query())
+            ->query(auth()->user()->role_id === 1 ? Patient::query() : Patient::where('user_id', auth()->id()))
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),

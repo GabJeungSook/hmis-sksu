@@ -29,7 +29,7 @@ class Billing extends Component implements HasForms, HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(Patient::query())
+            ->query(Patient::query()->whereNotIn('type', ['Discharged']))
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),

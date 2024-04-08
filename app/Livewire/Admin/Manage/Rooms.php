@@ -6,9 +6,10 @@ use App\Models\Room;
 use App\Models\User;
 use Livewire\Component;
 use Filament\Tables\Table;
+use Filament\Support\RawJs;
+use Filament\Tables\Actions\Action;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Components\Textarea;
-use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
@@ -32,6 +33,8 @@ class Rooms extends Component implements HasForms, HasTable
                 ->searchable(),
                 TextColumn::make('description'),
                 TextColumn::make('beds_count')->label('No. of Beds')->counts('beds'),
+                TextColumn::make('amount')
+                ->formatStateusing(fn ($state) => '₱ '. number_format($state, 2)),
                 // TextColumn::make('beds.name')
                 // ->listWithLineBreaks()
                 // ->bulleted()
@@ -49,7 +52,15 @@ class Rooms extends Component implements HasForms, HasTable
                         ->required()
                         ->maxLength(255),
                     Textarea::make('description')
-                        ->nullable()
+                        ->nullable(),
+                    TextInput::make('amount')
+                        ->label('Amount')
+                        ->numeric()
+                        ->autofocus()
+                        ->prefix('₱')
+                        ->mask(RawJs::make('$money($input)'))
+                        ->stripCharacters(',')
+                        ->required(),
                 ])
             ])->actions([
                 Action::make('manage_beds')
@@ -66,7 +77,15 @@ class Rooms extends Component implements HasForms, HasTable
                         ->required()
                         ->maxLength(255),
                     Textarea::make('description')
-                        ->nullable()
+                        ->nullable(),
+                    TextInput::make('amount')
+                        ->label('Amount')
+                        ->numeric()
+                        ->autofocus()
+                        ->prefix('₱')
+                        ->mask(RawJs::make('$money($input)'))
+                        ->stripCharacters(',')
+                        ->required(),
                 ]),
                 DeleteAction::make('delete')
                 ->button()

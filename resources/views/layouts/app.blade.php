@@ -186,6 +186,7 @@
                     Dashboard
                   </a>
                 </li>
+                @if(auth()->user()->role_id === 1)
                 <li>
                     <div class="text-xs font-semibold leading-6 text-gray-400">Manage</div>
                     <ul role="list" class="-mx-2 mt-2 space-y-1">
@@ -244,6 +245,8 @@
                       </li>
                     </ul>
                   </li>
+                  @endif
+                  @if(auth()->user()->role_id === 1 || auth()->user()->role_id === 2)
                   <li>
                     <div class="text-xs font-semibold leading-6 text-gray-400">Doctor Transactions</div>
                     <ul role="list" class="-mx-2 mt-2 space-y-1">
@@ -286,6 +289,8 @@
                       </li>
                     </ul>
                   </li>
+                  @endif
+                  @if(auth()->user()->role_id === 1 || auth()->user()->role_id === 3)
                   <li>
                     <div class="text-xs font-semibold leading-6 text-gray-400">Pharmacy</div>
                     <ul role="list" class="-mx-2 mt-2 space-y-1">
@@ -310,6 +315,8 @@
                       </li>
                     </ul>
                   </li>
+                  @endif
+                  @if(auth()->user()->role_id === 1 || auth()->user()->role_id === 4)
                   <li>
                     <div class="text-xs font-semibold leading-6 text-gray-400">Cashier Transactions</div>
                     <ul role="list" class="-mx-2 mt-2 space-y-1">
@@ -324,6 +331,7 @@
                         </li>
                     </ul>
                   </li>
+                  @endif
               </ul>
             </li>
             <li>
