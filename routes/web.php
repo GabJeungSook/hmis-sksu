@@ -2,6 +2,7 @@
 
 use App\Livewire\Doctor\Vitals;
 use App\Livewire\Admin\Dashboard;
+use App\Livewire\Cashier\Billing;
 use App\Livewire\Pharmacy\Receipt;
 use App\Livewire\Admin\Manage\Rooms;
 use App\Livewire\Pharmacy\Inventory;
@@ -48,6 +49,9 @@ Route::get('/pharmacy/manage-stock/{record}', ManageStock::class)->middleware(['
 Route::get('/pharmacy/point-of-sale', PointOfSale::class)->middleware(['auth', 'verified', 'role:admin'])->name('pharmacy.pos');
 Route::get('/pharmacy/receipt/{record}', Receipt::class)->middleware(['auth', 'verified', 'role:admin'])->name('pharmacy.receipt');
 Route::get('/pharmacy/transactions', Transaction::class)->middleware(['auth', 'verified', 'role:admin'])->name('pharmacy.transaction');
+
+//cashier routes
+Route::get('/cashier/billing', Billing::class)->middleware(['auth', 'verified', 'role:admin'])->name('cashier.billing');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
