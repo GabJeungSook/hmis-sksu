@@ -171,7 +171,7 @@
       <div class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
         <div class="flex h-16 shrink-0 items-center bg-blue-600 px-4 mt-4 rounded-lg text-white ">
           <img class="h-12 w-auto" src="{{asset('images/his-logo.png')}}" alt="HMIS">
-          <p class="poppins-medium text-xs px-2 tracking-wider">Hospital Information System</p>
+          <p class="poppins-medium text-xs px-2 tracking-wider">HEALTH HUB</p>
         </div>
         <nav class="flex flex-1 flex-col">
           <ul role="list" class="flex flex-1 flex-col gap-y-7">
