@@ -22,6 +22,7 @@ use App\Livewire\Admin\Inventory\Category;
 use App\Livewire\Admin\Inventory\Medicine;
 use App\Livewire\Doctor\ViewMedicalRecord;
 use App\Http\Controllers\ProfileController;
+use App\Livewire\Admin\Reports\PatientList;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -35,6 +36,7 @@ Route::get('/manage/rooms-and-beds', Rooms::class)->middleware(['auth', 'verifie
 Route::get('/manage/manage-beds/{record}', ManageBed::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.manage-beds');
 Route::get('/manage/inventory/category', Category::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.inventory.category');
 Route::get('/manage/inventory/medicine', Medicine::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.inventory.medicine');
+Route::get('/reports', PatientList::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.reports.patient-list');
 
 //doctor routes
 Route::get('/doctor/emergency-room', EmergencyRoom::class)->middleware(['auth', 'verified', 'role:admin,doctor'])->name('doctor.emergency-room');
