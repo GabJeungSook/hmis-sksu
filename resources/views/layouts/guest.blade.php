@@ -22,7 +22,7 @@
                 <a href="/">
                     <div class="flex h-16 shrink-0 items-center px-4 mt-4 rounded-lg text-gray-500">
                         <img class="h-12 w-auto" src="{{asset('images/his-logo.png')}}" alt="HMIS">
-                        <p class="poppins-medium text-2xl px-2 tracking-normal">Hospital Information System</p>
+                        <p class="poppins-medium text-2xl px-2 tracking-normal">HEALTH HUB</p>
                       </div>
                 </a>
             </div>
