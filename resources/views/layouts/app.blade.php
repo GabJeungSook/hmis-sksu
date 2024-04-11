@@ -334,7 +334,7 @@
                   @endif
               </ul>
             </li>
-            <li>
+            {{-- <li>
               <div class="text-xs font-semibold leading-6 text-gray-400">Reports</div>
               <ul role="list" class="-mx-2 mt-2 space-y-1">
                 <li>
@@ -347,7 +347,7 @@
                     </a>
                   </li>
                 </ul>
-            </li>
+            </li> --}}
             <li class="-mx-1 mt-auto">
                 <form action="{{route('logout')}}" method="POST">
                     @csrf
