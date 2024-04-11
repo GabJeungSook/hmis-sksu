@@ -25,14 +25,19 @@
                           <svg class="h-5 w-5 flex-shrink-0 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                           </svg>
+                          @if ($record->bed)
                           <div class="ml-4 flex-col min-w-0 gap-2">
                             <span class="truncate font-medium">Room : {{$record->bed->room->name}}</span>
                             <p class="flex-shrink-0 text-gray-400">Bed : {{$record->bed->name}}</p>
                           </div>
+
                         </div>
                         <div class="ml-4 flex-shrink-0">
                             <span class="font-medium text-gray-600">₱ {{number_format($record->bed->room->amount, 2)}}</span>
                         </div>
+                        @else
+                        <span class="truncate font-medium ml-4 text-red-500">The In-Patient should be assigned to a room.</span>
+                        @endif
                       </li>
                     @endif
                     @if ($record->laboratoryTests)
@@ -47,7 +52,9 @@
                         </svg>
                         <div class="ml-4 flex-col min-w-0 gap-2">
                           <span class="truncate font-medium">Test : {{$test->test}}</span>
+                          @if ($result)
                           <p class="flex-shrink-0 text-gray-400">Result : {{$result->result}}</p>
+                          @endif
                         </div>
                       </div>
                       <div class="ml-4 flex-shrink-0">
@@ -70,10 +77,13 @@
                     </div>
                   </li>
                 </ul>
+                @if ($record->bed)
                 <div class="mt-3 flex justify-end">
                     {{ ($this->payBillAction)(['id' => $record->id]) }}
                 </div>
                 <x-filament-actions::modals />
+                @endif
+
               </dd>
             </div>
           </dl>

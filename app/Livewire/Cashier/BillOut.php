@@ -26,8 +26,10 @@ class BillOut extends Component implements HasForms, HasActions
     {
         $this->record = Patient::find($record);
         $total = 0;
-        if ($this->record->type === 'In-Patient') {
+        if ($this->record->type === 'In-Patient' && $this->record->bed) {
             $total += $this->record->bed->room->amount;
+        }else{
+            $total = 0;
         }
         if ($this->record->laboratoryTests) {
             foreach ($this->record->laboratoryTests as $test) {
@@ -99,7 +101,7 @@ class BillOut extends Component implements HasForms, HasActions
             ->send();
             //reload page
          //   return redirect()->route('pharmacy.receipt', $transaction);
-            return redirect()->route('cashier.cashier.bill-out');
+            return redirect()->route('cashier.billing');
         })
         ->extraAttributes([
             'class' => 'w-full',
