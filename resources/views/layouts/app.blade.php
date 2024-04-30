@@ -188,8 +188,24 @@
                 </li>
                 @if(auth()->user()->role_id === 1)
                 <li>
-                    <div class="text-xs font-semibold leading-6 text-gray-400">Manage</div>
-                    <ul role="list" class="-mx-2 mt-2 space-y-1">
+                    <div x-cloak x-data="{ open_ipd: false }" class="relative inline-block text-left mt-4">
+                        <div>
+                            <button @click="open_ipd = ! open_ipd" class="inline-flex justify-center w-full rounded-md px-4 py-2 bg-white text-sm font-medium text-gray-400 hover:bg-gray-50 focus:outline-none ">
+                                Manage
+                                <!-- Heroicon name: chevron-down -->
+                                {{-- <svg :class="{ 'transform rotate-180': open, 'hidden': !open }" class="-mr-1 ml-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M10 12a1 1 0 01-.707-.293l-4-4a1 1 0 111.414-1.414L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4A1 1 0 0110 12z" clip-rule="evenodd" />
+                                </svg> --}}
+                                <svg :class="{ 'transform rotate-360': open_ipd, 'hidden': !open_ipd }" class="-mr-1 ml-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                                  </svg>
+                                <svg :class="{ 'transform rotate-360': !open_ipd, 'hidden': open_ipd }" class="-mr-1 ml-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                  </svg>
+                            </button>
+                        </div>
+                    {{-- <div class="text-xs font-semibold leading-6 text-gray-400">Manage</div> --}}
+                    <ul x-show="open_ipd" @click.away="open_ipd = false" role="list" class="-mx-2 mt-2 space-y-1">
                         <li>
                             <a wire:navigate href="{{ route('admin.doctors') }}" class="{{ request()->routeIs('admin.doctors') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
                                 <svg class="h-5 w-5 shrink-0 {{ request()->routeIs('admin.doctors') ? 'text-blue-600' : 'text-gray-500' }}" viewBox="0 0 17 20" xmlns="http://www.w3.org/2000/svg" fill="none">
@@ -199,7 +215,7 @@
                                 <span class="truncate">Users</span>
                             </a>
                         </li>
-                      <li>
+                      {{-- <li>
                         <a wire:navigate href="{{ route('admin.patients') }}" class="{{ request()->routeIs('admin.patients') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
                             <svg class="h-5 w-5 shrink-0 text-blue-600" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12.3826 0.538164C11.6554 0.200801 10.8531 0 10 0C7.60313 0 5.55804 1.48826 4.70937 3.59375H8.33393L12.3826 0.538164ZM15.2906 3.59375C14.9379 2.71912 14.3679 1.96758 13.6616 1.36922L10.7138 3.59375H15.2906ZM10 11.5C13.1558 11.5 15.7143 8.92553 15.7143 5.75C15.7143 5.50383 15.6719 5.26934 15.6424 5.03125H4.35759C4.32768 5.26934 4.28571 5.50383 4.28571 5.75C4.28571 8.92553 6.8442 11.5 10 11.5ZM3.57143 13.4631V23H9.29732L4.90223 13.0489C4.444 13.1339 3.99732 13.2729 3.57143 13.4631ZM0 20.8438C0 22.0346 0.959375 23 2.14286 23V14.3858C0.842857 15.4931 0 17.1269 0 18.975V20.8438ZM11.4286 18.6875H8.95625L10.8612 23H11.4286C12.6103 23 13.5714 22.0328 13.5714 20.8438C13.5714 19.6547 12.6103 18.6875 11.4286 18.6875ZM14 12.9375H13.254C12.2612 13.3948 11.1612 13.6562 10 13.6562C8.83884 13.6562 7.73884 13.3948 6.74598 12.9375H6.41696L8.32188 17.25H11.4286C13.3978 17.25 15 18.8622 15 20.8438C15 21.6559 14.7205 22.3976 14.2674 23H17.8571C19.0406 23 20 22.0346 20 20.8438V18.975C20 15.6404 17.3138 12.9375 14 12.9375Z"
@@ -216,7 +232,7 @@
                             </svg>
                             <span class="truncate">Rooms and Beds</span>
                         </a>
-                      </li>
+                      </li> --}}
                       <li>
                         <a wire:navigate href="{{ route('admin.inventory.category') }}" class="{{ request()->routeIs('admin.inventory.category') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
                             <svg class="h-4 w-4 shrink-0 text-blue-600" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -244,13 +260,117 @@
                         </a>
                       </li>
                     </ul>
+                </div>
                   </li>
                   @endif
+                  @if(auth()->user()->role_id === 1)
+                  <li>
+                      <div x-cloak x-data="{ open: false }" class="relative inline-block text-left mt-4">
+                          <div>
+                              <button @click="open = !open" class="inline-flex justify-center w-full rounded-md px-4 py-2 bg-white text-sm font-medium text-gray-400 hover:bg-gray-50 focus:outline-none ">
+                                  IPD / OPD Transactions
+                                  <!-- Heroicon name: chevron-down -->
+                                  {{-- <svg :class="{ 'transform rotate-180': open, 'hidden': !open }" class="-mr-1 ml-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                      <path fill-rule="evenodd" d="M10 12a1 1 0 01-.707-.293l-4-4a1 1 0 111.414-1.414L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4A1 1 0 0110 12z" clip-rule="evenodd" />
+                                  </svg> --}}
+                                  <svg :class="{ 'transform rotate-360': open, 'hidden': !open }" class="-mr-1 ml-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                      <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                                    </svg>
+                                  <svg :class="{ 'transform rotate-360': !open, 'hidden': open }" class="-mr-1 ml-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                      <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                    </svg>
+                              </button>
+                          </div>
+                      {{-- <div class="text-xs font-semibold leading-6 text-gray-400">Manage</div> --}}
+                      <ul x-show="open" @click.away="open = false" role="list" class="-mx-2 mt-2 space-y-1">
+                        <li>
+                          <a wire:navigate href="{{ route('admin.patients') }}" class="{{ request()->routeIs('admin.patients') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
+                              <svg class="h-5 w-5 shrink-0 text-blue-600" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M12.3826 0.538164C11.6554 0.200801 10.8531 0 10 0C7.60313 0 5.55804 1.48826 4.70937 3.59375H8.33393L12.3826 0.538164ZM15.2906 3.59375C14.9379 2.71912 14.3679 1.96758 13.6616 1.36922L10.7138 3.59375H15.2906ZM10 11.5C13.1558 11.5 15.7143 8.92553 15.7143 5.75C15.7143 5.50383 15.6719 5.26934 15.6424 5.03125H4.35759C4.32768 5.26934 4.28571 5.50383 4.28571 5.75C4.28571 8.92553 6.8442 11.5 10 11.5ZM3.57143 13.4631V23H9.29732L4.90223 13.0489C4.444 13.1339 3.99732 13.2729 3.57143 13.4631ZM0 20.8438C0 22.0346 0.959375 23 2.14286 23V14.3858C0.842857 15.4931 0 17.1269 0 18.975V20.8438ZM11.4286 18.6875H8.95625L10.8612 23H11.4286C12.6103 23 13.5714 22.0328 13.5714 20.8438C13.5714 19.6547 12.6103 18.6875 11.4286 18.6875ZM14 12.9375H13.254C12.2612 13.3948 11.1612 13.6562 10 13.6562C8.83884 13.6562 7.73884 13.3948 6.74598 12.9375H6.41696L8.32188 17.25H11.4286C13.3978 17.25 15 18.8622 15 20.8438C15 21.6559 14.7205 22.3976 14.2674 23H17.8571C19.0406 23 20 22.0346 20 20.8438V18.975C20 15.6404 17.3138 12.9375 14 12.9375Z"
+                                  fill="{{ request()->routeIs('admin.patients') ? '#2563EB' : '#5B5B5B'}}"/>
+                              </svg>
+                             <span class="truncate">Patients</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a wire:navigate href="{{ route('admin.rooms-and-beds') }}" class="{{ request()->routeIs('admin.rooms-and-beds') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
+                              <svg class="h-5 w-5 shrink-0 text-blue-600" viewBox="0 0 21 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M5.775 6C7.22236 6 8.4 4.87844 8.4 3.5C8.4 2.12156 7.22236 1 5.775 1C4.32764 1 3.15 2.12156 3.15 3.5C3.15 4.87844 4.32764 6 5.775 6ZM17.325 2H9.975C9.68494 2 9.45 2.22375 9.45 2.5V7H2.1V0.5C2.1 0.22375 1.86506 0 1.575 0H0.525C0.234937 0 0 0.22375 0 0.5V11.5C0 11.7762 0.234937 12 0.525 12H1.575C1.86506 12 2.1 11.7762 2.1 11.5V10H18.9V11.5C18.9 11.7762 19.1349 12 19.425 12H20.475C20.7651 12 21 11.7762 21 11.5V5.5C21 3.56687 19.3548 2 17.325 2Z"
+                                  fill="{{ request()->routeIs('admin.rooms-and-beds') ? '#2563EB' : '#5B5B5B'}}"/>
+                              </svg>
+                              <span class="truncate">Rooms and Beds</span>
+                          </a>
+                        </li>
+                        <li>
+                            <!-- Current: "bg-gray-50 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-50" -->
+                            <a wire:navigate href="{{ route('doctor.vitals') }}" class="{{ request()->routeIs('doctor.vitals') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
+                                <svg class="h-5 w-5 shrink-0 text-blue-600" viewBox="0 0 23 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0 2.2V8.8C0 10.0134 1.03141 11 2.3 11H5.75V0H2.3C1.03141 0 0 0.986563 0 2.2ZM20.7 0H17.25V11H20.7C21.9686 11 23 10.0134 23 8.8V2.2C23 0.986563 21.9686 0 20.7 0ZM6.9 11H16.1V0H6.9V11ZM13.225 3.025C13.703 3.025 14.0875 3.39281 14.0875 3.85C14.0875 4.30719 13.703 4.675 13.225 4.675C12.747 4.675 12.3625 4.30719 12.3625 3.85C12.3625 3.39281 12.747 3.025 13.225 3.025ZM13.225 6.325C13.703 6.325 14.0875 6.69281 14.0875 7.15C14.0875 7.60719 13.703 7.975 13.225 7.975C12.747 7.975 12.3625 7.60719 12.3625 7.15C12.3625 6.69281 12.747 6.325 13.225 6.325ZM9.775 3.025C10.253 3.025 10.6375 3.39281 10.6375 3.85C10.6375 4.30719 10.253 4.675 9.775 4.675C9.29703 4.675 8.9125 4.30719 8.9125 3.85C8.9125 3.39281 9.29703 3.025 9.775 3.025ZM9.775 6.325C10.253 6.325 10.6375 6.69281 10.6375 7.15C10.6375 7.60719 10.253 7.975 9.775 7.975C9.29703 7.975 8.9125 7.60719 8.9125 7.15C8.9125 6.69281 9.29703 6.325 9.775 6.325Z"
+                                    fill="{{ request()->routeIs('doctor.vitals') ? '#2563EB' : '#5B5B5B'}}"/>
+                                    </svg>
+                              <span class="truncate">Vitals</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a wire:navigate href="{{ route('doctor.laboratories') }}" class="{{ request()->routeIs('doctor.laboratories') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
+                                <svg class="h-5 w-5 shrink-0 text-blue-600" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6.5625 13.125H7.05469V13.7812C7.05469 14.1438 7.34836 14.4375 7.71094 14.4375H9.35156C9.71414 14.4375 10.0078 14.1438 10.0078 13.7812V13.125H10.5C11.2247 13.125 11.8125 12.5372 11.8125 11.8125V2.625C11.8125 1.90025 11.2247 1.3125 10.5 1.3125V0.65625C10.5 0.293672 10.2063 0 9.84375 0H7.21875C6.85617 0 6.5625 0.293672 6.5625 0.65625V1.3125C5.83775 1.3125 5.25 1.90025 5.25 2.625V11.8125C5.25 12.5372 5.83775 13.125 6.5625 13.125ZM19.0312 18.375H18.9783C20.2305 16.9801 21 15.143 21 13.125C21 8.78227 17.4677 5.25 13.125 5.25V7.875C16.0199 7.875 18.375 10.2301 18.375 13.125C18.375 16.0199 16.0199 18.375 13.125 18.375H1.96875C0.881426 18.375 0 19.2564 0 20.3438C0 20.7063 0.293672 21 0.65625 21H20.3438C20.7063 21 21 20.7063 21 20.3438C21 19.2564 20.1186 18.375 19.0312 18.375ZM4.26562 17.0625H12.7969C12.9782 17.0625 13.125 16.9157 13.125 16.7344V16.0781C13.125 15.8968 12.9782 15.75 12.7969 15.75H4.26562C4.08434 15.75 3.9375 15.8968 3.9375 16.0781V16.7344C3.9375 16.9157 4.08434 17.0625 4.26562 17.0625Z"
+                                    fill="{{ request()->routeIs('doctor.laboratories') ? '#2563EB' : '#5B5B5B'}}"/>
+                                    </svg>
+                              <span class="truncate">Laboratories</span>
+                            </a>
+                          </li>
+                        {{-- <li>
+                          <a wire:navigate href="{{ route('admin.inventory.category') }}" class="{{ request()->routeIs('admin.inventory.category') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
+                              <svg class="h-4 w-4 shrink-0 text-blue-600" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <g clip-path="url(#clip0_239_371)">
+                                  <path d="M14.3438 10.625H13.2812C13.1404 10.625 13.0052 10.681 12.9056 10.7806C12.806 10.8802 12.75 11.0154 12.75 11.1562V14.875H2.125V4.25H6.90625C7.04715 4.25 7.18227 4.19403 7.2819 4.0944C7.38153 3.99477 7.4375 3.85965 7.4375 3.71875V2.65625C7.4375 2.51535 7.38153 2.38023 7.2819 2.2806C7.18227 2.18097 7.04715 2.125 6.90625 2.125H1.59375C1.17106 2.125 0.765685 2.29291 0.466799 2.5918C0.167912 2.89068 0 3.29606 0 3.71875L0 15.4062C0 15.8289 0.167912 16.2343 0.466799 16.5332C0.765685 16.8321 1.17106 17 1.59375 17H13.2812C13.7039 17 14.1093 16.8321 14.4082 16.5332C14.7071 16.2343 14.875 15.8289 14.875 15.4062V11.1562C14.875 11.0154 14.819 10.8802 14.7194 10.7806C14.6198 10.681 14.4846 10.625 14.3438 10.625ZM16.2031 0H11.9531C11.2436 0 10.889 0.860293 11.3887 1.36133L12.575 2.54768L4.48242 10.6373C4.40813 10.7113 4.34919 10.7993 4.30897 10.8961C4.26875 10.993 4.24804 11.0969 4.24804 11.2017C4.24804 11.3066 4.26875 11.4105 4.30897 11.5073C4.34919 11.6042 4.40813 11.6922 4.48242 11.7662L5.23514 12.5176C5.30917 12.5919 5.39714 12.6508 5.494 12.691C5.59086 12.7313 5.69471 12.752 5.79959 12.752C5.90447 12.752 6.00832 12.7313 6.10518 12.691C6.20204 12.6508 6.29001 12.5919 6.36404 12.5176L14.4527 4.42664L15.6387 5.61133C16.1367 6.10938 17 5.76074 17 5.04688V0.796875C17 0.585531 16.916 0.382842 16.7666 0.233399C16.6172 0.0839562 16.4145 0 16.2031 0V0Z"
+                                  fill="{{ request()->routeIs('admin.inventory.category') ? '#2563EB' : '#5B5B5B'}}"/>
+                                  </g>
+                                  <defs>
+                                  <clipPath id="clip0_239_371">
+                                  <rect width="17" height="17" fill="white"/>
+                                  </clipPath>
+                                  </defs>
+                                  </svg>
+
+                              <span class="truncate">Categories</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a wire:navigate href="{{ route('admin.inventory.medicine') }}" class="{{ request()->routeIs('admin.inventory.medicine') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
+                              <svg class="h-4 w-4 shrink-0 text-blue-600" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M2.8125 14H12.1875V3H11.25V1.5C11.25 0.671562 10.6204 0 9.84375 0H5.15625C4.37959 0 3.75 0.671562 3.75 1.5V3H2.8125V14ZM5.625 2H9.375V3H5.625V2ZM15 4.5V12.5C15 13.3284 14.3704 14 13.5938 14H13.125V3H13.5938C14.3704 3 15 3.67156 15 4.5ZM1.875 14H1.40625C0.62959 14 0 13.3284 0 12.5V4.5C0 3.67156 0.62959 3 1.40625 3H1.875V14ZM10.3125 7.5V8.5C10.3125 8.77616 10.1026 9 9.84375 9H8.4375V10.5C8.4375 10.7762 8.22765 11 7.96875 11H7.03125C6.77235 11 6.5625 10.7762 6.5625 10.5V9H5.15625C4.89735 9 4.6875 8.77616 4.6875 8.5V7.5C4.6875 7.22384 4.89735 7 5.15625 7H6.5625V5.5C6.5625 5.22384 6.77235 5 7.03125 5H7.96875C8.22765 5 8.4375 5.22384 8.4375 5.5V7H9.84375C10.1026 7 10.3125 7.22384 10.3125 7.5Z"
+                                  fill="{{ request()->routeIs('admin.inventory.medicine') ? '#2563EB' : '#5B5B5B'}}"/>
+                                  </svg>
+                              <span class="truncate">Medicines</span>
+                          </a>
+                        </li> --}}
+                      </ul>
+                  </div>
+                    </li>
+                    @endif
                   @if(auth()->user()->role_id === 1 || auth()->user()->role_id === 2)
                   <li>
-                    <div class="text-xs font-semibold leading-6 text-gray-400">Doctor Transactions</div>
-                    <ul role="list" class="-mx-2 mt-2 space-y-1">
-                      <li>
+                    <div x-cloak x-data="{ open_doctor: false }" class="relative inline-block text-left mt-4">
+                        <div>
+                            <button @click="open_doctor = !open_doctor" class="inline-flex justify-center w-full rounded-md px-4 py-2 bg-white text-sm font-medium text-gray-400 hover:bg-gray-50 focus:outline-none ">
+                                Doctor Transactions
+                                <!-- Heroicon name: chevron-down -->
+                                {{-- <svg :class="{ 'transform rotate-180': open, 'hidden': !open }" class="-mr-1 ml-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M10 12a1 1 0 01-.707-.293l-4-4a1 1 0 111.414-1.414L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4A1 1 0 0110 12z" clip-rule="evenodd" />
+                                </svg> --}}
+                                <svg :class="{ 'transform rotate-360': open_doctor, 'hidden': !open_doctor }" class="-mr-1 ml-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                                  </svg>
+                                <svg :class="{ 'transform rotate-360': !open_doctor, 'hidden': open_doctor }" class="-mr-1 ml-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                  </svg>
+                            </button>
+                        </div>
+                    {{-- <div class="text-xs font-semibold leading-6 text-gray-400">Doctor Transactions</div> --}}
+                    <ul x-show="open_doctor" @click.away="open_doctor = false" role="list" class="-mx-2 mt-2 space-y-1">
+                      {{-- <li>
                         <a wire:navigate href="{{ route('doctor.emergency-room') }}" class="{{ request()->routeIs('doctor.emergency-room') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
                             <svg class="h-5 w-5 shrink-0 text-blue-600" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M10.9823 0C17.2718 0 22 4.88347 22 11C22 17.5246 16.744 22 10.9823 22C5.03871 22 0 17.1431 0 11C0 5.10524 4.64395 0 10.9823 0ZM11.0177 1.98266C5.775 1.98266 1.98266 6.325 1.98266 11C1.98266 15.8702 6.02782 19.9952 11.0177 19.9952C15.5952 19.9952 20.0129 16.398 20.0129 11C20.0173 5.95242 16.0121 1.98266 11.0177 1.98266ZM15.7637 11.102C15.5552 11.102 15.3645 11.2262 15.2891 11.4214L15.1117 11.8427L14.6238 7.72661C14.5484 7.11008 13.648 7.13226 13.5992 7.74435L13.4085 10.0242L13.1778 6.97258C13.129 6.33831 12.1976 6.34274 12.1488 6.97258L11.9935 8.96411L11.7319 4.78145C11.6919 4.13831 10.7427 4.14274 10.7028 4.78145L10.4766 8.49395L10.2859 5.55323C10.246 4.91452 9.30121 4.91452 9.25685 5.55323L9.02177 9.11048L8.83992 6.58226C8.79113 5.94798 7.86411 5.94798 7.81089 6.57339L7.46935 10.5565L7.38952 10.0153C7.31411 9.50968 6.63105 9.4121 6.41371 9.86895L5.82823 11.0976H3.88105V12.1266H6.15645C6.35161 12.1266 6.52903 12.0157 6.61774 11.8427L7.09234 15.0851C7.18105 15.6839 8.06371 15.6617 8.11693 15.054L8.28548 13.1202L8.53831 16.5931C8.5871 17.2319 9.52742 17.223 9.56734 16.5887L9.77137 13.4661L9.98427 16.7173C10.0242 17.356 10.9734 17.356 11.0133 16.7129L11.2306 13.1423L11.4302 16.327C11.4702 16.9613 12.4105 16.9702 12.4593 16.3359L12.6633 13.7367L12.8806 16.5931C12.9294 17.2274 13.8565 17.223 13.9052 16.5976L14.2069 12.9161L14.3266 13.9052C14.3887 14.4286 15.1117 14.5306 15.3157 14.0427L16.1141 12.1177H18.354V11.0887L15.7637 11.102ZM12.304 11.3327H11.3327V12.304C11.3327 12.4859 11.1863 12.6367 11 12.6367C10.8181 12.6367 10.6673 12.4903 10.6673 12.304V11.3327H9.69597C9.51411 11.3327 9.36331 11.1863 9.36331 11C9.36331 10.8181 9.51411 10.6673 9.69597 10.6673H10.6673V9.69597C10.6673 9.51411 10.8181 9.36331 11 9.36331C11.1819 9.36331 11.3327 9.50968 11.3327 9.69597V10.6673H12.304C12.4859 10.6673 12.6367 10.8137 12.6367 11C12.6367 11.1819 12.4859 11.3327 12.304 11.3327Z"
@@ -258,8 +378,8 @@
                                 </svg>
                           <span class="truncate">Emergency Room</span>
                         </a>
-                      </li>
-                      <li>
+                      </li> --}}
+                      {{-- <li>
                         <!-- Current: "bg-gray-50 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-50" -->
                         <a wire:navigate href="{{ route('doctor.vitals') }}" class="{{ request()->routeIs('doctor.vitals') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
                             <svg class="h-5 w-5 shrink-0 text-blue-600" viewBox="0 0 23 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -277,7 +397,7 @@
                                 </svg>
                           <span class="truncate">Laboratories</span>
                         </a>
-                      </li>
+                      </li> --}}
                       <li>
                         <a wire:navigate href="{{ route('doctor.medical-records') }}" class="{{ request()->routeIs('doctor.medical-records') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
                                 <svg class="h-5 w-5 shrink-0 text-blue-600" viewBox="0 0 18 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -288,12 +408,29 @@
                         </a>
                       </li>
                     </ul>
+                </div>
                   </li>
                   @endif
                   @if(auth()->user()->role_id === 1 || auth()->user()->role_id === 3)
                   <li>
-                    <div class="text-xs font-semibold leading-6 text-gray-400">Pharmacy</div>
-                    <ul role="list" class="-mx-2 mt-2 space-y-1">
+                    <div x-cloak x-data="{ open_pharmacy: false }" class="relative inline-block text-left mt-4">
+                        <div>
+                            <button @click="open_pharmacy = !open_pharmacy" class="inline-flex justify-center w-full rounded-md px-4 py-2 bg-white text-sm font-medium text-gray-400 hover:bg-gray-50 focus:outline-none ">
+                                Pharmacy Transactions
+                                <!-- Heroicon name: chevron-down -->
+                                {{-- <svg :class="{ 'transform rotate-180': open, 'hidden': !open }" class="-mr-1 ml-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M10 12a1 1 0 01-.707-.293l-4-4a1 1 0 111.414-1.414L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4A1 1 0 0110 12z" clip-rule="evenodd" />
+                                </svg> --}}
+                                <svg :class="{ 'transform rotate-360': open_pharmacy, 'hidden': !open_pharmacy }" class="-mr-1 ml-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                                  </svg>
+                                <svg :class="{ 'transform rotate-360': !open_pharmacy, 'hidden': open_pharmacy }" class="-mr-1 ml-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                  </svg>
+                            </button>
+                        </div>
+                    {{-- <div class="text-xs font-semibold leading-6 text-gray-400">Pharmacy</div> --}}
+                    <ul x-show="open_pharmacy" @click.away="open_pharmacy = false" role="list" class="-mx-2 mt-2 space-y-1">
                       <li>
                         <!-- Current: "bg-gray-50 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-50" -->
                         <a wire:navigate href="{{ route('pharmacy.inventory') }}" class="{{ request()->routeIs('pharmacy.inventory') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
@@ -314,12 +451,29 @@
                         </a>
                       </li>
                     </ul>
+                    </div>
                   </li>
                   @endif
                   @if(auth()->user()->role_id === 1 || auth()->user()->role_id === 4)
                   <li>
-                    <div class="text-xs font-semibold leading-6 text-gray-400">Cashier Transactions</div>
-                    <ul role="list" class="-mx-2 mt-2 space-y-1">
+                    <div x-cloak x-data="{ open_cashier: false }" class="relative inline-block text-left mt-4">
+                        <div>
+                            <button @click="open_cashier = !open_cashier" class="inline-flex justify-center w-full rounded-md px-4 py-2 bg-white text-sm font-medium text-gray-400 hover:bg-gray-50 focus:outline-none ">
+                                Cashier Transactions
+                                <!-- Heroicon name: chevron-down -->
+                                {{-- <svg :class="{ 'transform rotate-180': open, 'hidden': !open }" class="-mr-1 ml-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M10 12a1 1 0 01-.707-.293l-4-4a1 1 0 111.414-1.414L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4A1 1 0 0110 12z" clip-rule="evenodd" />
+                                </svg> --}}
+                                <svg :class="{ 'transform rotate-360': open_cashier, 'hidden': !open_cashier }" class="-mr-1 ml-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                                  </svg>
+                                <svg :class="{ 'transform rotate-360': !open_cashier, 'hidden': open_cashier }" class="-mr-1 ml-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                  </svg>
+                            </button>
+                        </div>
+                    {{-- <div class="text-xs font-semibold leading-6 text-gray-400">Cashier Transactions</div> --}}
+                    <ul x-show="open_cashier" @click.away="open_cashier = false" role="list" class="-mx-2 mt-2 space-y-1">
                         <li>
                             <a wire:navigate href="{{ route('cashier.billing') }}" class="{{ request()->routeIs('cashier.billing') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
                                     <svg class="h-6 w-6 shrink-0 {{ request()->routeIs('cashier.billing') ? 'text-blue-600' : 'text-gray-500' }}" viewBox="0 0 17 20" xmlns="http://www.w3.org/2000/svg" fill="none">
@@ -330,13 +484,30 @@
                             </a>
                         </li>
                     </ul>
+                    </div>
                   </li>
                   @endif
               </ul>
             </li>
             <li>
-              <div class="text-xs font-semibold leading-6 text-gray-400">Reports</div>
-              <ul role="list" class="-mx-2 mt-2 space-y-1">
+              <div x-cloak x-data="{ open_report: false }" class="relative inline-block text-left">
+                <div>
+                    <button @click="open_report = !open_report" class="inline-flex justify-center w-full rounded-md px-4 py-2 bg-white text-sm font-medium text-gray-400 hover:bg-gray-50 focus:outline-none ">
+                        Reports
+                        <!-- Heroicon name: chevron-down -->
+                        {{-- <svg :class="{ 'transform rotate-180': open, 'hidden': !open }" class="-mr-1 ml-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10 12a1 1 0 01-.707-.293l-4-4a1 1 0 111.414-1.414L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4A1 1 0 0110 12z" clip-rule="evenodd" />
+                        </svg> --}}
+                        <svg :class="{ 'transform rotate-360': open_report, 'hidden': !open_report }" class="-mr-1 ml-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                          </svg>
+                        <svg :class="{ 'transform rotate-360': !open_report, 'hidden': open_report }" class="-mr-1 ml-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                          </svg>
+                    </button>
+                </div>
+              {{-- <div class="text-xs font-semibold leading-6 text-gray-400">Reports</div> --}}
+              <ul x-show="open_report" @click.away="open_report = false" role="list" class="-mx-2 mt-2 space-y-1">
                 <li>
                     <a wire:navigate href="{{ route('admin.reports.patient-list') }}" class="{{ request()->routeIs('admin.reports.patient-list') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
                       <svg class="h-5 w-5 shrink-0 text-blue-600" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -347,6 +518,7 @@
                     </a>
                   </li>
                 </ul>
+              </div>
             </li>
             <li class="-mx-1 mt-auto">
                 <form action="{{route('logout')}}" method="POST">

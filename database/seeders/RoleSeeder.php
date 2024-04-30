@@ -26,6 +26,9 @@ class RoleSeeder extends Seeder
             [
                 'name' => 'cashier',
             ],
+            [
+                'name' => 'ipd / opd',
+            ],
         ]);
     }
 }
