@@ -25,8 +25,12 @@ use App\Http\Controllers\ProfileController;
 use App\Livewire\Admin\Manage\AssignBed;
 use App\Livewire\Admin\Manage\AssignDoctor;
 use App\Livewire\Admin\Manage\InitialDiagnosis;
+use App\Livewire\Admin\Reports\MedicineList;
+use App\Livewire\Admin\Reports\PatientAdmission;
+use App\Livewire\Admin\Reports\PatientBilling;
 use App\Livewire\Admin\Reports\PatientList;
 use App\Livewire\Doctor\Prescription;
+use App\Models\PatientBill;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -40,7 +44,10 @@ Route::get('/manage/rooms-and-beds', Rooms::class)->middleware(['auth', 'verifie
 Route::get('/manage/manage-beds/{record}', ManageBed::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.manage-beds');
 Route::get('/manage/inventory/category', Category::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.inventory.category');
 Route::get('/manage/inventory/medicine', Medicine::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.inventory.medicine');
-Route::get('/reports', PatientList::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.reports.patient-list');
+Route::get('/reports/patient-list', PatientList::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.reports.patient-list');
+Route::get('/reports/patient-admission', PatientAdmission::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.reports.patient-admission');
+Route::get('/reports/patient-billing', PatientBilling::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.reports.patient-billing');
+Route::get('/reports/medicine-list', MedicineList::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.reports.medicine-list');
 
 Route::get('/ipd-opd/patients', Patients::class)->middleware(['auth', 'verified', 'role:admin,ipd / opd'])->name('admin.patients');
 Route::get('/ipd-opd/assign-doctor', AssignDoctor::class)->middleware(['auth', 'verified', 'role:admin,ipd / opd'])->name('ipd.assign-doctor');
