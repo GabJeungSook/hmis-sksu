@@ -4,7 +4,7 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <div class="flex flex-shrink-0 items-center space-x-2">
-                    <img class="h-10 w-auto " src="{{asset('images/his-logo.png')}}" alt="Logo">
+                    <img class="h-10 w-auto " src="{{asset('images/sksu_logo.png')}}" alt="Logo">
                     <h1 class="font-medium tracking-wider">SULTAN KUDARAT</h1>
                   </div>
 
