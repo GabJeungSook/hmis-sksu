@@ -12,6 +12,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Actions\CreateAction;
@@ -36,16 +37,12 @@ class Patients extends Component implements HasForms, HasTable
                 TextColumn::make('type')
                     ->label('Patient Type')
                     ->sortable(),
-                TextColumn::make('doctor.name')
-                    ->label('Doctor')
-                    ->formatStateUsing(fn ($state) => 'Dr. '.$state)
-                    ->sortable(),
                 TextColumn::make('guardian_name')
                     ->label('Guardian')
                     ->searchable(),
-                TextColumn::make('initial_diagnosis')
-                    ->label('Initial Diagnosis')
-                    ->wrap(),
+                // TextColumn::make('initial_diagnosis')
+                //     ->label('Initial Diagnosis')
+                //     ->wrap(),
                 TextColumn::make('created_at')
                     ->label('Date Added')
                     ->formatStateUsing(fn ($state) => $state->format('F j, Y h:i A'))
@@ -59,10 +56,12 @@ class Patients extends Component implements HasForms, HasTable
                 ->label('Add Patient')
                 ->modalHeading('Add Patient')
                 ->form([
-                    Select::make('user_id')
-                    ->label('Doctor')
-                    ->required()
-                    ->options(User::where('role_id', 2)->get()->pluck('name', 'id')),
+                    Hidden::make('user_id')
+                    ->default(null),
+                    // Select::make('user_id')
+                    // ->label('Doctor')
+                    // ->required()
+                    // ->options(User::where('role_id', 2)->get()->pluck('name', 'id')),
                     TextInput::make('name')
                         ->label('Patient Name')
                         ->required()
@@ -99,8 +98,8 @@ class Patients extends Component implements HasForms, HasTable
                     TextInput::make('guardian_name')
                         ->label('Guardian Name')
                         ->maxLength(255),
-                    Textarea::make('initial_diagnosis')
-                        ->label('Initial Diagnosis')
+                    // Textarea::make('initial_diagnosis')
+                    //     ->label('Initial Diagnosis')
                 ])
             ])->actions([
                 EditAction::make('edit')
@@ -108,10 +107,12 @@ class Patients extends Component implements HasForms, HasTable
                 ->color('success')
                 ->model(Patient::class)
                 ->form([
-                    Select::make('user_id')
-                    ->label('Doctor')
-                    ->required()
-                    ->options(User::where('role_id', 2)->get()->pluck('name', 'id')),
+                    Hidden::make('user_id')
+                    ->default(null),
+                    // Select::make('user_id')
+                    // ->label('Doctor')
+                    // ->required()
+                    // ->options(User::where('role_id', 2)->get()->pluck('name', 'id')),
                     TextInput::make('name')
                         ->label('Patient Name')
                         ->required()
@@ -148,8 +149,8 @@ class Patients extends Component implements HasForms, HasTable
                     TextInput::make('guardian_name')
                         ->label('Guardian Name')
                         ->maxLength(255),
-                    Textarea::make('initial_diagnosis')
-                        ->label('Initial Diagnosis')
+                    // Textarea::make('initial_diagnosis')
+                    //     ->label('Initial Diagnosis')
                 ]),
                 DeleteAction::make('delete')
                 ->button()

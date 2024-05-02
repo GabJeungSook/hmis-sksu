@@ -22,29 +22,39 @@ use App\Livewire\Admin\Inventory\Category;
 use App\Livewire\Admin\Inventory\Medicine;
 use App\Livewire\Doctor\ViewMedicalRecord;
 use App\Http\Controllers\ProfileController;
+use App\Livewire\Admin\Manage\AssignBed;
+use App\Livewire\Admin\Manage\AssignDoctor;
+use App\Livewire\Admin\Manage\InitialDiagnosis;
 use App\Livewire\Admin\Reports\PatientList;
+use App\Livewire\Doctor\Prescription;
 
 Route::get('/', function () {
     return redirect()->route('login');
 });
 
 //admin routes
-Route::get('/dashboard', Dashboard::class)->middleware(['auth', 'verified', 'role:admin,doctor,pharmacist,cashier'])->name('admin.dashboard');
+Route::get('/dashboard', Dashboard::class)->middleware(['auth', 'verified', 'role:admin,doctor,pharmacist,cashier,ipd / opd'])->name('admin.dashboard');
 Route::get('/manage/doctors', Doctors::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.doctors');
-Route::get('/manage/patients', Patients::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.patients');
+
 Route::get('/manage/rooms-and-beds', Rooms::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.rooms-and-beds');
 Route::get('/manage/manage-beds/{record}', ManageBed::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.manage-beds');
 Route::get('/manage/inventory/category', Category::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.inventory.category');
 Route::get('/manage/inventory/medicine', Medicine::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.inventory.medicine');
 Route::get('/reports', PatientList::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.reports.patient-list');
 
+Route::get('/ipd-opd/patients', Patients::class)->middleware(['auth', 'verified', 'role:admin,ipd / opd'])->name('admin.patients');
+Route::get('/ipd-opd/assign-doctor', AssignDoctor::class)->middleware(['auth', 'verified', 'role:admin,ipd / opd'])->name('ipd.assign-doctor');
+Route::get('/ipd-opd/assign-bed', AssignBed::class)->middleware(['auth', 'verified', 'role:admin,ipd / opd'])->name('ipd.assign-bed');
+Route::get('/ipd-opd/vitals', Vitals::class)->middleware(['auth', 'verified', 'role:admin,ipd / opd'])->name('doctor.vitals');
+Route::get('/ipd-opd/laboratories', Laboratories::class)->middleware(['auth', 'verified', 'role:admin,ipd / opd'])->name('doctor.laboratories');
+Route::get('/ipd-opd/initial-diagnosis', InitialDiagnosis::class)->middleware(['auth', 'verified', 'role:admin,ipd / opd'])->name('ipd.initial-diagnosis');
+
 //doctor routes
 Route::get('/doctor/emergency-room', EmergencyRoom::class)->middleware(['auth', 'verified', 'role:admin,doctor'])->name('doctor.emergency-room');
-Route::get('/doctor/vitals', Vitals::class)->middleware(['auth', 'verified', 'role:admin,doctor'])->name('doctor.vitals');
-Route::get('/doctor/laboratories', Laboratories::class)->middleware(['auth', 'verified', 'role:admin,doctor'])->name('doctor.laboratories');
 Route::get('/doctor/manage-laboratories/{record}', ManageLaboratory::class)->middleware(['auth', 'verified', 'role:admin,doctor'])->name('doctor.manage-labs');
 Route::get('/doctor/medical-records', MedicalRecord::class)->middleware(['auth', 'verified', 'role:admin,doctor'])->name('doctor.medical-records');
 Route::get('/doctor/view-medical-records/{record}', ViewMedicalRecord::class)->middleware(['auth', 'verified', 'role:admin,doctor'])->name('doctor.view-medical-records');
+Route::get('/doctor/prescription', Prescription::class)->middleware(['auth', 'verified', 'role:admin,doctor'])->name('doctor.prescription');
 
 //pharmacy routes
 Route::get('/pharmacy/inventory', Inventory::class)->middleware(['auth', 'verified', 'role:admin,pharmacist'])->name('pharmacy.inventory');

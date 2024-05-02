@@ -215,6 +215,15 @@
                                 <span class="truncate">Users</span>
                             </a>
                         </li>
+                        <li>
+                            <a wire:navigate href="{{ route('admin.rooms-and-beds') }}" class="{{ request()->routeIs('admin.rooms-and-beds') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
+                                <svg class="h-5 w-5 shrink-0 text-blue-600" viewBox="0 0 21 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5.775 6C7.22236 6 8.4 4.87844 8.4 3.5C8.4 2.12156 7.22236 1 5.775 1C4.32764 1 3.15 2.12156 3.15 3.5C3.15 4.87844 4.32764 6 5.775 6ZM17.325 2H9.975C9.68494 2 9.45 2.22375 9.45 2.5V7H2.1V0.5C2.1 0.22375 1.86506 0 1.575 0H0.525C0.234937 0 0 0.22375 0 0.5V11.5C0 11.7762 0.234937 12 0.525 12H1.575C1.86506 12 2.1 11.7762 2.1 11.5V10H18.9V11.5C18.9 11.7762 19.1349 12 19.425 12H20.475C20.7651 12 21 11.7762 21 11.5V5.5C21 3.56687 19.3548 2 17.325 2Z"
+                                    fill="{{ request()->routeIs('admin.rooms-and-beds') ? '#2563EB' : '#5B5B5B'}}"/>
+                                </svg>
+                                <span class="truncate">Rooms and Beds</span>
+                            </a>
+                          </li>
                       {{-- <li>
                         <a wire:navigate href="{{ route('admin.patients') }}" class="{{ request()->routeIs('admin.patients') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
                             <svg class="h-5 w-5 shrink-0 text-blue-600" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -263,7 +272,7 @@
                 </div>
                   </li>
                   @endif
-                  @if(auth()->user()->role_id === 1)
+                  @if(auth()->user()->role_id === 1 || auth()->user()->role_id === 5)
                   <li>
                       <div x-cloak x-data="{ open: false }" class="relative inline-block text-left mt-4">
                           <div>
@@ -293,14 +302,23 @@
                           </a>
                         </li>
                         <li>
-                          <a wire:navigate href="{{ route('admin.rooms-and-beds') }}" class="{{ request()->routeIs('admin.rooms-and-beds') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
-                              <svg class="h-5 w-5 shrink-0 text-blue-600" viewBox="0 0 21 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M5.775 6C7.22236 6 8.4 4.87844 8.4 3.5C8.4 2.12156 7.22236 1 5.775 1C4.32764 1 3.15 2.12156 3.15 3.5C3.15 4.87844 4.32764 6 5.775 6ZM17.325 2H9.975C9.68494 2 9.45 2.22375 9.45 2.5V7H2.1V0.5C2.1 0.22375 1.86506 0 1.575 0H0.525C0.234937 0 0 0.22375 0 0.5V11.5C0 11.7762 0.234937 12 0.525 12H1.575C1.86506 12 2.1 11.7762 2.1 11.5V10H18.9V11.5C18.9 11.7762 19.1349 12 19.425 12H20.475C20.7651 12 21 11.7762 21 11.5V5.5C21 3.56687 19.3548 2 17.325 2Z"
-                                  fill="{{ request()->routeIs('admin.rooms-and-beds') ? '#2563EB' : '#5B5B5B'}}"/>
-                              </svg>
-                              <span class="truncate">Rooms and Beds</span>
-                          </a>
-                        </li>
+                            <a wire:navigate href="{{ route('ipd.assign-doctor') }}" class="{{ request()->routeIs('ipd.assign-doctor') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
+                                <svg class="h-5 w-5 shrink-0 text-blue-600" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12.3826 0.538164C11.6554 0.200801 10.8531 0 10 0C7.60313 0 5.55804 1.48826 4.70937 3.59375H8.33393L12.3826 0.538164ZM15.2906 3.59375C14.9379 2.71912 14.3679 1.96758 13.6616 1.36922L10.7138 3.59375H15.2906ZM10 11.5C13.1558 11.5 15.7143 8.92553 15.7143 5.75C15.7143 5.50383 15.6719 5.26934 15.6424 5.03125H4.35759C4.32768 5.26934 4.28571 5.50383 4.28571 5.75C4.28571 8.92553 6.8442 11.5 10 11.5ZM3.57143 13.4631V23H9.29732L4.90223 13.0489C4.444 13.1339 3.99732 13.2729 3.57143 13.4631ZM0 20.8438C0 22.0346 0.959375 23 2.14286 23V14.3858C0.842857 15.4931 0 17.1269 0 18.975V20.8438ZM11.4286 18.6875H8.95625L10.8612 23H11.4286C12.6103 23 13.5714 22.0328 13.5714 20.8438C13.5714 19.6547 12.6103 18.6875 11.4286 18.6875ZM14 12.9375H13.254C12.2612 13.3948 11.1612 13.6562 10 13.6562C8.83884 13.6562 7.73884 13.3948 6.74598 12.9375H6.41696L8.32188 17.25H11.4286C13.3978 17.25 15 18.8622 15 20.8438C15 21.6559 14.7205 22.3976 14.2674 23H17.8571C19.0406 23 20 22.0346 20 20.8438V18.975C20 15.6404 17.3138 12.9375 14 12.9375Z"
+                                    fill="{{ request()->routeIs('ipd.assign-doctor') ? '#2563EB' : '#5B5B5B'}}"/>
+                                </svg>
+                               <span class="truncate">Assign Doctor</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a wire:navigate href="{{ route('ipd.assign-bed') }}" class="{{ request()->routeIs('ipd.assign-bed') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
+                                <svg class="h-5 w-5 shrink-0 text-blue-600" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12.3826 0.538164C11.6554 0.200801 10.8531 0 10 0C7.60313 0 5.55804 1.48826 4.70937 3.59375H8.33393L12.3826 0.538164ZM15.2906 3.59375C14.9379 2.71912 14.3679 1.96758 13.6616 1.36922L10.7138 3.59375H15.2906ZM10 11.5C13.1558 11.5 15.7143 8.92553 15.7143 5.75C15.7143 5.50383 15.6719 5.26934 15.6424 5.03125H4.35759C4.32768 5.26934 4.28571 5.50383 4.28571 5.75C4.28571 8.92553 6.8442 11.5 10 11.5ZM3.57143 13.4631V23H9.29732L4.90223 13.0489C4.444 13.1339 3.99732 13.2729 3.57143 13.4631ZM0 20.8438C0 22.0346 0.959375 23 2.14286 23V14.3858C0.842857 15.4931 0 17.1269 0 18.975V20.8438ZM11.4286 18.6875H8.95625L10.8612 23H11.4286C12.6103 23 13.5714 22.0328 13.5714 20.8438C13.5714 19.6547 12.6103 18.6875 11.4286 18.6875ZM14 12.9375H13.254C12.2612 13.3948 11.1612 13.6562 10 13.6562C8.83884 13.6562 7.73884 13.3948 6.74598 12.9375H6.41696L8.32188 17.25H11.4286C13.3978 17.25 15 18.8622 15 20.8438C15 21.6559 14.7205 22.3976 14.2674 23H17.8571C19.0406 23 20 22.0346 20 20.8438V18.975C20 15.6404 17.3138 12.9375 14 12.9375Z"
+                                    fill="{{ request()->routeIs('ipd.assign-bed') ? '#2563EB' : '#5B5B5B'}}"/>
+                                </svg>
+                               <span class="truncate">Assign Bed</span>
+                            </a>
+                          </li>
                         <li>
                             <!-- Current: "bg-gray-50 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-50" -->
                             <a wire:navigate href="{{ route('doctor.vitals') }}" class="{{ request()->routeIs('doctor.vitals') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
@@ -312,6 +330,15 @@
                             </a>
                           </li>
                           <li>
+                            <a wire:navigate href="{{ route('ipd.initial-diagnosis') }}" class="{{ request()->routeIs('ipd.initial-diagnosis') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
+                                <svg class="h-5 w-5 shrink-0 {{ request()->routeIs('admin.doctors') ? 'text-blue-600' : 'text-gray-500' }}" viewBox="0 0 17 20" xmlns="http://www.w3.org/2000/svg" fill="none">
+                                    <path d="M8.5 10C11.1828 10 13.3571 7.76172 13.3571 5C13.3571 2.23828 11.1828 0 8.5 0C5.81719 0 3.64286 2.23828 3.64286 5C3.64286 7.76172 5.81719 10 8.5 10ZM3.94643 16.5625C3.94643 17.082 4.35246 17.5 4.85714 17.5C5.36183 17.5 5.76786 17.082 5.76786 16.5625C5.76786 16.043 5.36183 15.625 4.85714 15.625C4.35246 15.625 3.94643 16.043 3.94643 16.5625ZM12.1429 11.2734V13.1875C13.5279 13.4766 14.5714 14.7422 14.5714 16.25V17.8789C14.5714 18.1758 14.3665 18.4336 14.0819 18.4922L12.86 18.7422C12.6969 18.7773 12.5375 18.668 12.5033 18.4961L12.3857 17.8828C12.3516 17.7148 12.4578 17.5469 12.6248 17.5156L13.3571 17.3633V16.25C13.3571 13.7969 9.71429 13.707 9.71429 16.3242V17.3672L10.4467 17.5195C10.6098 17.5547 10.7161 17.7188 10.6857 17.8867L10.5681 18.5C10.5339 18.668 10.3746 18.7773 10.2114 18.7461L9.02746 18.582C8.72768 18.5391 8.50379 18.2773 8.50379 17.9609V16.25C8.50379 14.7422 9.54732 13.4805 10.9324 13.1875V11.4219C10.8489 11.4492 10.7654 11.4648 10.6819 11.4961C9.99888 11.7422 9.26652 11.8789 8.50379 11.8789C7.74107 11.8789 7.00871 11.7422 6.32567 11.4961C6.04487 11.3945 5.76027 11.332 5.46808 11.293V14.4805C6.34464 14.75 6.98594 15.5781 6.98594 16.5664C6.98594 17.7734 6.03348 18.7539 4.86094 18.7539C3.68839 18.7539 2.73594 17.7734 2.73594 16.5664C2.73594 15.5781 3.37723 14.75 4.25379 14.4805V11.3398C1.8404 11.7578 0 13.8984 0 16.5V18.25C0 19.2148 0.762723 20 1.7 20H15.3C16.2373 20 17 19.2148 17 18.25V16.5C17 13.6875 14.8446 11.4102 12.1429 11.2734Z"
+                                    fill="{{ request()->routeIs('ipd.initial-diagnosis') ? '#2563EB' : '#5B5B5B'}}"/>
+                                </svg>
+                              <span class="truncate">Initial Diagnosis</span>
+                            </a>
+                          </li>
+                          <li>
                             <a wire:navigate href="{{ route('doctor.laboratories') }}" class="{{ request()->routeIs('doctor.laboratories') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
                                 <svg class="h-5 w-5 shrink-0 text-blue-600" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M6.5625 13.125H7.05469V13.7812C7.05469 14.1438 7.34836 14.4375 7.71094 14.4375H9.35156C9.71414 14.4375 10.0078 14.1438 10.0078 13.7812V13.125H10.5C11.2247 13.125 11.8125 12.5372 11.8125 11.8125V2.625C11.8125 1.90025 11.2247 1.3125 10.5 1.3125V0.65625C10.5 0.293672 10.2063 0 9.84375 0H7.21875C6.85617 0 6.5625 0.293672 6.5625 0.65625V1.3125C5.83775 1.3125 5.25 1.90025 5.25 2.625V11.8125C5.25 12.5372 5.83775 13.125 6.5625 13.125ZM19.0312 18.375H18.9783C20.2305 16.9801 21 15.143 21 13.125C21 8.78227 17.4677 5.25 13.125 5.25V7.875C16.0199 7.875 18.375 10.2301 18.375 13.125C18.375 16.0199 16.0199 18.375 13.125 18.375H1.96875C0.881426 18.375 0 19.2564 0 20.3438C0 20.7063 0.293672 21 0.65625 21H20.3438C20.7063 21 21 20.7063 21 20.3438C21 19.2564 20.1186 18.375 19.0312 18.375ZM4.26562 17.0625H12.7969C12.9782 17.0625 13.125 16.9157 13.125 16.7344V16.0781C13.125 15.8968 12.9782 15.75 12.7969 15.75H4.26562C4.08434 15.75 3.9375 15.8968 3.9375 16.0781V16.7344C3.9375 16.9157 4.08434 17.0625 4.26562 17.0625Z"
@@ -320,6 +347,7 @@
                               <span class="truncate">Laboratories</span>
                             </a>
                           </li>
+
                         {{-- <li>
                           <a wire:navigate href="{{ route('admin.inventory.category') }}" class="{{ request()->routeIs('admin.inventory.category') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
                               <svg class="h-4 w-4 shrink-0 text-blue-600" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -405,6 +433,15 @@
                                     fill="{{ request()->routeIs('doctor.medical-records') ? '#2563EB' : '#5B5B5B'}}"/>
                                     </svg>
                           <span class="truncate">Patient Records</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a wire:navigate href="{{ route('doctor.prescription') }}" class="{{ request()->routeIs('doctor.prescription') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
+                            <svg class="h-6 w-6 shrink-0 {{ request()->routeIs('doctor.prescription') ? 'text-blue-600' : 'text-gray-500' }}" viewBox="0 0 17 20" xmlns="http://www.w3.org/2000/svg" fill="none">
+                                <path d="M9 8H3V10H9V8ZM11.7812 3.28125L8.72188 0.21875C8.58125 0.078125 8.39062 0 8.19063 0H8V4H12V3.80938C12 3.6125 11.9219 3.42188 11.7812 3.28125ZM7 4.25V0H0.75C0.334375 0 0 0.334375 0 0.75V15.25C0 15.6656 0.334375 16 0.75 16H11.25C11.6656 16 12 15.6656 12 15.25V5H7.75C7.3375 5 7 4.6625 7 4.25ZM2 2.25C2 2.11188 2.11188 2 2.25 2H4.75C4.88812 2 5 2.11188 5 2.25V2.75C5 2.88812 4.88812 3 4.75 3H2.25C2.11188 3 2 2.88812 2 2.75V2.25ZM2 4.25C2 4.11188 2.11188 4 2.25 4H4.75C4.88812 4 5 4.11188 5 4.25V4.75C5 4.88812 4.88812 5 4.75 5H2.25C2.11188 5 2 4.88812 2 4.75V4.25ZM10 13.75C10 13.8881 9.88813 14 9.75 14H7.25C7.11188 14 7 13.8881 7 13.75V13.25C7 13.1119 7.11188 13 7.25 13H9.75C9.88813 13 10 13.1119 10 13.25V13.75ZM10 7.5V10.5C10 10.7762 9.77625 11 9.5 11H2.5C2.22375 11 2 10.7762 2 10.5V7.5C2 7.22375 2.22375 7 2.5 7H9.5C9.77625 7 10 7.22375 10 7.5Z"
+                                fill="{{ request()->routeIs('doctor.prescription') ? '#2563EB' : '#5B5B5B'}}"/>
+                                </svg>
+                          <span class="truncate">Prescription</span>
                         </a>
                       </li>
                     </ul>
