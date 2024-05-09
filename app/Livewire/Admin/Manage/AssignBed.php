@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Manage;
 
+use Carbon\Carbon;
 use App\Models\Bed;
 use App\Models\Room;
 use App\Models\User;
@@ -49,11 +50,15 @@ class AssignBed extends Component implements HasForms, HasTable
                 TextColumn::make('bed.name')
                     ->label('Bed')
                     ->searchable(),
-                TextColumn::make('updated_at')
+                TextColumn::make('bed_added_at')
                     ->label('Days Admitted')
                     ->formatStateUsing(function ($state) {
                         //calculate days admitted
-                        $days = now()->diffInDays($state);
+
+                        $days = abs(now()->diffInDays($state));
+                        //convert $days to whole number
+                        $days = intval($days);
+
                         if($days == 0)
                             return 'Today';
                         else if($days == 1)
@@ -63,7 +68,6 @@ class AssignBed extends Component implements HasForms, HasTable
                         else
                             return 'Just now';
 
-                        // return $state->diffForHumans();
                     })
             ])
             ->filters([
@@ -78,6 +82,8 @@ class AssignBed extends Component implements HasForms, HasTable
                 ->color('success')
                 ->model(Patient::class)
                 ->form([
+                    Hidden::make('bed_added_at')
+                    ->default(now()),
                     Select::make('room_id')
                     ->label('Room')
                     ->required()

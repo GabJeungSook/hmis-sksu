@@ -21,14 +21,23 @@ class BillOut extends Component implements HasForms, HasActions
 
     public $record;
     public $grand_total;
-
+    public $total_days;
+    public $total_room_amount;
     public function mount($record)
     {
         $this->record = Patient::find($record);
+        //calculate days admitted from bed_added_at
+        $days = abs(now()->diffInDays($this->record->bed_added_at));
+        $this->total_days = intval($days);
+        //add 1 day if days is 0
+
+        $this->total_days = $this->total_days <= 0 ? 1 : $this->total_days;
+        //multiply days by room amount
+        $this->total_room_amount = $this->record->bed->room->amount * $this->total_days;
         $total = 0;
         $total += $this->record->doctor->doctors_fee;
         if ($this->record->type === 'In-Patient' && $this->record->bed) {
-            $total += $this->record->bed->room->amount;
+            $total += $this->total_room_amount;
         }else{
             $total = 0;
         }

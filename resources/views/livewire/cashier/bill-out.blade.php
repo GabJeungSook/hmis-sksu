@@ -40,13 +40,13 @@
                           </svg>
                           @if ($record->bed)
                           <div class="ml-4 flex-col min-w-0 gap-2">
-                            <span class="truncate font-medium">Room : {{$record->bed->room->name}}</span>
+                            <span class="truncate font-medium">Room : {{$record->bed->room->name}} X {{$total_days}} Day(s)</span>
                             <p class="flex-shrink-0 text-gray-400">Bed : {{$record->bed->name}}</p>
                           </div>
 
                         </div>
                         <div class="ml-4 flex-shrink-0">
-                            <span class="font-medium text-gray-600">₱ {{number_format($record->bed->room->amount, 2)}}</span>
+                            <span class="font-medium text-gray-600">₱ {{number_format($total_room_amount, 2)}}</span>
                         </div>
                         @else
                         <span class="truncate font-medium ml-4 text-red-500">The In-Patient should be assigned to a room.</span>
