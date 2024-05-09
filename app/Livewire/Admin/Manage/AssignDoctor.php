@@ -63,7 +63,7 @@ class AssignDoctor extends Component implements HasForms, HasTable
                     Select::make('user_id')
                     ->label('Doctor')
                     ->required()
-                    ->options(User::where('role_id', 2)->get()->pluck('name', 'id')),
+                    ->options(User::where('role_id', 2)->where('doctors_fee', '!=', null)->get()->pluck('name', 'id')),
                 ])
             ])
             ->bulkActions([

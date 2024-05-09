@@ -26,6 +26,7 @@ class BillOut extends Component implements HasForms, HasActions
     {
         $this->record = Patient::find($record);
         $total = 0;
+        $total += $this->record->doctor->doctors_fee;
         if ($this->record->type === 'In-Patient' && $this->record->bed) {
             $total += $this->record->bed->room->amount;
         }else{

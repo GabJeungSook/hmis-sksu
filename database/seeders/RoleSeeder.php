@@ -29,6 +29,9 @@ class RoleSeeder extends Seeder
             [
                 'name' => 'ipd / opd',
             ],
+            [
+                'name' => 'laboratory',
+            ],
         ]);
     }
 }

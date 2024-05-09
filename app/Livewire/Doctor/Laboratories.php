@@ -30,7 +30,7 @@ class Laboratories extends Component implements HasForms, HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(auth()->user()->role_id === 1 ? Patient::query()->whereNotIn('type', ['Discharged']) : Patient::where('user_id', auth()->id())->whereNotIn('type', ['Discharged']))
+            ->query(Patient::query()->whereNotIn('type', ['Discharged']))
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),

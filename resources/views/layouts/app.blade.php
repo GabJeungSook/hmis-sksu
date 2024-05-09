@@ -243,6 +243,15 @@
                         </a>
                       </li> --}}
                       <li>
+                        <a wire:navigate href="{{ route('admin.doctors-fee') }}" class="{{ request()->routeIs('admin.doctors-fee') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
+                            <svg class="h-5 w-5 shrink-0 {{ request()->routeIs('admin.doctors-fee') ? 'text-blue-600' : 'text-gray-500' }}" viewBox="0 0 17 20" xmlns="http://www.w3.org/2000/svg" fill="none">
+                                <path d="M8.5 10C11.1828 10 13.3571 7.76172 13.3571 5C13.3571 2.23828 11.1828 0 8.5 0C5.81719 0 3.64286 2.23828 3.64286 5C3.64286 7.76172 5.81719 10 8.5 10ZM3.94643 16.5625C3.94643 17.082 4.35246 17.5 4.85714 17.5C5.36183 17.5 5.76786 17.082 5.76786 16.5625C5.76786 16.043 5.36183 15.625 4.85714 15.625C4.35246 15.625 3.94643 16.043 3.94643 16.5625ZM12.1429 11.2734V13.1875C13.5279 13.4766 14.5714 14.7422 14.5714 16.25V17.8789C14.5714 18.1758 14.3665 18.4336 14.0819 18.4922L12.86 18.7422C12.6969 18.7773 12.5375 18.668 12.5033 18.4961L12.3857 17.8828C12.3516 17.7148 12.4578 17.5469 12.6248 17.5156L13.3571 17.3633V16.25C13.3571 13.7969 9.71429 13.707 9.71429 16.3242V17.3672L10.4467 17.5195C10.6098 17.5547 10.7161 17.7188 10.6857 17.8867L10.5681 18.5C10.5339 18.668 10.3746 18.7773 10.2114 18.7461L9.02746 18.582C8.72768 18.5391 8.50379 18.2773 8.50379 17.9609V16.25C8.50379 14.7422 9.54732 13.4805 10.9324 13.1875V11.4219C10.8489 11.4492 10.7654 11.4648 10.6819 11.4961C9.99888 11.7422 9.26652 11.8789 8.50379 11.8789C7.74107 11.8789 7.00871 11.7422 6.32567 11.4961C6.04487 11.3945 5.76027 11.332 5.46808 11.293V14.4805C6.34464 14.75 6.98594 15.5781 6.98594 16.5664C6.98594 17.7734 6.03348 18.7539 4.86094 18.7539C3.68839 18.7539 2.73594 17.7734 2.73594 16.5664C2.73594 15.5781 3.37723 14.75 4.25379 14.4805V11.3398C1.8404 11.7578 0 13.8984 0 16.5V18.25C0 19.2148 0.762723 20 1.7 20H15.3C16.2373 20 17 19.2148 17 18.25V16.5C17 13.6875 14.8446 11.4102 12.1429 11.2734Z"
+                                fill="{{ request()->routeIs('admin.doctors-fee') ? '#2563EB' : '#5B5B5B'}}"/>
+                            </svg>
+                            <span class="truncate">Doctors Fee</span>
+                        </a>
+                      </li>
+                      <li>
                         <a wire:navigate href="{{ route('admin.inventory.category') }}" class="{{ request()->routeIs('admin.inventory.category') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
                             <svg class="h-4 w-4 shrink-0 text-blue-600" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_239_371)">
@@ -270,6 +279,36 @@
                       </li>
                     </ul>
                 </div>
+                  </li>
+                  @endif
+                  @if(auth()->user()->role_id === 1 || auth()->user()->role_id === 6)
+                  <li>
+                    <div x-cloak x-data="{ open_lab: false }" class="relative inline-block text-left mt-4">
+                        <div>
+                            <button @click="open_lab = !open_lab" class="inline-flex justify-center w-full rounded-md px-4 py-2 bg-white text-sm font-medium text-gray-400 hover:bg-gray-50 focus:outline-none ">
+                                Laboratory Transactions
+
+                                <svg :class="{ 'transform rotate-360': open_lab, 'hidden': !open_lab }" class="-mr-1 ml-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                                  </svg>
+                                <svg :class="{ 'transform rotate-360': !open_lab, 'hidden': open_lab }" class="-mr-1 ml-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                  </svg>
+                            </button>
+                        </div>
+                    {{-- <div class="text-xs font-semibold leading-6 text-gray-400">Cashier Transactions</div> --}}
+                    <ul x-show="open_lab" @click.away="open_lab = false" role="list" class="-mx-2 mt-2 space-y-1">
+                        <li>
+                            <a wire:navigate href="{{ route('doctor.laboratories') }}" class="{{ request()->routeIs('doctor.laboratories') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
+                                <svg class="h-5 w-5 shrink-0 text-blue-600" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6.5625 13.125H7.05469V13.7812C7.05469 14.1438 7.34836 14.4375 7.71094 14.4375H9.35156C9.71414 14.4375 10.0078 14.1438 10.0078 13.7812V13.125H10.5C11.2247 13.125 11.8125 12.5372 11.8125 11.8125V2.625C11.8125 1.90025 11.2247 1.3125 10.5 1.3125V0.65625C10.5 0.293672 10.2063 0 9.84375 0H7.21875C6.85617 0 6.5625 0.293672 6.5625 0.65625V1.3125C5.83775 1.3125 5.25 1.90025 5.25 2.625V11.8125C5.25 12.5372 5.83775 13.125 6.5625 13.125ZM19.0312 18.375H18.9783C20.2305 16.9801 21 15.143 21 13.125C21 8.78227 17.4677 5.25 13.125 5.25V7.875C16.0199 7.875 18.375 10.2301 18.375 13.125C18.375 16.0199 16.0199 18.375 13.125 18.375H1.96875C0.881426 18.375 0 19.2564 0 20.3438C0 20.7063 0.293672 21 0.65625 21H20.3438C20.7063 21 21 20.7063 21 20.3438C21 19.2564 20.1186 18.375 19.0312 18.375ZM4.26562 17.0625H12.7969C12.9782 17.0625 13.125 16.9157 13.125 16.7344V16.0781C13.125 15.8968 12.9782 15.75 12.7969 15.75H4.26562C4.08434 15.75 3.9375 15.8968 3.9375 16.0781V16.7344C3.9375 16.9157 4.08434 17.0625 4.26562 17.0625Z"
+                                    fill="{{ request()->routeIs('doctor.laboratories') ? '#2563EB' : '#5B5B5B'}}"/>
+                                    </svg>
+                              <span class="truncate">Laboratories</span>
+                            </a>
+                          </li>
+                    </ul>
+                    </div>
                   </li>
                   @endif
                   @if(auth()->user()->role_id === 1 || auth()->user()->role_id === 5)
@@ -336,15 +375,6 @@
                                     fill="{{ request()->routeIs('ipd.initial-diagnosis') ? '#2563EB' : '#5B5B5B'}}"/>
                                 </svg>
                               <span class="truncate">Initial Diagnosis</span>
-                            </a>
-                          </li>
-                          <li>
-                            <a wire:navigate href="{{ route('doctor.laboratories') }}" class="{{ request()->routeIs('doctor.laboratories') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
-                                <svg class="h-5 w-5 shrink-0 text-blue-600" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6.5625 13.125H7.05469V13.7812C7.05469 14.1438 7.34836 14.4375 7.71094 14.4375H9.35156C9.71414 14.4375 10.0078 14.1438 10.0078 13.7812V13.125H10.5C11.2247 13.125 11.8125 12.5372 11.8125 11.8125V2.625C11.8125 1.90025 11.2247 1.3125 10.5 1.3125V0.65625C10.5 0.293672 10.2063 0 9.84375 0H7.21875C6.85617 0 6.5625 0.293672 6.5625 0.65625V1.3125C5.83775 1.3125 5.25 1.90025 5.25 2.625V11.8125C5.25 12.5372 5.83775 13.125 6.5625 13.125ZM19.0312 18.375H18.9783C20.2305 16.9801 21 15.143 21 13.125C21 8.78227 17.4677 5.25 13.125 5.25V7.875C16.0199 7.875 18.375 10.2301 18.375 13.125C18.375 16.0199 16.0199 18.375 13.125 18.375H1.96875C0.881426 18.375 0 19.2564 0 20.3438C0 20.7063 0.293672 21 0.65625 21H20.3438C20.7063 21 21 20.7063 21 20.3438C21 19.2564 20.1186 18.375 19.0312 18.375ZM4.26562 17.0625H12.7969C12.9782 17.0625 13.125 16.9157 13.125 16.7344V16.0781C13.125 15.8968 12.9782 15.75 12.7969 15.75H4.26562C4.08434 15.75 3.9375 15.8968 3.9375 16.0781V16.7344C3.9375 16.9157 4.08434 17.0625 4.26562 17.0625Z"
-                                    fill="{{ request()->routeIs('doctor.laboratories') ? '#2563EB' : '#5B5B5B'}}"/>
-                                    </svg>
-                              <span class="truncate">Laboratories</span>
                             </a>
                           </li>
 

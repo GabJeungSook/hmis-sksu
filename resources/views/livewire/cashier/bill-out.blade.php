@@ -19,6 +19,19 @@
               <dt class="text-sm font-medium leading-6 text-gray-900">Payables</dt>
               <dd class="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                 <ul role="list" class="divide-y divide-gray-100 rounded-md border border-gray-200">
+                    <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
+                        <div class="flex w-0 flex-1 items-center">
+                          <svg class="h-5 w-5 flex-shrink-0 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                          </svg>
+                          <div class="ml-4 flex-col min-w-0 gap-2">
+                            <span class="truncate font-medium">Doctor's Fee ({{$record->doctor->name}}) : </span>
+                          </div>
+                        </div>
+                        <div class="ml-4 flex-shrink-0">
+                            <span class="font-medium text-gray-600">₱ {{number_format($record->doctor->doctors_fee, 2)}}</span>
+                        </div>
+                      </li>
                     @if ($record->type === 'In-Patient')
                     <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
                         <div class="flex w-0 flex-1 items-center">

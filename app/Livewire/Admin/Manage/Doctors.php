@@ -39,6 +39,7 @@ class Doctors extends Component implements HasForms, HasTable
                     'pharmacist' => 'warning',
                     'cashier' => 'primary',
                     'ipd / opd' => 'info',
+                    'laboratory' => 'info',
                 })
                 ->formatStateUsing(fn ($state) => strtoupper($state)),
             ])
@@ -76,6 +77,7 @@ class Doctors extends Component implements HasForms, HasTable
                             '3' => 'Pharmacist',
                             '4' => 'Cashier',
                             '5' => 'IPD / OPD',
+                            '6' => 'Laboratory',
                         ]),
                 ])
             ])->actions([
@@ -99,6 +101,7 @@ class Doctors extends Component implements HasForms, HasTable
                             '3' => 'Pharmacist',
                             '4' => 'Cashier',
                             '5' => 'IPD / OPD',
+                            '6' => 'Laboratory',
                         ]),
                 ]),
                 DeleteAction::make('delete')
