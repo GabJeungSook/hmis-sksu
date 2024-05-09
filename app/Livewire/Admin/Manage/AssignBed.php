@@ -49,9 +49,22 @@ class AssignBed extends Component implements HasForms, HasTable
                 TextColumn::make('bed.name')
                     ->label('Bed')
                     ->searchable(),
-                TextColumn::make('created_at')
-                    ->label('Date Added')
-                    ->formatStateUsing(fn ($state) => $state->format('F j, Y h:i A'))
+                TextColumn::make('updated_at')
+                    ->label('Days Admitted')
+                    ->formatStateUsing(function ($state) {
+                        //calculate days admitted
+                        $days = now()->diffInDays($state);
+                        if($days == 0)
+                            return 'Today';
+                        else if($days == 1)
+                            return 'Yesterday';
+                        else if($days > 1)
+                            return $days . ' days ago';
+                        else
+                            return 'Just now';
+
+                        // return $state->diffForHumans();
+                    })
             ])
             ->filters([
                 // ...
@@ -76,7 +89,7 @@ class AssignBed extends Component implements HasForms, HasTable
                     ->options(fn (Get $get): Collection => Bed::query()
                     ->where('room_id', $get('room_id'))
                     ->pluck('name', 'id'))
-                ])
+                ])->visible(fn ($record) => is_null($record->bed_id)),
             ])
             ->bulkActions([
                 // ...
