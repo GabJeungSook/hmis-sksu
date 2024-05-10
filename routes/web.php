@@ -32,6 +32,7 @@ use App\Livewire\Admin\Reports\MedicineList;
 use App\Livewire\Admin\Reports\PatientBilling;
 use App\Livewire\Admin\Manage\InitialDiagnosis;
 use App\Livewire\Admin\Reports\PatientAdmission;
+use App\Livewire\Admin\Reports\LabResults;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -50,6 +51,7 @@ Route::get('/reports/patient-list', PatientList::class)->middleware(['auth', 've
 Route::get('/reports/patient-admission', PatientAdmission::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.reports.patient-admission');
 Route::get('/reports/patient-billing', PatientBilling::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.reports.patient-billing');
 Route::get('/reports/medicine-list', MedicineList::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.reports.medicine-list');
+Route::get('/reports/lab-results', LabResults::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.reports.lab-results');
 
 Route::get('/ipd-opd/patients', Patients::class)->middleware(['auth', 'verified', 'role:admin,ipd / opd'])->name('admin.patients');
 Route::get('/ipd-opd/assign-doctor', AssignDoctor::class)->middleware(['auth', 'verified', 'role:admin,ipd / opd'])->name('ipd.assign-doctor');
