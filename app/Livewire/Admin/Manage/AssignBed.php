@@ -16,6 +16,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Forms\Components\TextInput;
@@ -76,14 +77,18 @@ class AssignBed extends Component implements HasForms, HasTable
             ->headerActions([
                 //
             ])->actions([
-                EditAction::make('edit')
+                Action::make('edit')
                 ->label('Assign Bed')
                 ->button()
                 ->color('success')
                 ->model(Patient::class)
                 ->form([
-                    Hidden::make('bed_added_at')
-                    ->default(now()),
+                    DatePicker::make('bed_added_at')
+                    ->label('Date')->readonly()
+                    ->default(now())
+                    ->required(),
+                    // Hidden::make('bed_added_at')
+                    // ->default(now()),
                     Select::make('room_id')
                     ->label('Room')
                     ->required()
@@ -95,7 +100,15 @@ class AssignBed extends Component implements HasForms, HasTable
                     ->options(fn (Get $get): Collection => Bed::query()
                     ->where('room_id', $get('room_id'))
                     ->pluck('name', 'id'))
-                ])->visible(fn ($record) => $record->bed_added_at == null),
+                ])
+                ->action(function ($record, array $data){
+                    $record->update([
+                        'room_id' => $data['room_id'],
+                        'bed_id' => $data['bed_id'],
+                        'bed_added_at' => $data['bed_added_at']
+                    ]);
+                })
+                ->visible(fn ($record) => $record->bed_added_at == null),
             ])
             ->bulkActions([
                 // ...
