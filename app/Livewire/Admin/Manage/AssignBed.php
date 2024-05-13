@@ -95,7 +95,7 @@ class AssignBed extends Component implements HasForms, HasTable
                     ->options(fn (Get $get): Collection => Bed::query()
                     ->where('room_id', $get('room_id'))
                     ->pluck('name', 'id'))
-                ])->visible(fn ($record) => is_null($record->bed_id)),
+                ])->visible(fn ($record) => $record->bed_id == null),
             ])
             ->bulkActions([
                 // ...
