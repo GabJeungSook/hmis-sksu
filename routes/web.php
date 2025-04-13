@@ -39,7 +39,7 @@ Route::get('/', function () {
 });
 
 //admin routes
-Route::get('/dashboard', Dashboard::class)->middleware(['auth', 'verified', 'role:admin,doctor,pharmacist,cashier,ipd / opd,laboratory'])->name('admin.dashboard');
+Route::get('/dashboard', Dashboard::class)->middleware(['auth', 'verified', 'role:admin,student,doctor,pharmacist,cashier,ipd / opd,laboratory'])->name('admin.dashboard');
 Route::get('/manage/doctors', Doctors::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.doctors');
 
 Route::get('/manage/rooms-and-beds', Rooms::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.rooms-and-beds');
