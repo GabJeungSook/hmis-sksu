@@ -36,151 +36,235 @@
   <body class="h-full">
   ```
 -->
-<div>
+<div  x-cloak x-data="{ open: false }">
     <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
     <div class="relative z-50 lg:hidden" role="dialog" aria-modal="true">
-      <!--
-        Off-canvas menu backdrop, show/hide based on off-canvas menu state.
-
-        Entering: "transition-opacity ease-linear duration-300"
-          From: "opacity-0"
-          To: "opacity-100"
-        Leaving: "transition-opacity ease-linear duration-300"
-          From: "opacity-100"
-          To: "opacity-0"
-      -->
-      <div class="fixed inset-0 bg-gray-900/80"></div>
-
-      <div class="fixed inset-0 flex">
         <!--
-          Off-canvas menu, show/hide based on off-canvas menu state.
+          Off-canvas menu backdrop, show/hide based on off-canvas menu state.
 
-          Entering: "transition ease-in-out duration-300 transform"
-            From: "-translate-x-full"
-            To: "translate-x-0"
-          Leaving: "transition ease-in-out duration-300 transform"
-            From: "translate-x-0"
-            To: "-translate-x-full"
+          Entering: "transition-opacity ease-linear duration-300"
+            From: "opacity-0"
+            To: "opacity-100"
+          Leaving: "transition-opacity ease-linear duration-300"
+            From: "opacity-100"
+            To: "opacity-0"
         -->
-        <div class="relative mr-16 flex w-full max-w-xs flex-1">
+        <div x-show="open" x-transition:enter="transition-opacity ease-linear duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity ease-linear duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 bg-gray-900/80" aria-hidden="true"></div>
+
+        <div x-show="open" x-transition:enter="transition ease-in-out duration-300 transform" x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-300 transform" x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full" class="fixed inset-0 flex">
           <!--
-            Close button, show/hide based on off-canvas menu state.
+            Off-canvas menu, show/hide based on off-canvas menu state.
 
-            Entering: "ease-in-out duration-300"
-              From: "opacity-0"
-              To: "opacity-100"
-            Leaving: "ease-in-out duration-300"
-              From: "opacity-100"
-              To: "opacity-0"
+            Entering: "transition ease-in-out duration-300 transform"
+              From: "-translate-x-full"
+              To: "translate-x-0"
+            Leaving: "transition ease-in-out duration-300 transform"
+              From: "translate-x-0"
+              To: "-translate-x-full"
           -->
-          <div class="absolute left-full top-0 flex w-16 justify-center pt-5">
-            <button type="button" class="-m-2.5 p-2.5">
-              <span class="sr-only">Close sidebar</span>
-              <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
+          <div class="relative mr-16 flex w-full max-w-xs flex-1">
+            <!--
+              Close button, show/hide based on off-canvas menu state.
 
-          <!-- Sidebar component, swap this element with another sidebar if you like -->
-          <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-2 z-20">
-            <div class="flex h-16 shrink-0 items-center">
-              <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
+              Entering: "ease-in-out duration-300"
+                From: "opacity-0"
+                To: "opacity-100"
+              Leaving: "ease-in-out duration-300"
+                From: "opacity-100"
+                To: "opacity-0"
+            -->
+            <div class="absolute left-full top-0 flex w-16 justify-center pt-5">
+              <button @click="open = false" type="button" class="-m-2.5 p-2.5">
+                <span class="sr-only">Close sidebar</span>
+                <svg class="size-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+              </button>
             </div>
-            <nav class="flex flex-1 flex-col">
-              <ul role="list" class="flex flex-1 flex-col gap-y-7">
-                <li>
-                  <ul role="list" class="-mx-2 space-y-1">
+
+            <!-- Sidebar component, swap this element with another sidebar if you like -->
+            <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-green-600 px-6 pb-2">
+              <div class="flex h-16 shrink-0 items-center font-extrabold text-white text-2xl tracking-wider">
+                    CAMPUS CLINIC SYSTEM
+                {{-- <img class="h-8 w-auto" src="https://tailwindui.com/plus/img/logos/mark.svg?color=white" alt="Your Company"> --}}
+              </div>
+              <nav class="flex flex-1 flex-col">
+                <ul role="list" class="flex flex-1 flex-col gap-y-7">
+                  @if(Auth::user()->role == 'admin')
+                  <li>
+                    <ul role="list" class="-mx-2 space-y-1">
+                      {{-- <li>
+                        <a wire:navigate href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'group flex gap-x-3 rounded-md bg-green-700 p-2 text-sm/6 font-semibold text-white' : 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-green-200 hover:bg-green-700 hover:text-white' }}">
+                          <svg class="size-6 shrink-0 text-green-200 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                          </svg>
+                          Dashboard
+                        </a>
+                      </li>
+                      <li>
+                        <a wire:navigate href="{{ route('admin.users') }}" class="{{ request()->routeIs('admin.users') ? 'group flex gap-x-3 rounded-md bg-green-700 p-2 text-sm/6 font-semibold text-white' : 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-green-200 hover:bg-green-700 hover:text-white' }}">
+                          <svg class="size-6 shrink-0 text-green-200 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+                          </svg>
+                          Users
+                        </a>
+                      </li>
+                      <li>
+                          <a href="{{ route('admin.vehicle-type') }}" class="{{ request()->routeIs('admin.vehicle-type') ? 'group flex gap-x-3 rounded-md bg-green-700 p-2 text-sm/6 font-semibold text-white' : 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-green-200 hover:bg-green-700 hover:text-white' }}">
+                              <svg class="size-6 shrink-0 text-green-200 group-hover:text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+                                </svg>
+                              Vehicle Types
+                          </a>
+                        </li>
+                      <li>
+                          <a href="{{ route('admin.calendar') }}" class="{{ request()->routeIs('admin.calendar') || request()->routeIs('admin.create-schedule') || request()->routeIs('admin.view-schedule') ? 'group flex gap-x-3 rounded-md bg-green-700 p-2 text-sm/6 font-semibold text-white' : 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-green-200 hover:bg-green-700 hover:text-white' }}">
+                              <svg class="size-6 shrink-0 text-green-200 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+                              </svg>
+                              Manage Schedules
+                          </a>
+                        </li>
+                        <li>
+                          <a wire:navigate href="{{ route('admin.applications') }}" class="{{ request()->routeIs('admin.applications') ? 'group flex gap-x-3 rounded-md bg-green-700 p-2 text-sm/6 font-semibold text-white' : 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-green-200 hover:bg-green-700 hover:text-white' }}">
+                            <svg class="size-6 shrink-0 text-green-200 group-hover:text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z" />
+                            </svg>
+                            Applications
+                          </a>
+                        </li>
+                      <li>
+                        <a wire:navigate href="{{ route('admin.transactions') }}" class="{{ request()->routeIs('admin.transactions') ? 'group flex gap-x-3 rounded-md bg-green-700 p-2 text-sm/6 font-semibold text-white' : 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-green-200 hover:bg-green-700 hover:text-white' }}">
+                          <svg class="size-6 shrink-0 text-green-200 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
+                          </svg>
+                          Transactions
+                        </a>
+                      </li>
+                      <li>
+                        <a wire:navigate href="{{ route('admin.scan-qr') }}" class="{{ request()->routeIs('admin.scan-qr') ? 'group flex gap-x-3 rounded-md bg-green-700 p-2 text-sm/6 font-semibold text-white' : 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-green-200 hover:bg-green-700 hover:text-white' }}">
+                          <svg class="size-6 shrink-0 text-green-200 group-hover:text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 3.75 9.375v-4.5ZM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 0 1-1.125-1.125v-4.5ZM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 13.5 9.375v-4.5Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75h.75v.75h-.75v-.75ZM6.75 16.5h.75v.75h-.75v-.75ZM16.5 6.75h.75v.75h-.75v-.75ZM13.5 13.5h.75v.75h-.75v-.75ZM13.5 19.5h.75v.75h-.75v-.75ZM19.5 13.5h.75v.75h-.75v-.75ZM19.5 19.5h.75v.75h-.75v-.75ZM16.5 16.5h.75v.75h-.75v-.75Z" />
+                          </svg>
+                          Scan QR Code
+                        </a>
+                      </li>
+                      <li>
+                          <a wire:navigate href="{{ route('admin.results') }}" class="{{ request()->routeIs('admin.results') ? 'group flex gap-x-3 rounded-md bg-green-700 p-2 text-sm/6 font-semibold text-white' : 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-green-200 hover:bg-green-700 hover:text-white' }}">
+                            <svg class="size-6 shrink-0 text-green-200 group-hover:text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0 1 18 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3 1.5 1.5 3-3.75" />
+                            </svg>
+
+                            Result
+                          </a>
+                        </li> --}}
+                    </ul>
+                  </li>
+                  <li>
+                    <div class="text-xs/6 font-semibold text-green-200">Reports</div>
+                    <ul role="list" class="-mx-2 mt-2 space-y-1">
+                      {{-- <li>
+                        <a wire:navigate href="{{ route('admin.user-report') }}" class="{{ request()->routeIs('admin.user-report') ? 'group flex gap-x-3 rounded-md bg-green-700 p-2 text-sm/6 font-semibold text-white' : 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-green-200 hover:bg-green-700 hover:text-white' }}">
+                          <span class="flex size-6 shrink-0 items-center justify-center rounded-lg border border-green-400 bg-green-500 text-[0.625rem] font-medium text-white">U</span>
+                          <span class="truncate">User Report</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a wire:navigate href="{{ route('admin.transaction-report') }}" class="{{ request()->routeIs('admin.transaction-report') ? 'group flex gap-x-3 rounded-md bg-green-700 p-2 text-sm/6 font-semibold text-white' : 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-green-200 hover:bg-green-700 hover:text-white' }}">
+                          <span class="flex size-6 shrink-0 items-center justify-center rounded-lg border border-green-400 bg-green-500 text-[0.625rem] font-medium text-white">T</span>
+                          <span class="truncate">Transaction Report</span>
+                        </a>
+                      </li> --}}
+                    </ul>
+                  </li>
+
+
+                    <li class="-mx-1 mt-auto" wire:ignore>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-blue-600 w-full">
+                                <svg class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+                                </svg>
+                                Logout
+                            </button>
+                        </form>
+                    </li>
+                    @else
                     <li>
-                      <!-- Current: "bg-gray-50 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-50" -->
-                      <a href="#" class="bg-gray-50 text-indigo-600 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
-                        <svg class="h-6 w-6 shrink-0 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                        </svg>
-                        Dashboard
-                      </a>
+                      <ul role="list" class="-mx-2 space-y-1">
+                          {{-- <li>
+                              <a wire:navigate href="{{ route('user.dashboard') }}" class="{{ request()->routeIs('user.dashboard') ? 'group flex gap-x-3 rounded-md bg-green-700 p-2 text-sm/6 font-semibold text-white' : 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-green-200 hover:bg-green-700 hover:text-white' }}">
+                                <svg class="size-6 shrink-0 text-green-200 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                                </svg>
+                                My Profile
+                              </a>
+                            </li>
+                            <li>
+                              <a wire:navigate href="{{ route('user.applications') }}" class="{{ request()->routeIs('user.applications') ? 'group flex gap-x-3 rounded-md bg-green-700 p-2 text-sm/6 font-semibold text-white' : 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-green-200 hover:bg-green-700 hover:text-white' }}">
+                                  <svg class="size-6 shrink-0 text-green-200 group-hover:text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z" />
+                                    </svg>
+                                  Applications
+                              </a>
+                            </li>
+                            <li>
+                              <a wire:navigate href="{{ route('user.view-schedules') }}" class="{{ request()->routeIs('user.view-schedules') || request()->routeIs('admin.create-schedule') || request()->routeIs('admin.view-schedule') ? 'group flex gap-x-3 rounded-md bg-green-700 p-2 text-sm/6 font-semibold text-white' : 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-green-200 hover:bg-green-700 hover:text-white' }}">
+                                  <svg class="size-6 shrink-0 text-green-200 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                                      <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+                                  </svg>
+                                  Schedules
+                              </a>
+                            </li>
+                            <li>
+                              <a wire:navigate href="{{ route('user.view-transaction') }}" class="{{ request()->routeIs('user.view-transaction') ? 'group flex gap-x-3 rounded-md bg-green-700 p-2 text-sm/6 font-semibold text-white' : 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-green-200 hover:bg-green-700 hover:text-white' }}">
+                                <svg class="size-6 shrink-0 text-green-200 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
+                                </svg>
+                                Transactions
+                              </a>
+                            </li> --}}
+                      </ul>
                     </li>
                     <li>
-                      <a href="#" class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
-                        <svg class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
-                        </svg>
-                        Team
-                      </a>
+                    {{-- <div class="text-xs/6 font-semibold text-green-200">Reports</div>
+                    <ul role="list" class="-mx-2 mt-2 space-y-1">
+                      <li>
+                          <a wire:navigate href="{{ route('user.my-transactions') }}" class="{{ request()->routeIs('user.my-transactions') ? 'group flex gap-x-3 rounded-md bg-green-700 p-2 text-sm/6 font-semibold text-white' : 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-green-200 hover:bg-green-700 hover:text-white' }}">
+                            <span class="flex size-6 shrink-0 items-center justify-center rounded-lg border border-green-400 bg-green-500 text-[0.625rem] font-medium text-white">M</span>
+                            <span class="truncate">My Transactions</span>
+                          </a>
+                        </li>
+                    </ul> --}}
+                  </li>
+                    <li class="-mx-1 mt-auto" wire:ignore>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-blue-600 w-full">
+                                <svg class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+                                </svg>
+                                Logout
+                            </button>
+                        </form>
                     </li>
-                    <li>
-                      <a href="#" class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
-                        <svg class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
-                        </svg>
-                        Projects
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
-                        <svg class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
-                        </svg>
-                        Calendar
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
-                        <svg class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
-                        </svg>
-                        Documents
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
-                        <svg class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" />
-                        </svg>
-                        Reports
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <div class="text-xs font-semibold leading-6 text-gray-400">Your teams</div>
-                  <ul role="list" class="-mx-2 mt-2 space-y-1">
-                    <li>
-                      <!-- Current: "bg-gray-50 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-50" -->
-                      <a href="#" class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
-                        <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600">H</span>
-                        <span class="truncate">Heroicons</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
-                        <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600">T</span>
-                        <span class="truncate">Tailwind Labs</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
-                        <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600">W</span>
-                        <span class="truncate">Workcation</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </nav>
+                    @endif
+                </ul>
+              </nav>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
     <!-- Static sidebar for desktop -->
     <div class="hidden lg:fixed lg:inset-y-0 lg:z-20 lg:flex lg:w-72 lg:flex-col">
       <!-- Sidebar component, swap this element with another sidebar if you like -->
       <div class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
         <div class="flex h-16 shrink-0 items-center bg-blue-600 px-4 mt-4 rounded-lg text-white ">
-          <img class="h-12 w-auto" src="{{asset('images/sksu_logo.png')}}" alt="HMIS">
-          <p class="poppins-medium text-xs px-2 tracking-wider">HEALTH HUB</p>
+          {{-- <img class="h-12 w-auto" src="{{asset('images/sksu_logo.png')}}" alt="HMIS"> --}}
+          <p class="poppins-medium text-sm px-1 tracking-wider">CAMPUS CLINIC SYSTEM</p>
         </div>
         <nav class="flex flex-1 flex-col">
           <ul role="list" class="flex flex-1 flex-col gap-y-7">
@@ -632,39 +716,41 @@
                 </ul>
               </div>
             </li>
-         
+
           </ul>
         </div>
       </li>
-            
-            <li class="-mx-1 mt-auto">
-                <form action="{{route('logout')}}" method="POST">
-                    @csrf
-                    <button class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-blue-600 w-full">
-                        <svg class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
-                          </svg>
-                        Logout
-                    </button>
-                </form>
-              </li>
+
+        <li class="-mx-1 mt-auto" wire:ignore>
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-blue-600 w-full">
+                    <svg class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+                    </svg>
+                    Logout
+                </button>
+            </form>
+        </li>
         </nav>
+      </div>
+
+      <div @click="open = true" class="sticky top-0 z-40 flex items-center gap-x-6 bg-gray-600 px-4 py-4 shadow-sm sm:px-6 lg:hidden">
+        <button type="button" class="-m-2.5 p-2.5 text-green-200 lg:hidden">
+          <span class="sr-only">Open sidebar</span>
+          <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+        </button>
+        <div class="flex-1 text-sm/6 font-semibold text-white">Dashboard</div>
+        <a href="#">
+          <span class="sr-only">Your profile</span>
+          {{-- <img class="size-8 rounded-full bg-green-700" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt=""> --}}
+        </a>
       </div>
     </div>
 
-    <div class="sticky top-0 z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm sm:px-6 lg:hidden">
-      <button type="button" class="-m-2.5 p-2.5 text-gray-700 lg:hidden">
-        <span class="sr-only">Open sidebar</span>
-        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-        </svg>
-      </button>
-      <div class="flex-1 text-sm font-semibold leading-6 text-gray-900">Dashboard</div>
-      <a href="#">
-        <span class="sr-only">Your profile</span>
-        <img class="h-8 w-8 rounded-full bg-gray-50" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-      </a>
-    </div>
+
 
     <main class="lg:pl-72">
       <div>

@@ -36,7 +36,7 @@
 
                             <div class="flex mt-8 space-x-3 sm:border-l sm:border-transparent sm:pl-6 sm:-ml-6 justify-center">
 
-                                <a href="{{route('admin.dashboard')}}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm bg-blue-500 hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                <a href="{{route('home')}}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm bg-blue-500 hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                                     Go back to Dashboard
                                 </a>
                             </div>

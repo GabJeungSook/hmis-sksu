@@ -35,8 +35,16 @@ use App\Livewire\Admin\Reports\PatientAdmission;
 use App\Livewire\Admin\Reports\LabResults;
 
 Route::get('/', function () {
+    $user = auth()->user();
+
+    if ($user) {
+        return $user->role_id == 2
+            ? redirect()->route('student.dashboard')
+            : redirect()->route('admin.dashboard');
+    }
+
     return redirect()->route('login');
-});
+})->name('home');
 
 //admin routes
 Route::get('/dashboard', Dashboard::class)->middleware(['auth', 'verified', 'role:admin,student,doctor,pharmacist,cashier,ipd / opd,laboratory'])->name('admin.dashboard');
@@ -77,6 +85,11 @@ Route::get('/pharmacy/transactions', Transaction::class)->middleware(['auth', 'v
 //cashier routes
 Route::get('/cashier/billing', Billing::class)->middleware(['auth', 'verified', 'role:admin,cashier'])->name('cashier.billing');
 Route::get('/cashier/patient-bill/{record}', BillOut::class)->middleware(['auth', 'verified', 'role:admin,cashier'])->name('cashier.bill-out');
+
+//student routes
+Route::get('/student/dashboard', function () {
+    return view('student.dashboard');
+})->middleware(['auth', 'verified', 'role:student'])->name('student.dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

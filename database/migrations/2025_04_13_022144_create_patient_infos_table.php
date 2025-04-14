@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('full_address');
             $table->date('birthday');
             $table->enum('gender', ['male', 'female']);
+            $table->string('contact_number')->nullable();
             $table->timestamps();
         });
     }
