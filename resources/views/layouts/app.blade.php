@@ -387,6 +387,13 @@
                           <span class="truncate">Inventory</span>
                         </a>
                       </li>
+                      <li>
+                        <!-- Current: "bg-gray-50 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-50" -->
+                        <a wire:navigate href="{{ route('admin.cases') }}" class="{{ request()->routeIs('admin.cases') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
+                          <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600">H</span>
+                          <span class="truncate">Health Cases</span>
+                        </a>
+                      </li>
                     </ul>
                 </div>
                   </li>

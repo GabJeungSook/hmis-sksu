@@ -13,6 +13,8 @@ use App\Livewire\Doctor\Prescription;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\Manage\Doctors;
 use App\Livewire\Admin\Manage\HealthRecords;
+use App\Livewire\Admin\Manage\HealthCases;
+use App\Livewire\AddHealthCase;
 use App\Livewire\Doctor\EmergencyRoom;
 use App\Livewire\Doctor\MedicalRecord;
 use App\Livewire\Pharmacy\ManageStock;
@@ -100,7 +102,9 @@ Route::get('/admin/add-patient-exam', AddPatientExam::class)->middleware(['auth'
 Route::get('/admin/add-health-record', AddHealthRecord::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.add-health-record');
 Route::get('/admin/health-records', HealthRecords::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.health_records');
 Route::get('/admin/referrals', Referrals::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.referrals');
+Route::get('/admin/cases', HealthCases::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.cases');
 Route::get('/admin/add-referral', AddReferral::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.add_referral');
+Route::get('/admin/add-health-case', AddHealthCase::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.add-health-case');
 
 
 

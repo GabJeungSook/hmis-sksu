@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Manage;
 
+
 use Livewire\Component;
 use App\Models\PatientInfo;
 use App\Models\HealthRecord;
@@ -13,20 +14,20 @@ use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Tables\Contracts\HasTable;
 
-class HealthRecords extends Component implements HasForms, HasTable 
+class HealthCases extends Component implements HasForms, HasTable
 {
-
+    
     use InteractsWithTable;
     use InteractsWithForms;
 
     public function table(Table $table): Table
     {
         return $table
-            ->query(PatientInfo::query()->whereHas('healthRecords'))
+            ->query(PatientInfo::query()->whereHas('healthCases'))
             ->columns([
                 TextColumn::make('fullName')
                 ->formatStateUsing(fn (PatientInfo $record) => $record->first_name.' '.$record->last_name),
-                TextColumn::make('healthRecords.health_record')               
+                TextColumn::make('healthCases.health_case')               
                 ->listWithLineBreaks()
                 ->bulleted(),
                 TextColumn::make('created_at')->date(),
@@ -39,8 +40,8 @@ class HealthRecords extends Component implements HasForms, HasTable
             ])
             ->headerActions([
                 Action::make('add-patient-record')
-                ->label('Add Health Record')
-                ->url(fn () => route('admin.add-health-record'))
+                ->label('Add Health Case')
+                ->url(fn () => route('admin.add-health-case'))
             ])->actions([
                 // Action::make('manage_beds')
                 // ->button()
@@ -77,6 +78,6 @@ class HealthRecords extends Component implements HasForms, HasTable
 
     public function render()
     {
-        return view('livewire.admin.manage.health-records');
+        return view('livewire.admin.manage.health-cases');
     }
 }

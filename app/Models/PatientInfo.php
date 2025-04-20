@@ -30,6 +30,11 @@ class PatientInfo extends Model
         return $this->hasMany(Referral::class, 'patient_infos_id', 'id');
     }
 
+    public function healthCases()
+    {
+        return $this->hasMany(HealthCase::class, 'patient_infos_id', 'id');
+    }
+
     public function getFullNameAttribute()
     {
         return "{$this->first_name} {$this->last_name}";
