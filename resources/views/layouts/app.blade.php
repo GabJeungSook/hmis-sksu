@@ -270,6 +270,7 @@
           <ul role="list" class="flex flex-1 flex-col gap-y-7">
             <li>
               <ul role="list" class="-mx-2 space-y-1">
+                @if(auth()->user()->role_id === 1)
                 <li>
                   <!-- Current: "bg-gray-50 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-50" -->
                   <a wire:navigate href="{{route('admin.dashboard')}}" class="{{request()->routeIs('admin.dashboard') ? 'text-blue-600 bg-gray-100 poppins-medium hover:text-blue-600 hover:bg-gray-50 group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold' : 'poppins-medium hover:text-blue-600 hover:bg-gray-50 group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold'}}">
@@ -279,6 +280,7 @@
                     Dashboard
                   </a>
                 </li>
+                @endif
                 @if(auth()->user()->role_id === 1)
                 <li>
                     <div x-cloak x-data="{ open_ipd: true }" class="relative inline-block text-left mt-4">
@@ -525,7 +527,7 @@
                   </div>
                     </li>
                     @endif
-                  @if(auth()->user()->role_id === 2)
+                  @if(auth()->user()->role_id === 7)
                   <li>
                     <div x-cloak x-data="{ open_doctor: false }" class="relative inline-block text-left mt-4">
                         <div>
@@ -673,6 +675,7 @@
                   @endif
               </ul>
             </li>
+            @if(auth()->user()->role_id === 1)
             <li>
               <div x-cloak x-data="{ open_report: true }" class="relative inline-block text-left">
                 <div>
@@ -692,7 +695,7 @@
                 </div>
               {{-- <div class="text-xs font-semibold leading-6 text-gray-400">Reports</div> --}}
               <ul x-show="open_report" @click.away="open_report = true" role="list" class="mt-2 space-y-1">
-                <li>
+                {{-- <li>
                     <a wire:navigate href="{{ route('admin.reports.patient-list') }}" class="{{ request()->routeIs('admin.reports.patient-list') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
                       <svg class="h-5 w-5 shrink-0 text-blue-600" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12.3826 0.538164C11.6554 0.200801 10.8531 0 10 0C7.60313 0 5.55804 1.48826 4.70937 3.59375H8.33393L12.3826 0.538164ZM15.2906 3.59375C14.9379 2.71912 14.3679 1.96758 13.6616 1.36922L10.7138 3.59375H15.2906ZM10 11.5C13.1558 11.5 15.7143 8.92553 15.7143 5.75C15.7143 5.50383 15.6719 5.26934 15.6424 5.03125H4.35759C4.32768 5.26934 4.28571 5.50383 4.28571 5.75C4.28571 8.92553 6.8442 11.5 10 11.5ZM3.57143 13.4631V23H9.29732L4.90223 13.0489C4.444 13.1339 3.99732 13.2729 3.57143 13.4631ZM0 20.8438C0 22.0346 0.959375 23 2.14286 23V14.3858C0.842857 15.4931 0 17.1269 0 18.975V20.8438ZM11.4286 18.6875H8.95625L10.8612 23H11.4286C12.6103 23 13.5714 22.0328 13.5714 20.8438C13.5714 19.6547 12.6103 18.6875 11.4286 18.6875ZM14 12.9375H13.254C12.2612 13.3948 11.1612 13.6562 10 13.6562C8.83884 13.6562 7.73884 13.3948 6.74598 12.9375H6.41696L8.32188 17.25H11.4286C13.3978 17.25 15 18.8622 15 20.8438C15 21.6559 14.7205 22.3976 14.2674 23H17.8571C19.0406 23 20 22.0346 20 20.8438V18.975C20 15.6404 17.3138 12.9375 14 12.9375Z"
@@ -700,17 +703,17 @@
                       </svg>
                       Patient List
                     </a>
-                  </li>
+                  </li> --}}
                   <li>
                     <a wire:navigate href="{{ route('admin.reports.patient-admission') }}" class="{{ request()->routeIs('admin.reports.patient-admission') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
                       <svg class="h-5 w-5 shrink-0 text-blue-600" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12.3826 0.538164C11.6554 0.200801 10.8531 0 10 0C7.60313 0 5.55804 1.48826 4.70937 3.59375H8.33393L12.3826 0.538164ZM15.2906 3.59375C14.9379 2.71912 14.3679 1.96758 13.6616 1.36922L10.7138 3.59375H15.2906ZM10 11.5C13.1558 11.5 15.7143 8.92553 15.7143 5.75C15.7143 5.50383 15.6719 5.26934 15.6424 5.03125H4.35759C4.32768 5.26934 4.28571 5.50383 4.28571 5.75C4.28571 8.92553 6.8442 11.5 10 11.5ZM3.57143 13.4631V23H9.29732L4.90223 13.0489C4.444 13.1339 3.99732 13.2729 3.57143 13.4631ZM0 20.8438C0 22.0346 0.959375 23 2.14286 23V14.3858C0.842857 15.4931 0 17.1269 0 18.975V20.8438ZM11.4286 18.6875H8.95625L10.8612 23H11.4286C12.6103 23 13.5714 22.0328 13.5714 20.8438C13.5714 19.6547 12.6103 18.6875 11.4286 18.6875ZM14 12.9375H13.254C12.2612 13.3948 11.1612 13.6562 10 13.6562C8.83884 13.6562 7.73884 13.3948 6.74598 12.9375H6.41696L8.32188 17.25H11.4286C13.3978 17.25 15 18.8622 15 20.8438C15 21.6559 14.7205 22.3976 14.2674 23H17.8571C19.0406 23 20 22.0346 20 20.8438V18.975C20 15.6404 17.3138 12.9375 14 12.9375Z"
                         fill="{{ request()->routeIs('admin.reports.patient-admission') ? '#2563EB' : '#5B5B5B'}}"/>
                       </svg>
-                      Patient Admission
+                      Patient Cases
                     </a>
                   </li>
-                  <li>
+                  {{-- <li>
                     <a wire:navigate href="{{ route('admin.reports.patient-billing') }}" class="{{ request()->routeIs('admin.reports.patient-billing') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
                       <svg class="h-5 w-5 shrink-0 text-blue-600" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12.3826 0.538164C11.6554 0.200801 10.8531 0 10 0C7.60313 0 5.55804 1.48826 4.70937 3.59375H8.33393L12.3826 0.538164ZM15.2906 3.59375C14.9379 2.71912 14.3679 1.96758 13.6616 1.36922L10.7138 3.59375H15.2906ZM10 11.5C13.1558 11.5 15.7143 8.92553 15.7143 5.75C15.7143 5.50383 15.6719 5.26934 15.6424 5.03125H4.35759C4.32768 5.26934 4.28571 5.50383 4.28571 5.75C4.28571 8.92553 6.8442 11.5 10 11.5ZM3.57143 13.4631V23H9.29732L4.90223 13.0489C4.444 13.1339 3.99732 13.2729 3.57143 13.4631ZM0 20.8438C0 22.0346 0.959375 23 2.14286 23V14.3858C0.842857 15.4931 0 17.1269 0 18.975V20.8438ZM11.4286 18.6875H8.95625L10.8612 23H11.4286C12.6103 23 13.5714 22.0328 13.5714 20.8438C13.5714 19.6547 12.6103 18.6875 11.4286 18.6875ZM14 12.9375H13.254C12.2612 13.3948 11.1612 13.6562 10 13.6562C8.83884 13.6562 7.73884 13.3948 6.74598 12.9375H6.41696L8.32188 17.25H11.4286C13.3978 17.25 15 18.8622 15 20.8438C15 21.6559 14.7205 22.3976 14.2674 23H17.8571C19.0406 23 20 22.0346 20 20.8438V18.975C20 15.6404 17.3138 12.9375 14 12.9375Z"
@@ -718,7 +721,7 @@
                       </svg>
                       Patient Billing
                     </a>
-                  </li>
+                  </li> --}}
                   <li>
                     <a wire:navigate href="{{ route('admin.reports.medicine-list') }}" class="{{ request()->routeIs('admin.reports.medicine-list') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
                       <svg class="h-5 w-5 shrink-0 text-blue-600" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -728,7 +731,7 @@
                       Medicine List
                     </a>
                   </li>
-                  <li>
+                  {{-- <li>
                     <a wire:navigate href="{{ route('admin.reports.lab-results') }}" class="{{ request()->routeIs('admin.reports.lab-results') ? 'text-blue-600 bg-gray-100 poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' : 'poppins-medium group flex gap-x-3 rounded-md px-1 py-2 text-sm leading-6 font-semibold hover:text-blue-600 hover:bg-gray-50' }}">
                       <svg class="h-5 w-5 shrink-0 text-blue-600" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12.3826 0.538164C11.6554 0.200801 10.8531 0 10 0C7.60313 0 5.55804 1.48826 4.70937 3.59375H8.33393L12.3826 0.538164ZM15.2906 3.59375C14.9379 2.71912 14.3679 1.96758 13.6616 1.36922L10.7138 3.59375H15.2906ZM10 11.5C13.1558 11.5 15.7143 8.92553 15.7143 5.75C15.7143 5.50383 15.6719 5.26934 15.6424 5.03125H4.35759C4.32768 5.26934 4.28571 5.50383 4.28571 5.75C4.28571 8.92553 6.8442 11.5 10 11.5ZM3.57143 13.4631V23H9.29732L4.90223 13.0489C4.444 13.1339 3.99732 13.2729 3.57143 13.4631ZM0 20.8438C0 22.0346 0.959375 23 2.14286 23V14.3858C0.842857 15.4931 0 17.1269 0 18.975V20.8438ZM11.4286 18.6875H8.95625L10.8612 23H11.4286C12.6103 23 13.5714 22.0328 13.5714 20.8438C13.5714 19.6547 12.6103 18.6875 11.4286 18.6875ZM14 12.9375H13.254C12.2612 13.3948 11.1612 13.6562 10 13.6562C8.83884 13.6562 7.73884 13.3948 6.74598 12.9375H6.41696L8.32188 17.25H11.4286C13.3978 17.25 15 18.8622 15 20.8438C15 21.6559 14.7205 22.3976 14.2674 23H17.8571C19.0406 23 20 22.0346 20 20.8438V18.975C20 15.6404 17.3138 12.9375 14 12.9375Z"
@@ -736,11 +739,11 @@
                       </svg>
                       Lab Results
                     </a>
-                  </li>
+                  </li> --}}
                 </ul>
               </div>
             </li>
-
+            @endif
           </ul>
         </div>
       </li>

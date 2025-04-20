@@ -42,11 +42,12 @@ class HealthRecords extends Component implements HasForms, HasTable
                 ->label('Add Health Record')
                 ->url(fn () => route('admin.add-health-record'))
             ])->actions([
-                // Action::make('manage_beds')
-                // ->button()
-                // ->color('primary')
-                // ->icon('heroicon-o-plus-circle')
-                // ->url(fn (Room $record) => route('admin.manage-beds', $record)),
+                Action::make('view-record')
+                ->label('View Health Record')
+                ->button()
+                ->color('warning')
+                ->icon('heroicon-o-eye')
+                ->url(fn (PatientInfo $record) => route('admin.view-health-record', $record)),
                 // EditAction::make('edit')
                 // ->button()
                 // ->color('success')

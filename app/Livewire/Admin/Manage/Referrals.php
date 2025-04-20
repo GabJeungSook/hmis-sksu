@@ -22,13 +22,13 @@ class Referrals extends Component implements HasForms, HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(PatientInfo::query()->whereHas('referrals'))
+            ->query(Referral::query())
             ->columns([
                 TextColumn::make('fullName')
                 ->formatStateUsing(fn (PatientInfo $record) => $record->first_name.' '.$record->last_name),
-                TextColumn::make('referrals.hospital_name')               
-                ->listWithLineBreaks()
-                ->bulleted(),
+                TextColumn::make('hospital_name'),
+                TextColumn::make('doctor_name'),
+                TextColumn::make('diagnosis'),
                 TextColumn::make('created_at')->date(),
                 // TextColumn::make('beds.name')
                 // ->listWithLineBreaks()
@@ -42,11 +42,12 @@ class Referrals extends Component implements HasForms, HasTable
                 ->label('Add Referral')
                 ->url(fn () => route('admin.add_referral'))
             ])->actions([
-                // Action::make('manage_beds')
-                // ->button()
-                // ->color('primary')
-                // ->icon('heroicon-o-plus-circle')
-                // ->url(fn (Room $record) => route('admin.manage-beds', $record)),
+                Action::make('view-referral-details')
+                ->label('View Referral Form')
+                ->button()
+                ->color('warning')
+                ->icon('heroicon-o-eye')
+                ->url(fn (Referral $record) => route('admin.view-referral-details', ['record' => $record->patient, 'id' => $record->id])),
                 // EditAction::make('edit')
                 // ->button()
                 // ->color('success')

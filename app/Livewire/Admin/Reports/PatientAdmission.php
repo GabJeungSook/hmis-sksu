@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Admin\Reports;
 
-use App\Models\Patient;
+use App\Models\PatientInfo;
 use Livewire\Component;
 
 class PatientAdmission extends Component
@@ -10,7 +10,7 @@ class PatientAdmission extends Component
     public function render()
     {
         return view('livewire.admin.reports.patient-admission', [
-            'patients' => Patient::where('type', 'In-Patient')->get()
+            'patients' => PatientInfo::whereHas('healthCases')->get()
         ]);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Livewire\Admin;
 use App\Models\Room;
 use App\Models\User;
 use App\Models\Patient;
+use App\Models\PatientInfo;
 use Livewire\Component;
 
 class Dashboard extends Component
@@ -24,11 +25,11 @@ class Dashboard extends Component
     public function mount()
     {
         $this->doctor_count = User::where('role_id', 2)->count();
-        $this->patient_count = Patient::whereNotIn('type', ['Discharged'])->count();
+        $this->patient_count = PatientInfo::count();
         $this->in_patient = Patient::where('type', 'In-Patient')->count();
         $this->out_patient = Patient::where('type', 'Out-Patient')->count();
         $this->discharged_patient = Patient::where('type', 'Discharged')->count();
-        $this->cases = Patient::where('initial_diagnosis', '!=', null)->count();
+        $this->cases = PatientInfo::whereHas('healthCases')->count();
         $this->cases_get = Patient::whereNotNull('initial_diagnosis')->get();
         $diagnosis_counts = [];
         foreach ($this->cases_get as $item) {

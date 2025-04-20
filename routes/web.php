@@ -26,6 +26,8 @@ use App\Livewire\Admin\Manage\DoctorFee;
 use App\Livewire\Admin\Manage\ManageBed;
 use App\Livewire\Admin\Manage\AddPatientExam;
 use App\Livewire\Admin\Manage\AddHealthRecord;
+use App\Livewire\ViewHealthRecord;
+use App\Livewire\ViewReferralDetails;
 use App\Livewire\Admin\Manage\Referrals;
 use App\Livewire\Admin\Manage\AddReferral;
 use App\Livewire\Doctor\ManageLaboratory;
@@ -105,6 +107,8 @@ Route::get('/admin/referrals', Referrals::class)->middleware(['auth', 'verified'
 Route::get('/admin/cases', HealthCases::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.cases');
 Route::get('/admin/add-referral', AddReferral::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.add_referral');
 Route::get('/admin/add-health-case', AddHealthCase::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.add-health-case');
+Route::get('/admin/view-health-record/{record}', ViewHealthRecord::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.view-health-record');
+Route::get('/admin/view-referral-details/{record}/{id}', ViewReferralDetails::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.view-referral-details');
 
 
 

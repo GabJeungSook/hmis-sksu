@@ -218,7 +218,7 @@
                     <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
                       <p class="text-2xl font-semibold text-gray-900">{{$patient_count}}</p>
                     </dd>
-                    <canvas id="myChart"></canvas> 
+                    {{-- <canvas id="myChart"></canvas>  --}}
               </div>
               <div class="rounded-lg bg-gradient-to-br relative from-gray-200 overflow-hidden p-5 via-blue-100 to-blue-300">
                 <dt>
@@ -233,7 +233,7 @@
                   <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
                     <p class="text-2xl font-semibold text-gray-900">{{$cases}}</p>
                   </dd>
-                  <canvas id="myChart1"></canvas> 
+                  {{-- <canvas id="myChart1"></canvas>  --}}
               </div>
               {{-- <div class="rounded-lg bg-gradient-to-br relative from-gray-200 overflow-hidden p-5 via-blue-100 to-blue-300">
                 <dt>

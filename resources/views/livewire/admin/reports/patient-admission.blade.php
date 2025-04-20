@@ -1,4 +1,4 @@
-@section('title', 'Patient Admission')
+@section('title', 'Patient Cases')
 <div>
     <div class="flex justify-end">
         <div class="flex">
@@ -16,27 +16,27 @@
                   Full Name
                 </th>
                 <th class="border bg-blue-700   text-center px-2 text-sm font-medium text-white py-2 whitespace-nowrap">
-                    Guardian Name
+                    Full Address
                 </th>
                 <th class="border bg-blue-700   text-center px-2 text-sm font-medium text-white py-2 whitespace-nowrap">
-                  Room
+                  Gender
                 </th>
                 <th class="border bg-blue-700   text-center px-2 text-sm font-medium text-white py-2 whitespace-nowrap">
-                  Bed
+                  Birthday
                 </th>
                 <th class="border bg-blue-700   text-center px-2 text-sm font-medium text-white py-2 whitespace-nowrap">
-                  Admission Date
+                  Date Added
                 </th>
               </tr>
             </thead>
             <tbody class="">
               @foreach ($patients as $item)
                 <tr>
-                  <td class="border text-gray-600  px-3 py-1">{{ $item->name}}</td>
-                  <td class="border text-gray-600  px-3 py-1">{{ $item->guardian_name}}</td>
-                  <td class="border text-gray-600  px-3 py-1">{{ $item->bed->room->name}}</td>
-                  <td class="border text-gray-600  px-3 py-1">{{ $item->bed->name}}</td>
-                  <td class="border text-gray-600  px-3 py-1">{{ Carbon\Carbon::parse($item->updated_at)->format('F d, Y')}}</td>
+                  <td class="border text-gray-600  px-3 py-1">{{ $item->first_name}} {{ $item->last_name }}</td>
+                  <td class="border text-gray-600  px-3 py-1">{{ $item->full_address}}</td>
+                  <td class="border text-gray-600  px-3 py-1">{{ $item->gender}}</td>
+                  <td class="border text-gray-600  px-3 py-1">{{ Carbon\Carbon::parse($item->birthday)->format('F d, Y')}}</td>
+                  <td class="border text-gray-600  px-3 py-1">{{ Carbon\Carbon::parse($item->created_at)->format('F d, Y')}}</td>
                 </tr>
               @endforeach
             </tbody>

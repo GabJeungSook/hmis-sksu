@@ -1,4 +1,4 @@
-@section('title', 'Medicine List')
+@section('title', 'Supply List')
 <div>
     <div class="flex justify-end">
         <div class="flex">
@@ -21,9 +21,9 @@
                 <th class="border bg-blue-700   text-center px-2 text-sm font-medium text-white py-2 whitespace-nowrap">
                   Description
                 </th>
-                <th class="border bg-blue-700   text-center px-2 text-sm font-medium text-white py-2 whitespace-nowrap">
+                {{-- <th class="border bg-blue-700   text-center px-2 text-sm font-medium text-white py-2 whitespace-nowrap">
                   Price
-                </th>
+                </th> --}}
                 <th class="border bg-blue-700   text-center px-2 text-sm font-medium text-white py-2 whitespace-nowrap">
                   Available Stock
                 </th>
@@ -35,7 +35,7 @@
                   <td class="border text-gray-600  px-3 py-1">{{ $item->category->name}}</td>
                   <td class="border text-gray-600  px-3 py-1">{{ $item->name}}</td>
                   <td class="border text-gray-600  px-3 py-1">{{ $item->description}}</td>
-                  <td class="border text-gray-600  px-3 py-1">₱ {{number_format($item->price, 2) }}</td>
+                  {{-- <td class="border text-gray-600  px-3 py-1">₱ {{number_format($item->price, 2) }}</td> --}}
                   <td class="border text-gray-600  px-3 py-1">{{ $item->stock}}</td>
                 </tr>
               @endforeach
