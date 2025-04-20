@@ -127,14 +127,15 @@ class Patients extends Component implements HasForms, HasTable
                     DatePicker::make('birthday')
                     ->label('Birthday')
                     ->native(false),
-                    TextInput::make('contact_number')
-                        ->label('Contact Number')
-                        ->numeric()
-                        ->maxLength(11),
+                    Select::make('gender')
+                        ->options([
+                            'male' => 'Male',
+                            'female' => 'Female'
+                        ])->required(),
                 ]),
-                DeleteAction::make('delete')
-                ->button()
-                ->requiresConfirmation()
+                // DeleteAction::make('delete')
+                // ->button()
+                // ->requiresConfirmation()
             ])
             ->bulkActions([
                 // ...

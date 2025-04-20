@@ -1,4 +1,4 @@
-@section('title', 'Vitals')
+@section('title', 'Patient Examinations')
 <div>
     {{$this->table}}
 </div>

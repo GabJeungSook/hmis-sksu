@@ -24,6 +24,11 @@ class Medicine extends Component implements HasForms, HasTable
     use InteractsWithTable;
     use InteractsWithForms;
 
+    public function mount()
+    {
+        $this->form->fill();
+    }
+
     public function table(Table $table): Table
     {
         return $table
@@ -36,8 +41,9 @@ class Medicine extends Component implements HasForms, HasTable
                 TextColumn::make('name')
                 ->searchable(),
                 TextColumn::make('description'),
-                TextColumn::make('price')
-                ->formatStateusing(fn ($state) => '₱'. number_format($state, 2)),
+                // Hidden::make('price')->default(0)
+
+                // ->formatStateusing(fn ($state) => '₱'. number_format($state, 2)),
             ])
             ->filters([
                 // ...
@@ -45,8 +51,8 @@ class Medicine extends Component implements HasForms, HasTable
             ->headerActions([
                 CreateAction::make()
                 ->model(MedicineModel::class)
-                ->label('Add Medicine')
-                ->modalHeading('Add Medicine')
+                ->label('Add Supply')
+                ->modalHeading('Add Supply')
                 ->form([
                     Select::make('category_id')
                     ->label('Category')
@@ -57,9 +63,8 @@ class Medicine extends Component implements HasForms, HasTable
                         ->maxLength(255),
                     Textarea::make('description')
                     ->required(),
-                    TextInput::make('price')
-                        ->required()
-                        ->numeric(),
+                    Hidden::make('price')
+                    ->default(0),
                 Hidden::make('stock')
                     ->default(0)
                 ])
@@ -78,9 +83,8 @@ class Medicine extends Component implements HasForms, HasTable
                     ->maxLength(255),
                 Textarea::make('description')
                 ->required(),
-                TextInput::make('price')
-                        ->required()
-                        ->numeric(),
+                Hidden::make('price')
+                    ->default(0),
                 Hidden::make('stock')
                     ->default(0)
                 ]),

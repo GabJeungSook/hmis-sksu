@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('patient_vitals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('patient_id')->constrained()->onDelete('cascade');
+            $table->foreignId('patient_id');
             $table->string('temperature');
             $table->string('blood_pressure');
             $table->string('heart_rate');
             $table->string('respiratory_rate');
+            $table->text('initial_diagnosis')->nullable();
+            $table->text('prescription')->nullable();
             $table->timestamps();
         });
     }

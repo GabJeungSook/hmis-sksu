@@ -11,6 +11,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Forms\Components\TextInput;
@@ -31,8 +32,8 @@ class Vitals extends Component implements HasForms, HasTable
         return $table
             ->query(PatientVitals::query())
             ->columns([
-                TextColumn::make('patient.name')
-                    ->searchable(),
+                TextColumn::make('patient.fullName')
+                ->formatStateUsing(fn (PatientVitals $record) => $record->patient->first_name.' '.$record->patient->last_name),
                 TextColumn::make('temperature')
                     ->searchable()
                     ->label('Temperature (°C)'),
@@ -45,6 +46,7 @@ class Vitals extends Component implements HasForms, HasTable
                 TextColumn::make('respiratory_rate')
                     ->searchable()
                     ->label('Respiratory Rate'),
+                TextColumn::make('initial_diagnosis'),
                 TextColumn::make('created_at')
                     ->searchable()
                     ->label('Date Added')
@@ -54,74 +56,75 @@ class Vitals extends Component implements HasForms, HasTable
                 // ...
             ])
             ->headerActions([
-                CreateAction::make()
-                ->model(PatientVitals::class)
-                ->label('Add Patient Vitals')
-                ->modalHeading('Add Patient Vitals')
-                ->form([
-                    Select::make('patient_id')
-                    ->label('Patient')
-                    ->required()
-                    ->options(Patient::pluck('name', 'id')),
-                    TextInput::make('temperature')
-                        ->label('Temperature (°C)')
-                        ->numeric()
-                        ->inputMode('decimal')
-                        ->minValue(1)
-                        ->maxValue(100)
-                        ->required()
-                        ->maxLength(255),
-                    TextInput::make('blood_pressure')
-                        ->label('Blood Pressure')
-                        ->required()
-                        ->maxLength(255),
-                    TextInput::make('heart_rate')
-                        ->label('Heart Rate')
-                        ->required()
-                        ->maxLength(255),
-                    TextInput::make('respiratory_rate')
-                        ->label('Respiratory Rate')
-                        ->required()
-                        ->maxLength(255),
-                ])
+                Action::make('add-patient-exam')
+                ->label('Add Patient Examination')
+                ->url(fn () => route('admin.add-patient-exam'))
+                // CreateAction::make()
+                // ->model(PatientVitals::class)
+                // ->label('Add Patient Examination')
+                // ->modalHeading('Add Patient Examination')
+                // ->form([
+                //     Select::make('patient_id')
+                //     ->label('Patient')
+                //     ->required()
+                //     ->options(Patient::pluck('name', 'id')),
+                //     TextInput::make('temperature')
+                //         ->label('Temperature (°C)')
+                //         ->numeric()
+                //         ->inputMode('decimal')
+                //         ->minValue(1)
+                //         ->maxValue(100)
+                //         ->required()
+                //         ->maxLength(255),
+                //     TextInput::make('blood_pressure')
+                //         ->label('Blood Pressure')
+                //         ->required()
+                //         ->maxLength(255),
+                //     TextInput::make('heart_rate')
+                //         ->label('Heart Rate')
+                //         ->required()
+                //         ->maxLength(255),
+                //     TextInput::make('respiratory_rate')
+                //         ->label('Respiratory Rate')
+                //         ->required()
+                //         ->maxLength(255),
+                // ])
             ])->actions([
-                EditAction::make('edit')
-                ->button()
-                ->color('success')
-                ->model(PatientVitals::class)
-                ->form([
-                    Select::make('patient_id')
-                    ->label('Patient')
-                    ->required()
-                    ->options(Patient::pluck('name', 'id')),
-                    TextInput::make('temperature')
-                        ->label('Temperature (°C)')
-                        ->numeric()
-                        ->inputMode('decimal')
-                        ->minValue(1)
-                        ->maxValue(100)
-                        ->required()
-                        ->maxLength(255),
-                    TextInput::make('blood_pressure')
-                        ->label('Blood Pressure')
-                        ->required()
-                        ->maxLength(255),
-                    TextInput::make('heart_rate')
-                        ->label('Heart Rate')
-                        ->required()
-                        ->maxLength(255),
-                    TextInput::make('respiratory_rate')
-                        ->label('Respiratory Rate')
-                        ->required()
-                        ->maxLength(255),
-                ]),
-                DeleteAction::make('delete')
-                ->button()
-                ->requiresConfirmation()
+                // EditAction::make('edit')
+                // ->button()
+                // ->color('success')
+                // ->model(PatientVitals::class)
+                // ->form([
+                //     Select::make('patient_id')
+                //     ->label('Patient')
+                //     ->required()
+                //     ->options(Patient::pluck('name', 'id')),
+                //     TextInput::make('temperature')
+                //         ->label('Temperature (°C)')
+                //         ->numeric()
+                //         ->inputMode('decimal')
+                //         ->minValue(1)
+                //         ->maxValue(100)
+                //         ->required()
+                //         ->maxLength(255),
+                //     TextInput::make('blood_pressure')
+                //         ->label('Blood Pressure')
+                //         ->required()
+                //         ->maxLength(255),
+                //     TextInput::make('heart_rate')
+                //         ->label('Heart Rate')
+                //         ->required()
+                //         ->maxLength(255),
+                //     TextInput::make('respiratory_rate')
+                //         ->label('Respiratory Rate')
+                //         ->required()
+                //         ->maxLength(255),
+                //]),
             ])
             ->bulkActions([
                 // ...
-            ]);
+            ])->emptyStateHeading('No Records Yet')
+            ->emptyStateDescription('');
     }
 
     public function render()

@@ -12,6 +12,7 @@ use App\Livewire\Doctor\Laboratories;
 use App\Livewire\Doctor\Prescription;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\Manage\Doctors;
+use App\Livewire\Admin\Manage\HealthRecords;
 use App\Livewire\Doctor\EmergencyRoom;
 use App\Livewire\Doctor\MedicalRecord;
 use App\Livewire\Pharmacy\ManageStock;
@@ -21,6 +22,10 @@ use App\Livewire\Admin\Manage\Patients;
 use App\Livewire\Admin\Manage\AssignBed;
 use App\Livewire\Admin\Manage\DoctorFee;
 use App\Livewire\Admin\Manage\ManageBed;
+use App\Livewire\Admin\Manage\AddPatientExam;
+use App\Livewire\Admin\Manage\AddHealthRecord;
+use App\Livewire\Admin\Manage\Referrals;
+use App\Livewire\Admin\Manage\AddReferral;
 use App\Livewire\Doctor\ManageLaboratory;
 use App\Livewire\Admin\Inventory\Category;
 use App\Livewire\Admin\Inventory\Medicine;
@@ -90,6 +95,15 @@ Route::get('/cashier/patient-bill/{record}', BillOut::class)->middleware(['auth'
 Route::get('/student/dashboard', function () {
     return view('student.dashboard');
 })->middleware(['auth', 'verified', 'role:student'])->name('student.dashboard');
+
+Route::get('/admin/add-patient-exam', AddPatientExam::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.add-patient-exam');
+Route::get('/admin/add-health-record', AddHealthRecord::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.add-health-record');
+Route::get('/admin/health-records', HealthRecords::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.health_records');
+Route::get('/admin/referrals', Referrals::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.referrals');
+Route::get('/admin/add-referral', AddReferral::class)->middleware(['auth', 'verified', 'role:admin'])->name('admin.add_referral');
+
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -10,7 +10,7 @@
             <div class="sm:flex sm:items-center">
               <div class="sm:flex-auto">
                 <h1 class="text-base font-semibold leading-6 text-gray-900">Stock History</h1>
-                <p class="mt-2 text-sm text-gray-700">Here is the stock history for this medicine</p>
+                <p class="mt-2 text-sm text-gray-700">Here is the stock history for this supply</p>
               </div>
               <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
                 {{($this->addStockAction)(['id' => $record->id])}}
@@ -26,7 +26,7 @@
                       <tr>
                         <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Category</th>
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Name</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Price</th>
+                        {{-- <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Price</th> --}}
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Quantity</th>
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Date Added</th>
                       </tr>
@@ -37,7 +37,7 @@
                             {{-- <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">{{$record->category->name}}</td> --}}
                             <td class="whitespace-nowrap px-1 py-4 text-sm text-gray-500">{{$record->category->name}}</td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{$record->name}}</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">₱ {{number_format($record->price, 2)}}</td>
+                            {{-- <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">₱ {{number_format($record->price, 2)}}</td> --}}
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{$stock->quantity}}</td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{Carbon\Carbon::parse($stock->created_at)->format('F d, Y h:i A')}}</td>
                           </tr>
