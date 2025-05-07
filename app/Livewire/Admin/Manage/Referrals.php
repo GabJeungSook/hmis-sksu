@@ -28,7 +28,7 @@ class Referrals extends Component implements HasForms, HasTable
         return $table
             ->query(Referral::query())
             ->columns([
-                TextColumn::make('patient.first_name')
+                TextColumn::make('patient.fullName')
                 ->formatStateUsing(fn (PatientInfo $record) => $record->first_name.' '.$record->last_name),
                 TextColumn::make('hospital_name'),
                 TextColumn::make('doctor_name'),
