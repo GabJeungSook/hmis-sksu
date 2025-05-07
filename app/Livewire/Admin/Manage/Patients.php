@@ -133,9 +133,9 @@ class Patients extends Component implements HasForms, HasTable
                             'female' => 'Female'
                         ])->required(),
                 ]),
-                // DeleteAction::make('delete')
-                // ->button()
-                // ->requiresConfirmation()
+                DeleteAction::make('delete')
+                ->button()
+                ->requiresConfirmation()
             ])
             ->bulkActions([
                 // ...

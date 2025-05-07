@@ -205,7 +205,7 @@
     <div>
         <dl wire:ignore class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-2">
             <div class="rounded-lg bg-gradient-to-br relative from-gray-200 overflow-hidden p-5 via-blue-100 to-blue-300">
-                 
+
               <dt>
                       <div class="absolute rounded-md bg-blue-700 p-3">
                           <svg class="h-6 w-6 text-white" viewBox="0 0 17 20" xmlns="http://www.w3.org/2000/svg" fill="none">
@@ -233,64 +233,40 @@
                   <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
                     <p class="text-2xl font-semibold text-gray-900">{{$cases}}</p>
                   </dd>
-                  {{-- <canvas id="myChart1"></canvas>  --}}
               </div>
-              {{-- <div class="rounded-lg bg-gradient-to-br relative from-gray-200 overflow-hidden p-5 via-blue-100 to-blue-300">
+              <div class="rounded-lg bg-gradient-to-br relative from-gray-200 overflow-hidden p-5 via-blue-100 to-blue-300">
                 <dt>
                     <div class="absolute rounded-md bg-blue-700 p-3">
-                        <svg class="h-6 w-6 text-white" viewBox="0 0 21 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5.775 6C7.22236 6 8.4 4.87844 8.4 3.5C8.4 2.12156 7.22236 1 5.775 1C4.32764 1 3.15 2.12156 3.15 3.5C3.15 4.87844 4.32764 6 5.775 6ZM17.325 2H9.975C9.68494 2 9.45 2.22375 9.45 2.5V7H2.1V0.5C2.1 0.22375 1.86506 0 1.575 0H0.525C0.234937 0 0 0.22375 0 0.5V11.5C0 11.7762 0.234937 12 0.525 12H1.575C1.86506 12 2.1 11.7762 2.1 11.5V10H18.9V11.5C18.9 11.7762 19.1349 12 19.425 12H20.475C20.7651 12 21 11.7762 21 11.5V5.5C21 3.56687 19.3548 2 17.325 2Z"
+                        <svg class="h-6 w-6 text-white" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.3826 0.538164C11.6554 0.200801 10.8531 0 10 0C7.60313 0 5.55804 1.48826 4.70937 3.59375H8.33393L12.3826 0.538164ZM15.2906 3.59375C14.9379 2.71912 14.3679 1.96758 13.6616 1.36922L10.7138 3.59375H15.2906ZM10 11.5C13.1558 11.5 15.7143 8.92553 15.7143 5.75C15.7143 5.50383 15.6719 5.26934 15.6424 5.03125H4.35759C4.32768 5.26934 4.28571 5.50383 4.28571 5.75C4.28571 8.92553 6.8442 11.5 10 11.5ZM3.57143 13.4631V23H9.29732L4.90223 13.0489C4.444 13.1339 3.99732 13.2729 3.57143 13.4631ZM0 20.8438C0 22.0346 0.959375 23 2.14286 23V14.3858C0.842857 15.4931 0 17.1269 0 18.975V20.8438ZM11.4286 18.6875H8.95625L10.8612 23H11.4286C12.6103 23 13.5714 22.0328 13.5714 20.8438C13.5714 19.6547 12.6103 18.6875 11.4286 18.6875ZM14 12.9375H13.254C12.2612 13.3948 11.1612 13.6562 10 13.6562C8.83884 13.6562 7.73884 13.3948 6.74598 12.9375H6.41696L8.32188 17.25H11.4286C13.3978 17.25 15 18.8622 15 20.8438C15 21.6559 14.7205 22.3976 14.2674 23H17.8571C19.0406 23 20 22.0346 20 20.8438V18.975C20 15.6404 17.3138 12.9375 14 12.9375Z"
                             fill="#ffffff"/>
                         </svg>
                     </div>
-                    <p class="ml-16 truncate text-sm font-medium text-gray-500">Total Numbers of Rooms</p>
+                    <p class="ml-16 truncate text-sm font-medium text-gray-500">Total Number of Examined Student</p>
                   </dt>
                   <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
-                    <p class="text-2xl font-semibold text-gray-900">{{$room_count}}</p>
-                    <div class="absolute inset-x-0 bottom-0 px-4 py-4 sm:px-6">
-                      <div class="text-sm">
-                        <div class="flex sdpace-x-3">
-
-                            <a href="{{route('admin.rooms-and-beds')}}" class="font-medium text-blue-700 hover:text-blue-500">View all<span class="sr-only"> Total Subscribers stats</span></a>
-                        </div>
-                      </div>
-                    </div>
+                    <p class="text-2xl font-semibold text-gray-900">{{$cases}}</p>
                   </dd>
-                  <svg class="w-44 h-36 absolute text-gray-500 opacity-20 -top-2 -right-2" viewBox="0 0 21 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5.775 6C7.22236 6 8.4 4.87844 8.4 3.5C8.4 2.12156 7.22236 1 5.775 1C4.32764 1 3.15 2.12156 3.15 3.5C3.15 4.87844 4.32764 6 5.775 6ZM17.325 2H9.975C9.68494 2 9.45 2.22375 9.45 2.5V7H2.1V0.5C2.1 0.22375 1.86506 0 1.575 0H0.525C0.234937 0 0 0.22375 0 0.5V11.5C0 11.7762 0.234937 12 0.525 12H1.575C1.86506 12 2.1 11.7762 2.1 11.5V10H18.9V11.5C18.9 11.7762 19.1349 12 19.425 12H20.475C20.7651 12 21 11.7762 21 11.5V5.5C21 3.56687 19.3548 2 17.325 2Z"
-                    fill="#5B5B5B"/>
-                  </svg>
-              </div> --}}
-              {{-- <div class="rounded-lg bg-gradient-to-br relative from-gray-200 overflow-hidden p-5 via-blue-100 to-blue-300">
+              </div>
+              <div class="rounded-lg bg-gradient-to-br relative from-gray-200 overflow-hidden p-5 via-blue-100 to-blue-300">
                 <dt>
                     <div class="absolute rounded-md bg-blue-700 p-3">
-                        <svg class="h-6 w-6 text-white" viewBox="0 0 21 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5.775 6C7.22236 6 8.4 4.87844 8.4 3.5C8.4 2.12156 7.22236 1 5.775 1C4.32764 1 3.15 2.12156 3.15 3.5C3.15 4.87844 4.32764 6 5.775 6ZM17.325 2H9.975C9.68494 2 9.45 2.22375 9.45 2.5V7H2.1V0.5C2.1 0.22375 1.86506 0 1.575 0H0.525C0.234937 0 0 0.22375 0 0.5V11.5C0 11.7762 0.234937 12 0.525 12H1.575C1.86506 12 2.1 11.7762 2.1 11.5V10H18.9V11.5C18.9 11.7762 19.1349 12 19.425 12H20.475C20.7651 12 21 11.7762 21 11.5V5.5C21 3.56687 19.3548 2 17.325 2Z"
+                        <svg class="h-6 w-6 text-white" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.3826 0.538164C11.6554 0.200801 10.8531 0 10 0C7.60313 0 5.55804 1.48826 4.70937 3.59375H8.33393L12.3826 0.538164ZM15.2906 3.59375C14.9379 2.71912 14.3679 1.96758 13.6616 1.36922L10.7138 3.59375H15.2906ZM10 11.5C13.1558 11.5 15.7143 8.92553 15.7143 5.75C15.7143 5.50383 15.6719 5.26934 15.6424 5.03125H4.35759C4.32768 5.26934 4.28571 5.50383 4.28571 5.75C4.28571 8.92553 6.8442 11.5 10 11.5ZM3.57143 13.4631V23H9.29732L4.90223 13.0489C4.444 13.1339 3.99732 13.2729 3.57143 13.4631ZM0 20.8438C0 22.0346 0.959375 23 2.14286 23V14.3858C0.842857 15.4931 0 17.1269 0 18.975V20.8438ZM11.4286 18.6875H8.95625L10.8612 23H11.4286C12.6103 23 13.5714 22.0328 13.5714 20.8438C13.5714 19.6547 12.6103 18.6875 11.4286 18.6875ZM14 12.9375H13.254C12.2612 13.3948 11.1612 13.6562 10 13.6562C8.83884 13.6562 7.73884 13.3948 6.74598 12.9375H6.41696L8.32188 17.25H11.4286C13.3978 17.25 15 18.8622 15 20.8438C15 21.6559 14.7205 22.3976 14.2674 23H17.8571C19.0406 23 20 22.0346 20 20.8438V18.975C20 15.6404 17.3138 12.9375 14 12.9375Z"
                             fill="#ffffff"/>
                         </svg>
                     </div>
-                    <p class="ml-16 truncate text-sm font-medium text-gray-500">Total Numbers of Rooms</p>
+                    <p class="ml-16 truncate text-sm font-medium text-gray-500">Total Number of Issued Medicine</p>
                   </dt>
                   <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
-                    <p class="text-2xl font-semibold text-gray-900">{{$room_count}}</p>
-                    <div class="absolute inset-x-0 bottom-0 px-4 py-4 sm:px-6">
-                      <div class="text-sm">
-                        <div class="flex sdpace-x-3">
-
-                            <a href="{{route('admin.rooms-and-beds')}}" class="font-medium text-blue-700 hover:text-blue-500">View all<span class="sr-only"> Total Subscribers stats</span></a>
-                        </div>
-                      </div>
-                    </div>
+                    <p class="text-2xl font-semibold text-gray-900">0</p>
                   </dd>
-                  <svg class="w-44 h-36 absolute text-gray-500 opacity-20 -top-2 -right-2" viewBox="0 0 21 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5.775 6C7.22236 6 8.4 4.87844 8.4 3.5C8.4 2.12156 7.22236 1 5.775 1C4.32764 1 3.15 2.12156 3.15 3.5C3.15 4.87844 4.32764 6 5.775 6ZM17.325 2H9.975C9.68494 2 9.45 2.22375 9.45 2.5V7H2.1V0.5C2.1 0.22375 1.86506 0 1.575 0H0.525C0.234937 0 0 0.22375 0 0.5V11.5C0 11.7762 0.234937 12 0.525 12H1.575C1.86506 12 2.1 11.7762 2.1 11.5V10H18.9V11.5C18.9 11.7762 19.1349 12 19.425 12H20.475C20.7651 12 21 11.7762 21 11.5V5.5C21 3.56687 19.3548 2 17.325 2Z"
-                    fill="#5B5B5B"/>
-                  </svg>
-              </div> --}}
+              </div>
+
       </div>
       <script>
         const ctx = document.getElementById('myChart');
-      
+
         new Chart(ctx, {
           type: 'bar',
           data: {

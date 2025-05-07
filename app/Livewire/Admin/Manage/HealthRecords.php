@@ -13,7 +13,7 @@ use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Tables\Contracts\HasTable;
 
-class HealthRecords extends Component implements HasForms, HasTable 
+class HealthRecords extends Component implements HasForms, HasTable
 {
 
     use InteractsWithTable;
@@ -26,7 +26,7 @@ class HealthRecords extends Component implements HasForms, HasTable
             ->columns([
                 TextColumn::make('fullName')
                 ->formatStateUsing(fn (PatientInfo $record) => $record->first_name.' '.$record->last_name),
-                TextColumn::make('healthRecords.health_record')               
+                TextColumn::make('healthRecords.health_record')
                 ->listWithLineBreaks()
                 ->bulleted(),
                 TextColumn::make('created_at')->date(),

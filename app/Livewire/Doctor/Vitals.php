@@ -90,36 +90,36 @@ class Vitals extends Component implements HasForms, HasTable
                 //         ->maxLength(255),
                 // ])
             ])->actions([
-                // EditAction::make('edit')
-                // ->button()
-                // ->color('success')
-                // ->model(PatientVitals::class)
-                // ->form([
-                //     Select::make('patient_id')
-                //     ->label('Patient')
-                //     ->required()
-                //     ->options(Patient::pluck('name', 'id')),
-                //     TextInput::make('temperature')
-                //         ->label('Temperature (°C)')
-                //         ->numeric()
-                //         ->inputMode('decimal')
-                //         ->minValue(1)
-                //         ->maxValue(100)
-                //         ->required()
-                //         ->maxLength(255),
-                //     TextInput::make('blood_pressure')
-                //         ->label('Blood Pressure')
-                //         ->required()
-                //         ->maxLength(255),
-                //     TextInput::make('heart_rate')
-                //         ->label('Heart Rate')
-                //         ->required()
-                //         ->maxLength(255),
-                //     TextInput::make('respiratory_rate')
-                //         ->label('Respiratory Rate')
-                //         ->required()
-                //         ->maxLength(255),
-                //]),
+                EditAction::make('edit')
+                ->button()
+                ->color('success')
+                ->model(PatientVitals::class)
+                ->form([
+                    TextInput::make('temperature')
+                    ->label('Temperature (°C)')
+                    ->numeric()
+                    ->inputMode('decimal')
+                    ->minValue(1)
+                    ->maxValue(100)
+                    ->required()
+                    ->maxLength(255),
+                TextInput::make('blood_pressure')
+                    ->label('Blood Pressure')
+                    ->required()
+                    ->maxLength(255),
+                TextInput::make('heart_rate')
+                    ->label('Heart Rate')
+                    ->required()
+                    ->maxLength(255),
+                TextInput::make('respiratory_rate')
+                    ->label('Respiratory Rate')
+                    ->required()
+                    ->maxLength(255),
+                Textarea::make('initial_diagnosis')->required(),
+                ]),
+                DeleteAction::make('delete')
+                ->button()
+                ->requiresConfirmation()
             ])
             ->bulkActions([
                 // ...

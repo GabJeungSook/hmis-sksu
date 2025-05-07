@@ -21,6 +21,7 @@ class Dashboard extends Component
     public $cases_labels = [];
     public $cases_counts = [];
     public $labels_string;
+    public $examined;
 
     public function mount()
     {
@@ -30,6 +31,7 @@ class Dashboard extends Component
         $this->out_patient = Patient::where('type', 'Out-Patient')->count();
         $this->discharged_patient = Patient::where('type', 'Discharged')->count();
         $this->cases = PatientInfo::whereHas('healthCases')->count();
+        $this->examined = PatientInfo::whereHas('patientVitals')->count();
         $this->cases_get = Patient::whereNotNull('initial_diagnosis')->get();
         $diagnosis_counts = [];
         foreach ($this->cases_get as $item) {
@@ -42,12 +44,12 @@ class Dashboard extends Component
             } else {
                 $diagnosis_counts[$formatted_diagnosis] = 1; // Add the diagnosis and initialize its count to 1
             }
-            
+
             $this->cases_labels[] = $formatted_diagnosis;
             $this->cases_counts[] = $formatted_counts;
         }
-        
-       
+
+
         // dd($this->cases_counts);
         $this->labels_string = json_encode($this->cases_labels);
 
