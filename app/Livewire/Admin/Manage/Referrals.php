@@ -51,7 +51,7 @@ class Referrals extends Component implements HasForms, HasTable
                 ->button()
                 ->color('warning')
                 ->icon('heroicon-o-eye')
-                ->url(fn (Referral $record) => route('admin.view-referral-details', ['record' => $record->patient, 'id' => $record->id])),
+                ->url(fn (Referral $record) => route('admin.view-referral-details', ['record' => $record->patient != null ? $record->patient : 1, 'id' => $record->id])),
                 EditAction::make('edit')
                 ->button()
                 ->color('success')
