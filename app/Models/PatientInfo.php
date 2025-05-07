@@ -29,7 +29,7 @@ class PatientInfo extends Model
 
     public function referrals()
     {
-        return $this->hasMany(Referral::class, 'patient_infos_id', 'id');
+        return $this->hasMany(Referral::class);
     }
 
     public function healthCases()
