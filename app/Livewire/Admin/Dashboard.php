@@ -5,8 +5,9 @@ namespace App\Livewire\Admin;
 use App\Models\Room;
 use App\Models\User;
 use App\Models\Patient;
-use App\Models\PatientInfo;
 use Livewire\Component;
+use App\Models\PatientInfo;
+use Illuminate\Support\Facades\DB;
 
 class Dashboard extends Component
 {
@@ -22,9 +23,42 @@ class Dashboard extends Component
     public $cases_counts = [];
     public $labels_string;
     public $examined;
+    public $genders;
+    public $genderCounts = [];
+    public $tribes;
+    public $tribeCounts = [];
+    public $ages;
+    public $ageCounts = [];
+    public $colors = [];
 
     public function mount()
     {
+
+        $this->genders = PatientInfo::select('gender', DB::raw('count(*) as total'))
+            ->groupBy('gender')
+            ->get();
+
+        // Tribe group
+        $this->tribes = PatientInfo::select('tribe', DB::raw('count(*) as total'))
+            ->groupBy('tribe')
+            ->get();
+
+        // Age group
+        $this->ages = PatientInfo::select(DB::raw('TIMESTAMPDIFF(YEAR, birthday, CURDATE()) as age'), DB::raw('count(*) as total'))
+            ->groupBy('age')
+            ->orderBy('age')
+            ->get();
+
+        // Assign a unique color to each label
+        $allLabels = collect($this->genders)->pluck('gender')
+            ->merge($this->tribes->pluck('tribe'))
+            ->merge($this->ages->pluck('age'));
+
+        foreach ($allLabels as $label) {
+            $this->colors[(string) $label] = '#' . substr(md5($label), 0, 6); // hex from hash
+        }
+
+
         $this->doctor_count = User::where('role_id', 2)->count();
         $this->patient_count = PatientInfo::count();
         $this->in_patient = Patient::where('type', 'In-Patient')->count();

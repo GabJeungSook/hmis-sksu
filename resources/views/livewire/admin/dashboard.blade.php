@@ -263,65 +263,73 @@
                   </dd>
               </div>
 
+              <div>
+                {{-- chart --}}
+                <div class="mt-8 text-4xl font-semibold text-gray-700 poppins-regular">
+                    Patients Statistics
+              </div>
+            <div class="mt-5 w-full">
+                <canvas id="profileChart" width="400" height="200"></canvas>
+            </div>
+            @php
+            $datasets = [];
+
+            foreach ($genders as $item) {
+                $datasets[] = [
+                    'label' => $item->gender,
+                    'data' => [$item->total, 0, 0],
+                    'backgroundColor' => $colors[$item->gender] ?? '#aaa',
+                ];
+            }
+
+            foreach ($tribes as $item) {
+                $datasets[] = [
+                    'label' => $item->tribe,
+                    'data' => [0, $item->total, 0],
+                    'backgroundColor' => $colors[$item->tribe] ?? '#aaa',
+                ];
+            }
+
+            foreach ($ages as $item) {
+                $datasets[] = [
+                    'label' => "Age {$item->age}",
+                    'data' => [0, 0, $item->total],
+                    'backgroundColor' => $colors[$item->age] ?? '#aaa',
+                ];
+            }
+            @endphp
       </div>
       <script>
-        const ctx = document.getElementById('myChart');
+        (function () {
+            if (window.profileChartInstance) {
+                window.profileChartInstance.destroy();
+            }
 
-        new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: ['In-Patients', 'Out-Patients', 'Discharged'],
-            datasets: [{
-              label: 'Total number',
-              data: [{{$in_patient}}, {{$out_patient}}, {{$discharged_patient}}],
-              borderWidth: 1,
-              borderColor: ['#56887d',['#ef98aa'],['#5a11b6']],
-              backgroundColor: ['#56887d',['#ef98aa'],['#5a11b6']],
-            },
-          ]
-          },
-          options: {
-            scales: {
-              y: {
-                beginAtZero: true
-              }
-            },
-            plugins: {
-            legend: {
-              display: false
-            }
-          }
-          }
-        });
-      </script>
-       <script>
-        const ctx1 = document.getElementById('myChart1');
-        var labels = <?php echo json_encode($cases_labels); ?>;
-        var counts = <?php echo json_encode($cases_counts); ?>;
-        console.log(counts);
-        new Chart(ctx1, {
-          type: 'bar',
-          data: {
-            labels:labels,
-            datasets: [{
-              label: 'Total number',
-              data: counts,
-              borderWidth: 1,
-            },
-          ]
-          },
-          options: {
-            scales: {
-              y: {
-                beginAtZero: true
-              }
-            },
-            plugins: {
-            legend: {
-              display: false
-            }
-          }
-          }
-        });
-      </script>
+            const ctx = document.getElementById('profileChart')?.getContext('2d');
+
+            const labels = ['GENDER', 'TRIBE', 'AGE'];
+            const datasets = @json($datasets);
+
+            window.profileChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        title: {
+                            display: true,
+                            text: 'PATIENTS BY GENDER, TRIBE, AND AGE'
+                        }
+                    },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        })();
+        </script>
 </div>

@@ -28,6 +28,14 @@
                     <dt class="text-sm/6 font-medium text-gray-900">Birthday</dt>
                     <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0 uppercase">{{Carbon\Carbon::parse($user->patient->birthday)->format('F d, Y')}}</dd>
                 </div>
+                <div class="bg-gray-50 px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
+                    <dt class="text-sm/6 font-medium text-gray-900">Age</dt>
+                    <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0 uppercase">{{Carbon\Carbon::parse($user->patient->birthday)->age}} years old</dd>
+                </div>
+                <div class="bg-gray-50 px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
+                    <dt class="text-sm/6 font-medium text-gray-900">Tribe</dt>
+                    <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0 uppercase">{{$user->patient->tribe}}</dd>
+                </div>
               </dl>
             </div>
           </div>

@@ -45,6 +45,9 @@ class Patients extends Component implements HasForms, HasTable
                     ->date(),
                 TextColumn::make('gender')
                     ->label('Gender'),
+                TextColumn::make('age')
+                    ->label('Age'),
+                TextColumn::make('tribe'),
                 // TextColumn::make('initial_diagnosis')
                 //     ->label('Initial Diagnosis')
                 //     ->wrap(),
@@ -132,6 +135,43 @@ class Patients extends Component implements HasForms, HasTable
                             'male' => 'Male',
                             'female' => 'Female'
                         ])->required(),
+                    Select::make('tribe')
+                        ->label('Tribe')
+                        ->options([
+                            'Aeta' => 'Aeta',
+                            'Agta' => 'Agta',
+                            'Blaan' => 'Blaan',
+                            'Bontoc' => 'Bontoc',
+                            'Buhid' => 'Buhid',
+                            'Cagayan' => 'Cagayan',
+                            'Calamian' => 'Calamian',
+                            'Cebuano' => 'Cebuano',
+                            'Cuyonon' => 'Cuyonon',
+                            'Gaddang' => 'Gaddang',
+                            'Ifugao' => 'Ifugao',
+                            'Ibanag' => 'Ibanag',
+                            'Ibaloi' => 'Ibaloi',
+                            'Ilocano' => 'Ilocano',
+                            'Isnag' => 'Isnag',
+                            'Kankanaey' => 'Kankanaey',
+                            'Kinaray-a' => 'Kinaray-a',
+                            'Kuyonon' => 'Kuyonon',
+                            'Lumad' => 'Lumad',
+                            'Mangyan' => 'Mangyan',
+                            'Manobo' => 'Manobo',
+                            'Maranao' => 'Maranao',
+                            'Negrito' => 'Negrito',
+                            'Palawano' => 'Palawano',
+                            'Pangasinense' => 'Pangasinense',
+                            'Sama' => 'Sama',
+                            'Subanon' => 'Subanon',
+                            'Tausug' => 'Tausug',
+                            'Tingguian' => 'Tingguian',
+                            'T\'boli' => 'T\'boli',
+                            'Yakan' => 'Yakan',
+                            'Zambal' => 'Zambal',
+                            'Others' => 'Others'
+                        ]),
                 ]),
                 DeleteAction::make('delete')
                 ->button()
