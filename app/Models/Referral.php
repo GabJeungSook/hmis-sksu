@@ -13,6 +13,6 @@ class Referral extends Model
 
     public function patient()
     {
-        return $this->belongsTo(PatientInfo::class);
+        return $this->belongsTo(PatientInfo::class, 'patient_infos_id', 'id');
     }
 }
