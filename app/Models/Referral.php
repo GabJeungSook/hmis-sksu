@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\PatientInfo;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Referral extends Model
 {
@@ -12,6 +13,6 @@ class Referral extends Model
 
     public function patient()
     {
-        return $this->belongsTo(PatientInfo::class, 'patient_infos_id');
+        return $this->belongsTo(PatientInfo::class, 'patient_infos_id', 'id');
     }
 }
