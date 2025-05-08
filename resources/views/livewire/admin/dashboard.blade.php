@@ -259,7 +259,7 @@
                     <p class="ml-16 truncate text-sm font-medium text-gray-500">Total Number of Issued Medicine</p>
                   </dt>
                   <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
-                    <p class="text-2xl font-semibold text-gray-900">0</p>
+                    <p class="text-2xl font-semibold text-gray-900">{{$issued_medicines}}</p>
                   </dd>
               </div>
 

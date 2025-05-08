@@ -30,6 +30,7 @@ class Dashboard extends Component
     public $ages;
     public $ageCounts = [];
     public $colors = [];
+    public $issued_medicines;
 
     public function mount()
     {
@@ -88,6 +89,7 @@ class Dashboard extends Component
         $this->labels_string = json_encode($this->cases_labels);
 
         $this->room_count = Room::all()->count();
+        $this->issued_medicines = PatientInfo::sum('medicine_quantity');
     }
 
     public function render()

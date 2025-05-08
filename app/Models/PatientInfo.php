@@ -46,4 +46,9 @@ class PatientInfo extends Model
     {
         return Carbon::parse($this->birthday)->age;
     }
+
+    public function medicine()
+    {
+        return $this->belongsTo(Medicine::class, 'medicine_id');
+    }
 }
