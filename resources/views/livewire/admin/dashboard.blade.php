@@ -4,8 +4,8 @@
             <div class="flex justify-between relative">
                 <h1 class="poppins-medium text-3xl text-gray-700">Welcome {{auth()->user()->name}},
                     <div wire:poll.1s class="bg-gray-300 p-4 rounded-md mt-8">
-                        <p class="poppins-regular text-2xl text-gray-700">{{Carbon\Carbon::parse(now())->format('F d, Y')}}</p>
-                        <p class="poppins-regular text-2xl text-gray-700">{{Carbon\Carbon::parse(now())->format('h:i:s A')}}</p>
+                        <p class="poppins-regular text-2xl text-gray-700">{{Carbon\Carbon::parse(now('Asia/Manila'))->format('F d, Y')}}</p>
+                        <p class="poppins-regular text-2xl text-gray-700">{{Carbon\Carbon::parse(now('Asia/Manila'))->format('h:i:s A')}}</p>
                     </div>
                 </h1>
                 <div class="absolute right-3">
